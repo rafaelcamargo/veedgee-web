@@ -1,0 +1,46 @@
+{
+  "source": {
+    "root": "src",
+    "index": {
+      "file": "src/index.html"
+    },
+    "scripts": {
+      "index": "src/index.js"
+    },
+    "images": {
+      "files": "src/base/images/*.*"
+    },
+    "tests": {
+      "files": [
+        "src/**/*.js",
+        "!src/**/mocks/**/*.js",
+        "!src/base/workers/**/*.js"
+      ]
+    },
+    "environments": {
+      "root": "environments"
+    }
+  },
+  "dist": {
+    "root": "dist",
+    "scripts": {
+      "filename": {
+        "production": "assets/[name]-[contenthash].js",
+        "development": "assets/[name].js"
+      }
+    },
+    "styles": {
+      "filename": {
+        "production": "assets/[name]-[contenthash].css",
+        "development": "assets/[name].css"
+      }
+    },
+    "images": {
+      "directory": "dist/assets/images",
+      "filename": {
+        "production": "assets/images/[name]-[contenthash][ext]",
+        "development": "assets/images/[name][ext]"
+      }
+    }
+  }
+}
