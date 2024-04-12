@@ -23,8 +23,8 @@ describe('Index', () => {
     let websiteLoadedEventReceived;
     document.addEventListener('websiteLoaded', () => {
       websiteLoadedEventReceived = true;
-    })
-    act(() => init())
+    });
+    act(() => init());
     expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument();
     expect(analyticsService.init).toHaveBeenCalledTimes(1);
     expect(analyticsService.trackPageView).toHaveBeenCalledTimes(1);

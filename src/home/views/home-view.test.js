@@ -8,6 +8,6 @@ describe('Home View', () => {
 
   it('should contain a gretting', async () => {
     await mount();
-    expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument();
   });
 });
