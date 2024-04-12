@@ -1,4 +1,5 @@
 import { asyncMount, screen } from '@src/base/services/testing';
+import homeViewTranslations from './home-view.trans.json';
 import { HomeView } from './home-view';
 
 describe('Home View', () => {
@@ -6,8 +7,10 @@ describe('Home View', () => {
     return await asyncMount(<HomeView />);
   }
 
-  it('should contain a gretting', async () => {
+  it('should contain the main headings', async () => {
     await mount();
-    expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument();
+    const { find_events } = homeViewTranslations;
+    expect(screen.getByRole('heading', { level: 1, name: 'Veedgee' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: find_events })).toBeInTheDocument();
   });
 });

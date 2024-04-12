@@ -25,7 +25,7 @@ describe('Index', () => {
       websiteLoadedEventReceived = true;
     });
     act(() => init());
-    expect(screen.getByRole('heading', { name: 'Hello' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Veedgee' })).toBeInTheDocument();
     expect(analyticsService.init).toHaveBeenCalledTimes(1);
     expect(analyticsService.trackPageView).toHaveBeenCalledTimes(1);
     expect(websiteLoadedEventReceived).toEqual(true);

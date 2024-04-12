@@ -11,6 +11,6 @@ _public.init = () => {
   analytics.init(DOMAIN, OPTIONS);
 };
 
-_public.trackPageView = () => analytics.trackPageview();
+_public.trackPageView = () => analytics?.trackPageview();
 
 export default _public;
