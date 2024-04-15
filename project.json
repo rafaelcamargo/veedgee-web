@@ -7,6 +7,9 @@
     "scripts": {
       "index": "src/index.js"
     },
+    "styles": {
+      "mixins": "src/mixins.styl"
+    },
     "images": {
       "files": "src/base/images/*.*"
     },

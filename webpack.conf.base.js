@@ -35,7 +35,8 @@ module.exports = {
   resolve: {
     alias: {
       '@environment$': `${__dirname}/${project.source.environments.root}/${env}.js`,
-      '@src': `${__dirname}/${project.source.root}`
+      '@src': `${__dirname}/${project.source.root}`,
+      '@mixins': `${__dirname}/${project.source.styles.mixins}`
     }
   },
   plugins: [

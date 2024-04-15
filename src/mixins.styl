@@ -1,0 +1,24 @@
+select-arrow()
+  position absolute
+  top 42%
+  right 14px
+  content ''
+  width 4px
+  height 4px
+  border-width 1px 0 0 1px
+  border-style solid
+  border-color var(--vcolor-grey)
+
+breakpoint($size)
+  if($size == 'xs')
+    @media screen and (min-width 0)
+      {block}
+  if($size == 'sm')
+    @media screen and (min-width 768px)
+      {block}
+  else if ($size == 'md')
+    @media screen and (min-width 992px)
+      {block}
+  else if ($size == 'lg')
+    @media screen and (min-width 1200px)
+      {block}

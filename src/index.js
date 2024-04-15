@@ -1,3 +1,4 @@
+import './index.styl';
 import { createRoot } from 'react-dom/client';
 import { WEBSITE_LOADED } from '@src/base/constants/events';
 import analyticsService from '@src/base/services/analytics';

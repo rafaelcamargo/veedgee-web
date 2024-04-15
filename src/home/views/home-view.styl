@@ -1,0 +1,131 @@
+@import '@mixins'
+
+.v-home-view
+  min-height 100vh
+  background-color var(--vcolor-lightest)
+  h1
+    position relative
+    width 84px
+    height 40px
+    text-indent -9999px
+    .v-logo
+      position absolute
+      top 0
+      left 0
+  h2
+    font-size var(--vfont-size-xxl)
+    line-height 1.1
+    letter-spacing -1px
+
+.v-home-hero
+  padding 50px 0 120px
+  background-color var(--vcolor-grey-lighter)
+  h2
+    margin-top 20px
+
+.v-home-about
+  position relative
+  &:before
+    position absolute
+    top -40px
+    left 0
+    content ''
+    width 100%
+    height 80px
+    background-color var(--vcolor-lightest)
+    border-radius 40px 40px 0 0
+  h2
+    position relative
+    padding-left 20px
+    &:before
+      position absolute
+      top -2px
+      left 0
+      content ''
+      width 3px
+      height 30px
+      background-color var(--vcolor-primary)
+    font-size var(--vfont-size-xl)
+  .v-container
+    position relative
+    z-index 1
+
+.v-home-about-items
+  margin 40px 0 0 0
+  padding 0
+  list-style-type none
+  li
+    display flex
+    align-items center
+    &:not(:first-child)
+      margin-top 20px
+  .v-tag
+    margin-top 12px
+
+.v-home-about-item-icon-wrapper
+  display flex
+  align-items center
+  justify-content center
+  margin-right 20px
+  min-width 100px
+  height 100px
+  background-color var(--vcolor-grey-lighter)
+  border-radius 10px
+  .v-icon
+    width 80px
+    height 80px
+
++breakpoint('sm')
+  .v-home-hero
+    padding 80px 0 150px
+    .v-container
+      display flex
+      flex-direction column
+      align-items center
+    h2
+      max-width 600px
+      text-align center
+  .v-home-about
+    h2
+      padding-left 0
+      text-align center
+      &:before
+        position absolute
+        top auto
+        bottom -10px
+        left 50%
+        transform translateX(-50%)
+        content ''
+        width 30px
+        height 3px
+        background-color var(--vcolor-primary)
+  .v-home-about-items
+    display grid
+    grid-template-columns 1fr 1fr 1fr
+    grid-gap 0 90px
+    margin 40px auto 0
+    max-width 680px
+    li
+      display flex
+      flex-direction column
+      align-items center
+      width 160px
+      text-align center
+      &:not(:first-child)
+        margin-top 0
+  .v-home-about-item-icon-wrapper
+    margin 0 0 25px 0
+
++breakpoint('md')
+  .v-home-about-items
+    margin 70px auto
+    grid-gap 0 40px
+    max-width 910px
+    li
+      display flex
+      flex-direction row
+      align-items center
+      width auto
+      text-align left
+  .v-home-about-item-icon-wrapper
+    margin 0 25px 0 0

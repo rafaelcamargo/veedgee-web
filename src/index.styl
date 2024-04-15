@@ -1,0 +1,42 @@
+@import url('https://rsms.me/inter/inter.css');
+@import 'vars'
+
+html,
+body
+  margin 0
+  color var(--vcolor-darkest)
+  font-size 16px
+  font-family var(--vfont-family-primary)
+  font-weight 300
+
+h1, h2, h3, h4, h5, h6
+  margin 0
+
+p
+  margin 0
+  line-height 1.2
+
+select
+  position relative
+  padding 9px 30px 9px 9px
+  min-width 150px
+  background-color var(--vcolor-grey-light)
+  background-image url('./base/images/icon-arrows_40x40.svg')
+  background-position right center
+  background-repeat no-repeat
+  color var(--vcolor-grey-darker)
+  font-size var(--vfont-size-sm)
+  border-width 2px
+  border-style solid
+  border-color var(--vcolor-grey-light)
+  border-radius 6px
+  box-sizing border-box
+  transition-property background-color, border-color
+  transition-duration 200ms
+  transition-timing-function ease-in-out
+  outline 0
+  -webkit-appearance none
+  &:focus,
+  &:active
+    background-color var(--vcolor-lightest)
+    border-color var(--vcolor-red-light)
