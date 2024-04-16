@@ -1,6 +1,9 @@
 # Veedgee Web
 > Veedgee's Web Client
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/rafaelcamargo/veedgee-web/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/rafaelcamargo/veedgee-web/tree/main)
+[![Coverage Status](https://coveralls.io/repos/github/rafaelcamargo/veedgee-web/badge.svg?branch=main)](https://coveralls.io/github/rafaelcamargo/veedgee-web?branch=main)
+
 ## Contributing
 
 1. Install [Node](https://nodejs.org/en/). Download the "Recommend for Most Users" version.
