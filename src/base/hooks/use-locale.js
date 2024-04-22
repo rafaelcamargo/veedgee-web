@@ -27,7 +27,7 @@ function setLocaleSearchParam(locale){
   const params = getCurrentSearchParams();
   params.set(getLocaleSearchParamKey(), locale);
   const { origin, pathname } = window.location;
-  window.history.pushState({}, '', `${origin}${pathname}?${params.toString()}`);
+  window.history.replaceState({}, '', `${origin}${pathname}?${params.toString()}`);
 }
 
 function getLocaleSearchParam(){

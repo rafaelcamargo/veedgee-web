@@ -1,0 +1,22 @@
+@import '@mixins'
+
+.v-event-list
+  display grid
+  grid-template-columns 1fr
+  grid-gap 40px
+  margin 40px auto 0
+  padding 0
+  list-style-type none
+
+.v-event-list-load-more-button
+  display flex
+  justify-content center
+  margin 50px auto
+
++breakpoint('sm')
+  .v-event-list
+    grid-template-columns 1fr 1fr
+
++breakpoint('md')
+  .v-event-list
+    grid-template-columns 1fr 1fr 1fr

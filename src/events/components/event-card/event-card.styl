@@ -1,0 +1,60 @@
+.v-event-card
+  position relative
+  padding 20px
+  height 240px
+  background-color var(--vcolor-lightest)
+  border-radius 6px
+  h2
+    margin-top 15px
+  a
+    position absolute
+    right 20px
+    bottom 30px
+    display flex
+    width 60px
+    height 60px
+    background-color var(--vcolor-red-light)
+    border-radius 50%
+    z-index var(--vlayer-base)
+  address
+    display flex
+    align-items center
+    position absolute
+    left 0
+    bottom 0
+    padding 20px
+    width 100%
+    color var(--vcolor-grey-dark)
+    font-style normal
+    font-size var(--vfont-size-xxs)
+    font-weight bold
+    text-transform uppercase
+    border-top 1px solid var(--vcolor-grey-light)
+    box-sizing border-box
+  .v-icon
+    width 26px
+    height 26px
+
+.v-event-card-datetime
+  display flex
+  justify-content space-between
+  align-items center
+  font-size var(--vfont-size-xxs)
+  font-weight bold
+  text-transform uppercase
+
+.v-event-card-date
+  padding 5px 20px
+  color var(--vcolor-primary)
+  border 1px solid var(--vcolor-primary)
+  border-radius 4px
+
+.v-event-card-time
+  display flex
+  align-items center
+  color var(--vcolor-grey-dark)
+
+.v-event-card-details-link
+  display flex
+  align-items center
+  justify-content center

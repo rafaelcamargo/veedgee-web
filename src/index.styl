@@ -40,3 +40,30 @@ select
   &:active
     background-color var(--vcolor-lightest)
     border-color var(--vcolor-red-light)
+
+a.v-button,
+button
+  padding 10px 0
+  min-width 200px
+  background-color var(--vcolor-primary)
+  color var(--vcolor-lightest)
+  font-size var(--vfont-size-sm)
+  font-weight bold
+  line-height 1
+  text-align center
+  text-decoration none
+  border-width 2px
+  border-style solid
+  border-color var(--vcolor-primary)
+  border-radius 6px
+  transition-property background-color, border-color
+  transition-duration 200ms
+  transition-timing-function ease-in-out
+  outline 0
+  cursor pointer
+  -webkit-appearance none
+  &:focus,
+  &:hover,
+  &:active
+    background-color var(--vcolor-red-dark)
+    border-color var(--vcolor-red-dark)

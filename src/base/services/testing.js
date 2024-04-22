@@ -1,7 +1,8 @@
 import { act, render } from '@testing-library/react';
-export * from '@testing-library/react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { I18nProvider } from '@src/base/providers/i18n';
+export * from '@testing-library/react';
 
 export async function asyncMount(component){
   let result;
@@ -16,6 +17,16 @@ export async function asyncMount(component){
   });
   return { user, ...result };
 }
+
+export const TestingRouter = ({ children }) => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={children} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export function getTranslations(translations){
   return translations['en-US'];

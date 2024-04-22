@@ -1,18 +1,23 @@
-import { asyncMount, screen, getTranslations } from '@src/base/services/testing';
+import { TestingRouter, asyncMount, screen, getTranslations } from '@src/base/services/testing';
 import localeSelectTranslations from '@src/base/components/locale-select/locale-select.trans';
 import homeViewTranslations from './home-view.trans';
 import { HomeView } from './home-view';
 
 describe('Home View', () => {
   async function mount(){
-    return await asyncMount(<HomeView />);
+    return await asyncMount(
+      <TestingRouter>
+        <HomeView />
+      </TestingRouter>
+    );
   }
 
   it('should contain the hero section', async () => {
     await mount();
-    const { find_events } = getTranslations(homeViewTranslations);
+    const { find_events, search } = getTranslations(homeViewTranslations);
     expect(screen.getByRole('heading', { level: 1, name: 'Veedgee' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 2, name: find_events })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: search })).toHaveAttribute('href', '/events');
   });
 
   it('should contain the about section', async () => {

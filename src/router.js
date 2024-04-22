@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RouterAnalytics } from '@src/base/components/router-analytics/router-analytics';
 import { HomeView } from '@src/home/views/home-view';
+import { EventsView } from '@src/events/views/events-view';
 import routes from '@src/routes';
 
 export const Router = () => {
@@ -20,6 +21,7 @@ export const Router = () => {
 
 function getViewComponentByViewName(viewName){
   return {
-    'home': HomeView
+    'home': HomeView,
+    'events': EventsView,
   }[viewName];
 }

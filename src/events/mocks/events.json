@@ -1,0 +1,41 @@
+[
+  {
+    "id": "123",
+    "slug": "rockfeel-fest-balneario-camboriu-balneario-camboriu-sc-20240427",
+    "title": "Rockfeel Fest Balneário Camboriú",
+    "date": "2024-03-23",
+    "time": null,
+    "city": "Balneário Camboriú",
+    "state": "SC",
+    "country": "BR",
+    "url": "https://some.external.site/123",
+    "created_at": "2024-04-05T01:49:35.466Z",
+    "updated_at": "2024-04-05T01:49:35.466Z"
+  },
+  {
+    "id": "456",
+    "slug": "balburdia-groove-blumenau-sc-20240414",
+    "title": "Balbúrdia Groove",
+    "date": "2024-04-14",
+    "time": "17:00",
+    "city": "Blumenau",
+    "state": "SC",
+    "country": "BR",
+    "url": "https://some-other.external.site/456",
+    "created_at": "2024-04-05T01:49:35.475Z",
+    "updated_at": "2024-04-05T01:49:35.475Z"
+  },
+  {
+    "id": "789",
+    "slug": "acustico-navaranda-curitiba-pr-20240503",
+    "title": "Acústico Navaranda",
+    "date": "2024-05-03",
+    "time": "19:30",
+    "city": "Curitiba",
+    "state": "PR",
+    "country": "BR",
+    "url": "https://some.external.hotsite/789",
+    "created_at": "2024-04-05T01:49:35.490Z",
+    "updated_at": "2024-04-05T01:49:35.490Z"
+  }
+]

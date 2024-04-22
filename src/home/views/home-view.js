@@ -1,4 +1,6 @@
 import './home-view.styl';
+import { Link } from 'react-router-dom';
+import routes from '@src/routes';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import { Logo } from '@src/base/components/logo/logo';
 import { Container } from '@src/base/components/container/container';
@@ -22,6 +24,7 @@ export const HomeView = () => {
             <Logo aria-hidden="true" />
           </h1>
           <h2>{t('find_events')}</h2>
+          <Link className="v-button" to={routes[1].path}>{t('search')}</Link>
         </Container>
       </section>
       <section className="v-home-about" aria-label={t('how_it_works')}>

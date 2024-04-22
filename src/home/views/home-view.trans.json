@@ -1,6 +1,7 @@
 {
   "en-US": {
     "find_events": "Discover shows, festivals, plays, and the best of what happens in the South of Brazil.",
+    "search": "Search",
     "how_it_works": "How it works",
     "grabs_events": "Collects events from several websites scattered on the web.",
     "formats_them": "Displays them in a friendly and easily searchable way.",
@@ -9,6 +10,7 @@
   },
   "pt-BR": {
     "find_events": "Descubra shows, festivais, peças de teatro e o que de melhor acontece no sul do Brasil.",
+    "search": "Pesquisar",
     "how_it_works": "Como funciona",
     "grabs_events": "Coleta eventos de diversos sites espalhados pela internet.",
     "formats_them": "Formata os dados para que sejam facilmente encontrados.",
