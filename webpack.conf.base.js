@@ -9,7 +9,8 @@ module.exports = {
   entry: [`${__dirname}/${project.source.scripts.index}`],
   output: {
     filename: project.dist.scripts.filename[env],
-    assetModuleFilename: project.dist.images.filename[env]
+    assetModuleFilename: project.dist.images.filename[env],
+    publicPath: '/'
   },
   module: {
     rules: [
