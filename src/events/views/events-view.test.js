@@ -1,4 +1,12 @@
-import { TestingRouter, asyncMount, screen, within, mockSearchParams, getTranslations } from '@src/base/services/testing';
+import {
+  TestingRouter,
+  asyncMount,
+  screen,
+  within,
+  mockSearchParams,
+  getTranslations,
+  flushEventsCache
+} from '@src/base/services/testing';
 import dateService from '@src/base/services/date';
 import eventListTranslations from '@src/events/components/event-list/event-list.trans';
 import eventsMock from '@src/events/mocks/events';
@@ -8,7 +16,7 @@ import localeSelectTranslations from '@src/base/components/locale-select/locale-
 import eventCardTranslations from '@src/events/components/event-card/event-card.trans';
 import { EventsView } from './events-view';
 
-describe('Home View', () => {
+describe('Events View', () => {
   async function mount(){
     return await asyncMount(
       <TestingRouter>
@@ -41,6 +49,7 @@ describe('Home View', () => {
 
   beforeEach(() => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
+    flushEventsCache();
   });
 
   afterEach(() => {
@@ -53,7 +62,7 @@ describe('Home View', () => {
     expect(screen.getByRole('link', { name: homepage })).toHaveAttribute('href', '/');
   });
 
-  it('should contain a event list', async () => {
+  it('should contain an event list', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 3, 23));
     await mount();
     const eventHeadings = screen.getAllByRole('heading', { level: 2 });

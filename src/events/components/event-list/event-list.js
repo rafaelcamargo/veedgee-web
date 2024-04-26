@@ -2,8 +2,7 @@ import './event-list.styl';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from '@src/base/hooks/use-translation';
-import dateService from '@src/base/services/date';
-import eventsResource from '@src/events/resources/events';
+import eventsService from '@src/events/services/events';
 import { EventCard } from '@src/events/components/event-card/event-card';
 import translations from './event-list.trans';
 
@@ -16,7 +15,7 @@ export const EventList = () => {
   const loadMore = () => setLimit(prevState => prevState + getPageSize());
 
   useEffect(() => {
-    eventsResource.get({ minDate: buildEventsFetchMinDate() }).then(({ data }) => setEvents(data));
+    eventsService.get().then(({ data }) => setEvents(data));
   }, []);
 
   useEffect(() => {
@@ -44,10 +43,6 @@ export const EventList = () => {
     </>
   );
 };
-
-function buildEventsFetchMinDate(){
-  return dateService.buildISOString(dateService.getNow());
-}
 
 function getInitialLimit(customLimit){
   return customLimit || getPageSize();

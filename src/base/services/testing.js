@@ -41,3 +41,7 @@ export function mockSearchParams(paramsString){
   const url = paramsString ? `${pathname}?${paramsString}` : pathname;
   window.history.pushState({}, '', url);
 }
+
+export function flushEventsCache(){
+  window.localStorage.removeItem('vevents');
+}
