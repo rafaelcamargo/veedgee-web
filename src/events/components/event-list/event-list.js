@@ -34,12 +34,16 @@ export const EventList = () => {
           );
         })}
       </ul>
-      <button
-        className="v-event-list-load-more-button"
-        onClick={loadMore}
-      >
-        {t('load_more')}
-      </button>
+      {
+        hasMoreEvents(events, limit) && (
+          <button
+            className="v-event-list-load-more-button"
+            onClick={loadMore}
+          >
+            {t('load_more')}
+          </button>
+        )
+      }
     </>
   );
 };
@@ -54,4 +58,8 @@ function getPageSize(){
 
 function limitEvents(events, limit){
   return events.slice(0, limit);
+}
+
+function hasMoreEvents(events, limit){
+  return events?.length > limit;
 }

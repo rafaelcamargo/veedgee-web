@@ -139,5 +139,6 @@ describe('Events View', () => {
     expect(screen.getByRole('heading', { name: 'Event #10' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Event #31' })).toBeInTheDocument();
     expect(getSearchParam('limit')).toEqual('60');
+    expect(screen.queryByRole('button', { name: load_more })).not.toBeInTheDocument();
   });
 });
