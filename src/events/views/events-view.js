@@ -2,7 +2,7 @@ import { Container } from '@src/base/components/container/container';
 import { Viewport } from '@src/base/components/viewport/viewport';
 import { EventList } from '@src/events/components/event-list/event-list';
 
-export const EventsView = () => {
+const EventsView = () => {
   return (
     <div className="v-events-view">
       <Viewport>
@@ -13,3 +13,5 @@ export const EventsView = () => {
     </div>
   );
 };
+
+export default EventsView;

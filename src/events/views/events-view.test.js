@@ -14,7 +14,7 @@ import eventsResource from '@src/events/resources/events';
 import topbarTranslations from '@src/base/components/topbar/topbar.trans';
 import localeSelectTranslations from '@src/base/components/locale-select/locale-select.trans';
 import eventCardTranslations from '@src/events/components/event-card/event-card.trans';
-import { EventsView } from './events-view';
+import EventsView from './events-view';
 
 describe('Events View', () => {
   async function mount(){

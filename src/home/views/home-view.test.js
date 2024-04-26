@@ -1,7 +1,7 @@
 import { TestingRouter, asyncMount, screen, getTranslations } from '@src/base/services/testing';
 import localeSelectTranslations from '@src/base/components/locale-select/locale-select.trans';
 import homeViewTranslations from './home-view.trans';
-import { HomeView } from './home-view';
+import HomeView from './home-view';
 
 describe('Home View', () => {
   async function mount(){

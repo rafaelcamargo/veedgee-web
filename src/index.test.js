@@ -42,7 +42,8 @@ describe('Index', () => {
   it('should render the website', async () => {
     const listenerData = listenWebsiteLoaded();
     act(() => init());
-    expect(screen.getByRole('heading', { level: 1, name: 'Veedgee' })).toBeInTheDocument();
+    const heading = await screen.findByRole('heading', { level: 1, name: 'Veedgee' });
+    expect(heading).toBeInTheDocument();
     expect(analyticsService.init).toHaveBeenCalledTimes(1);
     expect(analyticsService.trackPageView).toHaveBeenCalledTimes(1);
     expect(eventsResource.get).toHaveBeenCalledTimes(1);

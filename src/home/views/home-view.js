@@ -1,4 +1,4 @@
-import './home-view.styl';
+import(/* webpackChunkName: 'home-view-css' */ './home-view.styl');
 import { Link } from 'react-router-dom';
 import routes from '@src/routes';
 import { useTranslation } from '@src/base/hooks/use-translation';
@@ -11,7 +11,7 @@ import { Magnifier } from '@src/base/icons/magnifier';
 import { Notification } from '@src/base/icons/notification';
 import translations from './home-view.trans.json';
 
-export const HomeView = () => {
+const HomeView = () => {
   const { t } = useTranslation(translations);
   const heroSectionName = 'Veedgee';
 
@@ -71,3 +71,5 @@ function buildHowItWorksItems(t){
     }
   ];
 }
+
+export default HomeView;
