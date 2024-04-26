@@ -1,12 +1,31 @@
-@import url('https://rsms.me/inter/inter.css');
 @import 'vars'
+
+@font-face {
+  font-family Inter
+  font-style normal
+  font-weight 300
+  font-display swap
+  src url('@src/base/fonts/Inter-Light.woff2') format('woff2')
+}
+
+@font-face {
+  font-family Inter
+  font-style normal
+  font-weight 700
+  font-display swap
+  src url('@src/base/fonts/Inter-Bold.woff2') format('woff2')
+}
+
+:root {
+  font-family Inter, sans-serif
+  font-feature-settings 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
 
 html,
 body
   margin 0
   color var(--vcolor-darkest)
   font-size 16px
-  font-family var(--vfont-family-primary)
   font-weight 300
 
 h1, h2, h3, h4, h5, h6
@@ -21,7 +40,7 @@ select
   padding 9px 30px 9px 9px
   min-width 150px
   background-color var(--vcolor-grey-light)
-  background-image url('./base/images/icon-arrows_40x40.svg')
+  background-image url('@src/base/images/icon-arrows_40x40.svg')
   background-position right center
   background-repeat no-repeat
   color var(--vcolor-grey-darker)

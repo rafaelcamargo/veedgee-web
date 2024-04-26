@@ -38,6 +38,13 @@
         "development": "assets/[name].css"
       }
     },
+    "custom": {
+      "directory": "dist/assets/custom",
+      "filename": {
+        "production": "assets/custom/[name]-[contenthash][ext]",
+        "development": "assets/custom/[name][ext]"
+      }
+    },
     "images": {
       "directory": "dist/assets/images",
       "filename": {

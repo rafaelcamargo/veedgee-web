@@ -9,7 +9,7 @@ module.exports = {
   entry: [`${__dirname}/${project.source.scripts.index}`],
   output: {
     filename: project.dist.scripts.filename[env],
-    assetModuleFilename: project.dist.images.filename[env],
+    assetModuleFilename: project.dist.custom.filename[env],
     publicPath: '/'
   },
   module: {
@@ -54,7 +54,7 @@ module.exports = {
           from: path.join(__dirname, project.source.images.files),
           to: `${path.join(__dirname, project.dist.images.directory)}/[name][ext]`
         }
-      ],
+      ]
     })
   ]
 }
