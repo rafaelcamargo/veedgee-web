@@ -1,4 +1,3 @@
-import './topbar.styl';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import { Container } from '@src/base/components/container/container';

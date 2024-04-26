@@ -1,5 +1,3 @@
-import './logo.styl';
-
 export const Logo = props => {
   return (
     <span className="v-logo" {...props}>

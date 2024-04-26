@@ -1,4 +1,3 @@
-import(/* webpackChunkName: 'home-view-css' */ './home-view.styl');
 import { Link } from 'react-router-dom';
 import routes from '@src/routes';
 import { useTranslation } from '@src/base/hooks/use-translation';

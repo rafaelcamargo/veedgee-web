@@ -1,4 +1,3 @@
-import(/* webpackChunkName: 'event-list-css' */ './event-list.styl');
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from '@src/base/hooks/use-translation';

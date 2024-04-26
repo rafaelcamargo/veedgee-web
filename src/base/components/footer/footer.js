@@ -1,4 +1,3 @@
-import './footer.styl';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import { Container } from '@src/base/components/container/container';
 import { LocaleSelect } from '@src/base/components/locale-select/locale-select';

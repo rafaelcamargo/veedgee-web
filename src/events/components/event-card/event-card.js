@@ -1,4 +1,3 @@
-import './event-card.styl';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import { Clock } from '@src/base/icons/clock';
 import { Pin } from '@src/base/icons/pin';
