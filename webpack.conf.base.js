@@ -1,4 +1,5 @@
 const CopyPlugin = require("copy-webpack-plugin");
+const FontPreloadPlugin = require("webpack-font-preload-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -55,6 +56,7 @@ module.exports = {
           to: `${path.join(__dirname, project.dist.images.directory)}/[name][ext]`
         }
       ]
-    })
+    }),
+    new FontPreloadPlugin()
   ]
 }
