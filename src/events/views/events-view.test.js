@@ -131,6 +131,7 @@ describe('Events View', () => {
   });
 
   it('should optionally show more than thirty events', async () => {
+    mockSearchParams('limit=30');
     eventsResource.get = jest.fn(() => Promise.resolve({ data: buildEventsMock(31) }));
     const { user } = await mount();
     const { load_more } = getTranslations(eventListTranslations);

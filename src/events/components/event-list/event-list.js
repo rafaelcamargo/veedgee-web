@@ -49,7 +49,7 @@ export const EventList = () => {
 };
 
 function getInitialLimit(customLimit){
-  return customLimit || getPageSize();
+  return customLimit && parseInt(customLimit) || getPageSize();
 }
 
 function getPageSize(){
