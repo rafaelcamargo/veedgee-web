@@ -9,9 +9,9 @@ let currentRequest;
 _public.get = () => {
   const cache = getCachedEvents();
   if(currentRequest) return currentRequest;
-  if(isCacheValid(cache)) return Promise.resolve(cache.response);
+  if(isCacheValid(cache)) return Promise.resolve(removePastEvents(cache.response));
   return storeRequest(eventsResource.get({
-    minDate: dateService.buildISOString(dateService.getNow())
+    minDate: buildNowDateISOString()
   }).then(response => {
     cacheEvents(response);
     currentRequest = null;
@@ -43,6 +43,18 @@ function isCacheValid(cache){
 
 function getNowTimestamp(){
   return dateService.getNow().getTime();
+}
+
+function removePastEvents(response){
+  const todayISOString = buildNowDateISOString();
+  return {
+    ...response,
+    data: response.data.filter(event => event.date >= todayISOString)
+  };
+}
+
+function buildNowDateISOString(){
+  return dateService.buildISOString(dateService.getNow());
 }
 
 export default _public;

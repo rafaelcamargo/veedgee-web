@@ -29,13 +29,23 @@ describe('Events Service', () => {
   });
 
   it('should optionally respond with cached events if cache is newer than 24h', async () => {
-    dateService.getNow = jest.fn(() => new Date(2024, 3, 26, 10, 0));
-    const createdAt = new Date(2024, 3, 25, 10, 30);
+    dateService.getNow = jest.fn(() => new Date(2024, 2, 23, 10, 0));
+    const createdAt = new Date(2024, 2, 22, 10, 30);
     const cache = { createdAt: createdAt.getTime(), response: { data: eventsMock } };
     window.localStorage.setItem('vevents', JSON.stringify(cache));
     const response = await eventsService.get();
     expect(eventsResource.get).not.toHaveBeenCalled();
     expect(response).toEqual({ data: eventsMock });
+  });
+
+  it('should remove past events from events cache', async () => {
+    dateService.getNow = jest.fn(() => new Date(2024, 3, 15, 10, 0));
+    const createdAt = new Date(2024, 3, 14, 12, 0);
+    const cache = { createdAt: createdAt.getTime(), response: { data: eventsMock } };
+    window.localStorage.setItem('vevents', JSON.stringify(cache));
+    const response = await eventsService.get();
+    expect(eventsResource.get).not.toHaveBeenCalled();
+    expect(response).toEqual({ data: [eventsMock[2]] });
   });
 
   it('should refetch events if cache is older than 24h', async () => {
@@ -44,7 +54,7 @@ describe('Events Service', () => {
     const cache = { createdAt: createdAt.getTime(), response: { data: eventsMock } };
     window.localStorage.setItem('vevents', JSON.stringify(cache));
     const response = await eventsService.get();
-    expect(eventsResource.get).toHaveBeenCalledWith({ minDate: buildNowDateISOString() });
+    expect(eventsResource.get).toHaveBeenCalledWith({ minDate: '2024-04-26' });
     expect(response).toEqual({ data: eventsMock });
   });
 
