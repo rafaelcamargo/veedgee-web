@@ -1,3 +1,4 @@
+import(/* webpackChunkName: 'events-css' */ '@src/events/index.styl');
 import { Container } from '@src/base/components/container/container';
 import { Viewport } from '@src/base/components/viewport/viewport';
 import { EventList } from '@src/events/components/event-list/event-list';
