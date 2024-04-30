@@ -1,7 +1,8 @@
 module.exports = [
   {
     path: '/',
-    name: 'home'
+    name: 'home',
+    prerender: true
   },
   {
     path: '/events',

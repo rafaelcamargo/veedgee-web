@@ -8,7 +8,9 @@ _public.getRoutes = () => {
 };
 
 function getRoutePaths(){
-  return routes.map(route => route.path);
+  return routes.reduce((result, route) => {
+    return route.prerender ? [...result, route.path] : result;
+  }, []);
 }
 
 module.exports = _public;
