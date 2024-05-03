@@ -1,0 +1,20 @@
+{
+  "en-US": {
+    "city": "City",
+    "all_cities": "All Cities",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "show_filters": "Show filters",
+    "hide_filters": "Hide filters",
+    "filters": "Filters"
+  },
+  "pt-BR": {
+    "city": "Cidade",
+    "all_cities": "Todas as Cidades",
+    "start_date": "Data Inicial",
+    "end_date": "Data Final",
+    "show_filters": "Exibir filtros",
+    "hide_filters": "Ocultar filtros",
+    "filters": "Filtros"
+  }
+}

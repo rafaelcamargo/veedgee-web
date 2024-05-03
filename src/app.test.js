@@ -2,6 +2,7 @@ import Staly from '@compilorama/staly';
 import { StalyMock, stalyInstanceMock } from '@src/base/mocks/staly';
 import { asyncMount, screen, getTranslations, mockSearchParams } from '@src/base/services/testing';
 import analyticsService from '@src/base/services/analytics';
+import dateService from '@src/base/services/date';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
 import homeViewTranslations from '@src/home/views/home-view.trans.json';
@@ -39,6 +40,7 @@ describe('App', () => {
   });
 
   it('should contain an events view', async () => {
+    dateService.getNow = jest.fn(() => new Date(2024, 2, 23));
     setRoute('/events');
     await mount();
     const firstEventHeading = await screen.findByRole('heading', { level: 2, name: eventsMock[0].title });

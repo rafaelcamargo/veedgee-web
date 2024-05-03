@@ -1,8 +1,12 @@
 {
   "en-US": {
-    "load_more": "Load more"
+    "load_more": "Load more",
+    "no_results": "No events left",
+    "try_redo_filters": "Try different dates"
   },
   "pt-BR": {
-    "load_more": "Mostar mais"
+    "load_more": "Mostar mais",
+    "no_results": "Não sobraram eventos",
+    "try_redo_filters": "Tente explorar outras datas"
   }
 }

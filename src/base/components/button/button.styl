@@ -1,0 +1,50 @@
+.v-button
+  padding 10px 0
+  min-width 200px
+  background-color var(--vcolor-grey-light)
+  color var(--vcolor-grey-darker)
+  font-size var(--vfont-size-sm)
+  font-weight bold
+  line-height 1
+  text-align center
+  text-decoration none
+  border-width 1px
+  border-style solid
+  border-color var(--vcolor-grey)
+  border-radius 6px
+  transition-property background-color, border-color
+  transition-duration 200ms
+  transition-timing-function ease-in-out
+  outline 0
+  cursor pointer
+  -webkit-appearance none
+  &:focus,
+  &:hover,
+  &:active
+    border-color var(--vcolor-grey-dark)
+    color var(--vcolor-darkest)
+  &.v-button-primary
+    background-color var(--vcolor-primary)
+    color var(--vcolor-lightest)
+    border-color var(--vcolor-primary)
+    &:focus,
+    &:hover,
+    &:active
+      background-color var(--vcolor-red-dark)
+      border-color var(--vcolor-red-dark)
+  &.v-button-icon
+    position relative
+    padding 0
+    min-width 0
+    width 40px
+    height 40px
+    border 0
+    background-color transparent
+    &:focus,
+    &:hover,
+    &:active
+      background-color transparent
+    .v-icon
+      position absolute
+      top 0
+      left 0

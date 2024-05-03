@@ -1,0 +1,107 @@
+@import '@mixins'
+
+.v-event-filters-visibility-toggler
+  position relative
+  z-index var(--vlayer-low)
+
+.v-event-filter-fields
+  position absolute
+  top 0
+  right 0
+  display flex
+  flex-direction column
+  padding 20px 20px 60px
+  width 100vw
+  background-color var(--vcolor-lightest)
+  border-bottom 1px solid var(--vcolor-grey-light)
+  box-shadow 0 6px 72px 0 rgba(0, 0, 0, 0.15)
+  box-sizing border-box
+  opacity 0
+  transform translate3d(0, -100%, 0)
+  transition all 200ms ease-out
+  &.v-event-filter-fields-visible
+    transform translate3d(0, 0, 0)
+    opacity 1
+  h3
+    margin-bottom 40px
+    color var(--vcolor-grey-dark)
+    text-align center
+
+.v-event-filter-field
+  width 100%
+  &:not(:first-child)
+    margin-left 20px
+  select,
+  input
+    width 100%
+
+.v-event-filter-field-group
+  display flex
+  width 100%
+  &:not(:first-child)
+    margin-top 20px
+
+.v-event-filters-visibility-toggler-wrapper
+  position relative
+  display flex
+
+.v-event-filters-counter-wrapper
+  position absolute
+  top 4px
+  right 6px
+  transform translateX(0)
+  transition all 200ms ease-in
+  z-index var(--vlayer-middle)
+  &.v-event-filters-counter-wrapper-center
+    top 13px
+    right 50vw
+    transform translateX(75px)
+    .v-event-filters-counter
+      &.v-event-filters-counter-visible
+        transform scale(1.15)
+
+.v-event-filters-counter
+  position relative
+  display flex
+  align-items center
+  justify-content center
+  width 16px
+  height 16px
+  background-color var(--vcolor-primary)
+  color var(--vcolor-lightest)
+  font-size var(--vfont-size-xxxs)
+  font-weight bold
+  line-height 1
+  border-radius 50%
+  transform scale(0)
+  transition all 200ms ease-in
+  &.v-event-filters-counter-visible
+    transform scale(1)
+
++breakpoint('sm')
+  .v-event-filter-fields
+    position relative
+    top auto
+    right auto
+    display flex
+    flex-direction row
+    padding 0
+    width auto
+    background-color transparent
+    border-bottom 0
+    box-shadow none
+    transition none
+    &.v-event-filter-fields-visible
+      top auto
+      box-shadow none
+  .v-event-filter-field
+    width auto
+    margin-left 20px
+    select,
+    input
+      width auto
+  .v-event-filter-field-group
+    display relative
+    width auto
+    &:not(:first-child)
+      margin-top 0

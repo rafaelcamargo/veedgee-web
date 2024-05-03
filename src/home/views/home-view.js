@@ -24,7 +24,7 @@ const HomeView = () => {
             <Logo aria-hidden="true" />
           </h1>
           <h2>{t('find_events')}</h2>
-          <Link className="v-button" to={routes[1].path}>{t('search')}</Link>
+          <Link className="v-button v-button-primary" to={routes[1].path}>{t('search')}</Link>
         </Container>
       </section>
       <section className="v-home-about" aria-label={t('how_it_works')}>
