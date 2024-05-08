@@ -112,6 +112,11 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange }){
             onChange={handleFilterChange}
           />
         </div>
+        { isMobile && (
+          <div className="v-event-filter-date-field-divider">
+            {t('to')}
+          </div>
+        )}
         <div className="v-event-filter-field">
           <input
             type="date"

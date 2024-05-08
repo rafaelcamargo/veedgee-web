@@ -182,10 +182,11 @@ describe('Events View', () => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     mockSearchParams('limit=60');
     const { user } = await mount();
-    const { start_date, end_date } = getTranslations(eventFiltersTranslations);
+    const { start_date, to, end_date } = getTranslations(eventFiltersTranslations);
     await selectCity(user, 'Joinville');
     await selectDate(user, start_date, '2024-05-01');
     await selectDate(user, end_date, '2024-05-03');
+    expect(screen.queryByText(to)).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Event #3' })).toBeInTheDocument();
@@ -310,7 +311,7 @@ describe('Events View', () => {
   it('should show filters counter on mobile', async () => {
     simulateScreenType('mobile');
     const { user, container } = await mount();
-    const { all_cities, end_date, show_filters, hide_filters } = getTranslations(eventFiltersTranslations);
+    const { all_cities, to, end_date, show_filters, hide_filters } = getTranslations(eventFiltersTranslations);
     const eventFilterCounterEl = container.querySelector('#eventFiltersCounter');
     const eventFilterCounterWrapperEl = container.querySelector('#eventFiltersCounterWrapper');
     const getCounterElClassNames = () => eventFilterCounterEl.classList;
@@ -322,6 +323,7 @@ describe('Events View', () => {
     await user.click(screen.getByRole('button', { name: show_filters }));
     await selectCity(user, 'Curitiba');
     await selectDate(user, end_date, '2024-05-05');
+    expect(screen.getByText(to)).toBeInTheDocument();
     expect(getCounterElClassNames()).toContain('v-event-filters-counter-visible');
     expect(getCounterWrapperElClassNames()).toContain('v-event-filters-counter-wrapper-center');
     expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'false');

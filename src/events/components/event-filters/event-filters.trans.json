@@ -3,6 +3,7 @@
     "city": "City",
     "all_cities": "All Cities",
     "start_date": "Start Date",
+    "to": "to",
     "end_date": "End Date",
     "show_filters": "Show filters",
     "hide_filters": "Hide filters",
@@ -13,6 +14,7 @@
     "all_cities": "Todas as Cidades",
     "start_date": "Data Inicial",
     "end_date": "Data Final",
+    "to": "até",
     "show_filters": "Exibir filtros",
     "hide_filters": "Ocultar filtros",
     "filters": "Filtros"
