@@ -3,6 +3,9 @@
 .v-event-filters-visibility-toggler
   position relative
   z-index var(--vlayer-low)
+  &.v-button-icon-right
+    &.v-event-filters-visibility-toggler-textless
+      padding-left 0
 
 .v-event-filter-fields
   position absolute
@@ -48,14 +51,10 @@
   &:not(:first-child)
     margin-top 20px
 
-.v-event-filters-visibility-toggler-wrapper
-  position relative
-  display flex
-
 .v-event-filters-counter-wrapper
   position absolute
   top 4px
-  right 6px
+  right -5px
   transform translateX(0)
   transition all 200ms ease-in
   z-index var(--vlayer-middle)

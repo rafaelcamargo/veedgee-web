@@ -34,17 +34,19 @@
       border-color var(--vcolor-red-dark)
   &.v-button-icon
     position relative
-    padding 0
-    min-width 0
-    width 40px
-    height 40px
-    border 0
-    background-color transparent
-    &:focus,
-    &:hover,
-    &:active
-      background-color transparent
+    min-width 40px
+    min-height 40px
     .v-icon
       position absolute
       top 0
       left 0
+    &.v-button-icon-right
+        left auto
+        right 0
+        min-width 40px
+        padding 0 40px 0 10px
+        .v-icon
+          position absolute
+          top 0
+          left auto
+          right 0

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
-import { Loupe } from '@src/base/icons/loupe';
+import { Filters } from '@src/base/icons/filters';
 import { Close } from '@src/base/icons/close';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
@@ -45,25 +45,29 @@ export const EventFilters = ({ filters, onChange }) => {
 
 function FiltersVisibilityButton({ filters, isFiltersVisibile, onClick }){
   const { t } = useTranslation(translations);
-  const { label, Icon } = isFiltersVisibile ? {
+  const { label, Icon, text, className } = isFiltersVisibile ? {
     label: t('hide_filters'),
+    className: 'v-event-filters-visibility-toggler-textless',
     Icon: Close
   } : {
     label: t('show_filters'),
-    Icon: Loupe
+    text: t('filters'),
+    className: '',
+    Icon: Filters
   };
 
   return (
     <Button
       aria-label={label}
-      theme="icon"
-      className="v-event-filters-visibility-toggler"
+      theme="icon-right"
+      className={`v-event-filters-visibility-toggler ${className}`}
       onClick={onClick}
     >
       <FiltersCounter
         filters={filters}
         isFiltersVisibile={isFiltersVisibile}
       />
+      {text}
       <Icon />
     </Button>
   );
