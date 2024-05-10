@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { Filters } from '@src/base/icons/filters';
-import { Close } from '@src/base/icons/close';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
 import dateService from '@src/base/services/date';
@@ -27,53 +26,46 @@ export const EventFilters = ({ filters, onChange }) => {
   return (
     <div className="v-event-filters-wrapper">
       { isMobile && (
-        <FiltersVisibilityButton
-          filters={filters}
-          isFiltersVisibile={isFiltersVisibile}
-          onClick={toggleFiltersVisibility}
-        />
+        <>
+          <FiltersCounter
+            filters={filters}
+            isFiltersVisibile={isFiltersVisibile}
+          />
+          <FiltersVisibilityButton
+            filters={filters}
+            isFiltersVisibile={isFiltersVisibile}
+            onClick={toggleFiltersVisibility}
+          />
+        </>
       )}
       <FilterFields
         filters={filters}
         isFiltersVisibile={isFiltersVisibile}
         isMobile={isMobile}
         onChange={onChange}
+        onFinish={toggleFiltersVisibility}
       />
     </div>
   );
 };
 
-function FiltersVisibilityButton({ filters, isFiltersVisibile, onClick }){
+function FiltersVisibilityButton({ isFiltersVisibile, onClick }){
   const { t } = useTranslation(translations);
-  const { label, Icon, text, className } = isFiltersVisibile ? {
-    label: t('hide_filters'),
-    className: 'v-event-filters-visibility-toggler-textless',
-    Icon: Close
-  } : {
-    label: t('show_filters'),
-    text: t('filters'),
-    className: '',
-    Icon: Filters
-  };
 
-  return (
+  return !isFiltersVisibile && (
     <Button
-      aria-label={label}
+      aria-label={t('show_filters')}
       theme="icon-right"
-      className={`v-event-filters-visibility-toggler ${className}`}
+      className="v-event-filters-visibility-toggler"
       onClick={onClick}
     >
-      <FiltersCounter
-        filters={filters}
-        isFiltersVisibile={isFiltersVisibile}
-      />
-      {text}
-      <Icon />
+      {t('filters')}
+      <Filters />
     </Button>
   );
 }
 
-function FilterFields({ filters, isFiltersVisibile, isMobile, onChange }){
+function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish }){
   const { t } = useTranslation(translations);
   const getFilterValue = attrName => filters[attrName] || '';
   const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
@@ -132,6 +124,19 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange }){
           />
         </div>
       </div>
+      {handleDoneButton(isMobile, onFinish)}
+    </div>
+  );
+}
+
+function handleDoneButton(isMobile, onClick){
+  const { t } = useTranslation(translations);
+
+  return isMobile && (
+    <div className="v-event-filter-actions">
+      <Button theme="primary" onClick={onClick}>
+        {t('done')}
+      </Button>
     </div>
   );
 }

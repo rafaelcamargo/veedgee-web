@@ -13,7 +13,7 @@
   right 0
   display flex
   flex-direction column
-  padding 20px 20px 60px
+  padding 20px 20px 40px
   width 100vw
   background-color var(--vcolor-lightest)
   border-bottom 1px solid var(--vcolor-grey-light)
@@ -53,15 +53,15 @@
 
 .v-event-filters-counter-wrapper
   position absolute
-  top 4px
-  right -5px
+  top 6px
+  right 12px
   transform translateX(0)
   transition all 200ms ease-in
   z-index var(--vlayer-middle)
   &.v-event-filters-counter-wrapper-center
-    top 13px
+    top 22px
     right 50vw
-    transform translateX(75px)
+    transform translateX(60px)
     .v-event-filters-counter
       &.v-event-filters-counter-visible
         transform scale(1.15)
@@ -83,6 +83,10 @@
   transition all 200ms ease-in
   &.v-event-filters-counter-visible
     transform scale(1)
+
+.v-event-filter-actions
+  margin-top 40px
+  text-align center
 
 +breakpoint('sm')
   .v-event-filter-fields

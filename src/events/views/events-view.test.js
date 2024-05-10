@@ -167,6 +167,14 @@ describe('Events View', () => {
     expect(screen.queryByRole('button', { name: load_more })).not.toBeInTheDocument();
   });
 
+  it('should not show mobile filter elements on desktop', async () => {
+    simulateScreenType('desktop');
+    await mount();
+    const { show_filters, done } = getTranslations(eventFiltersTranslations);
+    expect(screen.queryByRole('button', { name: show_filters })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: done })).not.toBeInTheDocument();
+  });
+
   it('should filter events by start, end date, and city', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 3, 30));
     const events = buildEventsMock(8, [
@@ -296,14 +304,14 @@ describe('Events View', () => {
   it('should not show filters on mobile by default', async () => {
     simulateScreenType('mobile');
     const { user, container } = await mount();
-    const { show_filters, hide_filters } = getTranslations(eventFiltersTranslations);
+    const { show_filters, done } = getTranslations(eventFiltersTranslations);
     const eventFilterFieldEl = container.querySelector('#eventFilterFields');
     expect(eventFilterFieldEl.classList).not.toContain('v-event-filter-fields-visible');
     expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'true');
     await user.click(screen.getByRole('button', { name: show_filters }));
     expect(eventFilterFieldEl.classList).toContain('v-event-filter-fields-visible');
     expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'false');
-    await user.click(screen.getByRole('button', { name: hide_filters }));
+    await user.click(screen.getByRole('button', { name: done }));
     expect(eventFilterFieldEl.classList).not.toContain('v-event-filter-fields-visible');
     expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'true');
   });
@@ -311,7 +319,7 @@ describe('Events View', () => {
   it('should show filters counter on mobile', async () => {
     simulateScreenType('mobile');
     const { user, container } = await mount();
-    const { all_cities, to, end_date, show_filters, hide_filters } = getTranslations(eventFiltersTranslations);
+    const { all_cities, to, end_date, show_filters, done } = getTranslations(eventFiltersTranslations);
     const eventFilterCounterEl = container.querySelector('#eventFiltersCounter');
     const eventFilterCounterWrapperEl = container.querySelector('#eventFiltersCounterWrapper');
     const getCounterElClassNames = () => eventFilterCounterEl.classList;
@@ -336,7 +344,7 @@ describe('Events View', () => {
     expect(getCounterElClassNames()).not.toContain('v-event-filters-counter-visible');
     expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'true');
     expect(eventFilterCounterEl.textContent).toEqual('0');
-    await user.click(screen.getByRole('button', { name: hide_filters }));
+    await user.click(screen.getByRole('button', { name: done }));
     expect(getCounterWrapperElClassNames()).not.toContain('v-event-filters-counter-wrapper-center');
   });
 });

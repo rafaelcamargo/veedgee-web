@@ -6,8 +6,8 @@
     "to": "to",
     "end_date": "End Date",
     "show_filters": "Show filters",
-    "hide_filters": "Hide filters",
-    "filters": "Filters"
+    "filters": "Filters",
+    "done": "Done"
   },
   "pt-BR": {
     "city": "Cidade",
@@ -16,7 +16,7 @@
     "end_date": "Data Final",
     "to": "até",
     "show_filters": "Exibir filtros",
-    "hide_filters": "Ocultar filtros",
-    "filters": "Filtros"
+    "filters": "Filtros",
+    "done": "Concluir"
   }
 }
