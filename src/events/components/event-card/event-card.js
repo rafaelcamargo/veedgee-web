@@ -2,6 +2,7 @@ import { useTranslation } from '@src/base/hooks/use-translation';
 import { Clock } from '@src/base/icons/clock';
 import { Pin } from '@src/base/icons/pin';
 import { Arrow } from '@src/base/icons/arrow';
+import dateService from '@src/base/services/date';
 import translations from './event-card.trans';
 
 export const EventCard = ({ eventDetails, titleId }) => {
@@ -10,9 +11,12 @@ export const EventCard = ({ eventDetails, titleId }) => {
 
   return (
     <div className="v-event-card">
-      <time className="v-event-card-datetime" dateTime={buildDateTimeString(date, time)}>
+      <time
+        className={buildDateTimeClassName(date)}
+        dateTime={buildDateTimeString(date, time)}
+      >
         <span className="v-event-card-date">
-          {formatDate(date)}
+          {handleDateLabel(date, formatDate)}
         </span>
         {
           time && (
@@ -41,4 +45,19 @@ export const EventCard = ({ eventDetails, titleId }) => {
 
 function buildDateTimeString(date, time){
   return time ? `${date}T${time}` : date;
+}
+
+function buildDateTimeClassName(date){
+  const classNames = ['v-event-card-datetime'];
+  if (dateService.isToday(date) || dateService.isTomorrow(date)) {
+    classNames.push('v-event-card-datetime-featured');
+  }
+  return classNames.join(' ');
+}
+
+function handleDateLabel(date, formatDate){
+  const { t } = useTranslation(translations);
+  if(dateService.isToday(date)) return t('today');
+  if(dateService.isTomorrow(date)) return t('tomorrow');
+  return formatDate(date);
 }

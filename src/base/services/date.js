@@ -13,7 +13,22 @@ _public.formatTime = (timeString, { locale }) => {
   return new Intl.DateTimeFormat(locale, getTimeDefaultOptions()).format(date);
 };
 
+_public.isToday = dateString => {
+  const today = _public.getNow();
+  return isSameDay(today, buildDateFromString(dateString));
+};
+
+_public.isTomorrow = dateString => {
+  const ONE_DAY = 86400000;
+  const tomorrow = new Date(_public.getNow().getTime() + ONE_DAY);
+  return isSameDay(tomorrow, buildDateFromString(dateString));
+};
+
 _public.buildISOString = dateObj => dateObj.toISOString().split('T')[0];
+
+function isSameDay(comparingDate, comparedDate){
+  return _public.buildISOString(comparingDate) === _public.buildISOString(comparedDate);
+}
 
 function buildDateFromString(dateString){
   const [year, month, day] = dateString.split('-').map(num => parseInt(num));

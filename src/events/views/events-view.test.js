@@ -283,22 +283,23 @@ describe('Events View', () => {
     expect(screen.getByText(try_redo_filters)).toBeInTheDocument();
   });
 
-  it('should show no results message if no event has been found', async () => {
+  it('should show special date labels for events happening today or tomorrow', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 4, 3));
     const events = buildEventsMock(8, [
-      { date: '2024-05-04', city: 'Blumenau' },
+      { date: '2024-05-03', city: 'Blumenau' },
       { date: '2024-05-04', city: 'São José' },
-      { date: '2024-05-04', city: 'Joinville' }
+      { date: '2024-05-05', city: 'Joinville' }
     ]);
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
-    const { user } = await mount();
-    const { no_results, try_redo_filters } = getTranslations(eventListTranslations);
-    await selectCity(user, 'Curitiba');
-    expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: no_results })).toBeInTheDocument();
-    expect(screen.getByText(try_redo_filters)).toBeInTheDocument();
+    const { container } = await mount();
+    const { today, tomorrow } = getTranslations(eventCardTranslations);
+    const [firstEventTime, secondEventTime, thirdEventTime] = container.querySelectorAll('time');
+    expect(screen.getByText(today)).toBeInTheDocument();
+    expect(firstEventTime.classList).toContain('v-event-card-datetime-featured');
+    expect(screen.getByText(tomorrow)).toBeInTheDocument();
+    expect(secondEventTime.classList).toContain('v-event-card-datetime-featured');
+    expect(screen.getByText('May 5, 2024')).toBeInTheDocument();
+    expect(thirdEventTime.classList).not.toContain('v-event-card-datetime-featured');
   });
 
   it('should not show filters on mobile by default', async () => {

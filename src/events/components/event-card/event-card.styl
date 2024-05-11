@@ -42,12 +42,20 @@
   font-size var(--vfont-size-xxs)
   font-weight bold
   text-transform uppercase
+  &.v-event-card-datetime-featured
+    .v-event-card-date
+      background-color var(--vcolor-blue-light)
+      color var(--vcolor-blue-dark)
+      border 1px solid var(--vcolor-blue)
 
 .v-event-card-date
   padding 5px 20px
+  min-width 120px
   color var(--vcolor-primary)
+  text-align center
   border 1px solid var(--vcolor-primary)
   border-radius 4px
+  box-sizing border-box
 
 .v-event-card-time
   display flex
