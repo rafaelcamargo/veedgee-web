@@ -69,7 +69,7 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
   const { t } = useTranslation(translations);
   const getFilterValue = attrName => filters[attrName] || '';
   const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
-  const minStartDate = dateService.buildISOString(dateService.getNow());
+  const minStartDate = dateService.getTodayISOString();
 
   return (
     <div

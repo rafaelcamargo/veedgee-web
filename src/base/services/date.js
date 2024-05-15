@@ -18,6 +18,10 @@ _public.isToday = dateString => {
   return isSameDay(today, buildDateFromString(dateString));
 };
 
+_public.getTodayISOString = () => {
+  return _public.buildISOString(clearTime(_public.getNow()));
+};
+
 _public.isTomorrow = dateString => {
   const ONE_DAY = 86400000;
   const tomorrow = new Date(clearTime(_public.getNow()).getTime() + ONE_DAY);

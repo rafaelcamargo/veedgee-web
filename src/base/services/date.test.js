@@ -12,6 +12,12 @@ describe('Date Service', () => {
     expect(serviceNow.getSeconds()).toEqual(now.getSeconds());
   });
 
+  it('should build today ISO string', () => {
+    const today = new Date(2024, 4, 14, 23, 59, 59);
+    dateService.getNow = jest.fn(() => today);
+    expect(dateService.getTodayISOString()).toEqual('2024-05-14');
+  });
+
   it('should answer if a date is today', () => {
     const today = new Date(2024, 4, 14, 23, 59, 59);
     dateService.getNow = jest.fn(() => today);

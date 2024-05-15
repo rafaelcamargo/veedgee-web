@@ -43,7 +43,7 @@ function buildFilterValue(searchParams, filterName){
 
 function buildInitialStartDate(customStartDate){
   if(customStartDate || customStartDate === '') return customStartDate;
-  return dateService.buildISOString(dateService.getNow());
+  return dateService.getTodayISOString();
 }
 
 function buildInitialLimit(customLimit){
