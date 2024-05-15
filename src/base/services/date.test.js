@@ -11,4 +11,16 @@ describe('Date Service', () => {
     expect(serviceNow.getMinutes()).toEqual(now.getMinutes());
     expect(serviceNow.getSeconds()).toEqual(now.getSeconds());
   });
+
+  it('should answer if a date is today', () => {
+    const today = new Date(2024, 4, 14, 23, 59, 59);
+    dateService.getNow = jest.fn(() => today);
+    expect(dateService.isToday('2024-05-14')).toEqual(true);
+  });
+
+  it('should answer if a date is tomorrow', () => {
+    const today = new Date(2024, 4, 14, 23, 59, 59);
+    dateService.getNow = jest.fn(() => today);
+    expect(dateService.isTomorrow('2024-05-15')).toEqual(true);
+  });
 });

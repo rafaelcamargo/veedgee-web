@@ -14,17 +14,24 @@ _public.formatTime = (timeString, { locale }) => {
 };
 
 _public.isToday = dateString => {
-  const today = _public.getNow();
+  const today = clearTime(_public.getNow());
   return isSameDay(today, buildDateFromString(dateString));
 };
 
 _public.isTomorrow = dateString => {
   const ONE_DAY = 86400000;
-  const tomorrow = new Date(_public.getNow().getTime() + ONE_DAY);
+  const tomorrow = new Date(clearTime(_public.getNow()).getTime() + ONE_DAY);
   return isSameDay(tomorrow, buildDateFromString(dateString));
 };
 
 _public.buildISOString = dateObj => dateObj.toISOString().split('T')[0];
+
+function clearTime(dateObj){
+  dateObj.setHours(0);
+  dateObj.setMinutes(0);
+  dateObj.setSeconds(0);
+  return dateObj;
+}
 
 function isSameDay(comparingDate, comparedDate){
   return _public.buildISOString(comparingDate) === _public.buildISOString(comparedDate);
