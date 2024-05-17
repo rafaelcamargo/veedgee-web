@@ -71,6 +71,7 @@ describe('Events View', () => {
     dateService.getNow = (() => new Date(2024, 2, 1));
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
     viewportService.listenResize = jest.fn();
+    window.scroll = jest.fn();
     simulateScreenType('desktop');
     flushEventsCache();
   });
@@ -346,6 +347,7 @@ describe('Events View', () => {
     expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'true');
     expect(eventFilterCounterEl.textContent).toEqual('0');
     await user.click(screen.getByRole('button', { name: done }));
+    expect(window.scroll).toHaveBeenCalledWith({ top: 0, left: 0 });
     expect(getCounterWrapperElClassNames()).not.toContain('v-event-filters-counter-wrapper-center');
   });
 });

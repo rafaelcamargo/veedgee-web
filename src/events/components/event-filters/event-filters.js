@@ -69,7 +69,10 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
   const { t } = useTranslation(translations);
   const getFilterValue = attrName => filters[attrName] || '';
   const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
-  const minStartDate = dateService.getTodayISOString();
+  const onFinishButtonClick = () => {
+    window.scroll({ top: 0, left: 0 });
+    onFinish();
+  };
 
   return (
     <div
@@ -101,7 +104,7 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
         <div className="v-event-filter-field">
           <input
             type="date"
-            min={minStartDate}
+            min={dateService.getTodayISOString()}
             name={START_DATE_FILTER_NAME}
             value={getFilterValue(START_DATE_FILTER_NAME)}
             aria-label={t('start_date')}
@@ -124,7 +127,7 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
           />
         </div>
       </div>
-      {handleDoneButton(isMobile, onFinish)}
+      {handleDoneButton(isMobile, onFinishButtonClick)}
     </div>
   );
 }
