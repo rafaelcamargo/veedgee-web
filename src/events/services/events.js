@@ -14,9 +14,10 @@ _public.get = () => {
     minDate: buildNowDateISOString()
   }).then(response => {
     cacheEvents(response);
-    currentRequest = null;
     return response;
-  }));
+  })).finally(() => {
+    currentRequest = null;
+  });
 };
 
 function storeRequest(request){

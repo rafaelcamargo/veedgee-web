@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
+import { Loader } from '@src/base/components/loader/loader';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
 import eventsService from '@src/events/services/events';
@@ -7,28 +8,51 @@ import { EventCard } from '@src/events/components/event-card/event-card';
 import { LIMIT_FILTER_NAME, DEFAULT_LIMIT } from '@src/events/constants/event-filters';
 import translations from './event-list.trans';
 
-// eslint-disable-next-line max-statements
+// eslint-disable-next-line
 export const EventList = ({ filters, onLoadMore }) => {
   const { t } = useTranslation(translations);
-  const [events, setEvents] = useState([]);
-  const filteredEvents = filterEvents(events, filters);
+  const [events, setEvents] = useState({ loading: true });
+  const filteredEvents = filterEvents(events?.data, filters);
+  const fetchEvents = () => {
+    return eventsService.get()
+      .then(({ data }) => setEvents({ data }))
+      .catch(() => setEvents(() => ({ failed: true })));
+  };
 
   useEffect(() => {
-    eventsService.get().then(({ data }) => setEvents(data));
+    fetchEvents();
   }, []);
 
   return (
-    <>
+    <div aria-live="polite">
       {
-        filteredEvents?.length === 0 && (
-          <div className="v-event-list-no-results">
+        events?.loading && buildFeedback(
+          <Loader>
+            {t('loading')}
+          </Loader>
+        )
+      }
+      {
+        events?.failed && buildFeedback(
+          <>
+            <h2>{t('something_went_wrong')}</h2>
+            <p>{t('could_not_be_possible_to_fetch_events')}</p>
+            <Button theme="primary" onClick={fetchEvents}>
+              {t('retry')}
+            </Button>
+          </>
+        )
+      }
+      {
+        filteredEvents?.length === 0 && buildFeedback(
+          <>
             <h2>{t('no_results')}</h2>
             <p>{t('try_redo_filters')}</p>
-          </div>
+          </>
         )
       }
       <ul className="v-event-list">
-        {filteredEvents.slice(0, filters.limit).map(eventDetails => {
+        {filteredEvents?.slice(0, filters.limit).map(eventDetails => {
           const label = `event-${eventDetails.id}`;
           return (
             <li key={eventDetails.id} aria-labelledby={label}>
@@ -48,16 +72,24 @@ export const EventList = ({ filters, onLoadMore }) => {
           </Button>
         )
       }
-    </>
+    </div>
   );
 };
+
+function buildFeedback(content){
+  return (
+    <div className="v-event-list-feedback-wrapper">
+      {content}
+    </div> 
+  );
+}
 
 function buildNewLimit(currentLimit){
   return { [LIMIT_FILTER_NAME]: currentLimit + DEFAULT_LIMIT };
 }
 
-function filterEvents(events, { city, startDate, endDate }){
-  return events.filter(event => {
+function filterEvents(eventsData, { city, startDate, endDate }){
+  return eventsData?.filter(event => {
     return isInDateRange(event.date, startDate, endDate) && isInCity(event.city, city);
   });
 }

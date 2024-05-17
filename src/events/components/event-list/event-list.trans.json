@@ -1,12 +1,20 @@
 {
   "en-US": {
+    "loading": "Fetching events",
     "load_more": "Load more",
     "no_results": "No events left",
-    "try_redo_filters": "Try different dates"
+    "try_redo_filters": "Try different dates.",
+    "something_went_wrong": "Sorry, something went wrong.",
+    "could_not_be_possible_to_fetch_events": "It could not be possible to fetch events.",
+    "retry": "Retry"
   },
   "pt-BR": {
+    "loading": "Carregando os eventos",
     "load_more": "Mostar mais",
     "no_results": "Não sobraram eventos",
-    "try_redo_filters": "Tente explorar outras datas"
+    "try_redo_filters": "Tente explorar outras datas.",
+    "something_went_wrong": "Foi mal, algo deu errado.",
+    "could_not_be_possible_to_fetch_events": "Não foi possível carregar os eventos.",
+    "retry": "Tentar novamente"
   }
 }

@@ -1,6 +1,7 @@
 import {
   TestingRouter,
   asyncMount,
+  act,
   screen,
   within,
   mockSearchParams,
@@ -282,6 +283,25 @@ describe('Events View', () => {
     expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: no_results })).toBeInTheDocument();
     expect(screen.getByText(try_redo_filters)).toBeInTheDocument();
+  });
+
+  it('should show error message and a button to retry on events fetch fail', async () => {
+    const events = buildEventsMock(1, [{ date: '2024-05-03', city: 'Blumenau' }]);
+    let fetchPromise;
+    eventsResource.get = jest.fn(() => new Promise((resolve, reject) => {
+      fetchPromise = { resolve, reject };
+    }));
+    const { user } = await mount();
+    const { something_went_wrong, could_not_be_possible_to_fetch_events, retry, loading } = getTranslations(eventListTranslations);
+    expect(screen.getByText(loading)).toBeInTheDocument();
+    await act(() => fetchPromise.reject());
+    expect(screen.getByRole('heading', { name: something_went_wrong })).toBeInTheDocument();
+    expect(screen.getByText(could_not_be_possible_to_fetch_events)).toBeInTheDocument();
+    expect(eventsResource.get).toHaveBeenCalledTimes(1);
+    await user.click(screen.getByRole('button', { name: retry }));
+    expect(eventsResource.get).toHaveBeenCalledTimes(2);
+    await act(() => fetchPromise.resolve({ data: events }));
+    expect(screen.queryByRole('heading', { name: events[0].title })).toBeInTheDocument();
   });
 
   it('should show special date labels for events happening today or tomorrow', async () => {

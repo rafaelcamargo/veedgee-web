@@ -1,0 +1,26 @@
+.v-loader
+  display flex
+  justify-content center
+  align-items center
+  height 8px
+  text-indent -9999px
+
+.v-loader-item
+  display inline-block
+  width 10px
+  height 8px
+  background-color var(--vcolor-grey-dark)
+  border-radius 3px
+  animation loader 600ms infinite ease-in-out both
+  &:first-child
+    animation-delay -200ms
+  &:last-child
+    animation-delay 200ms
+
+@keyframes loader
+  0%, 80%, 100%
+    opacity .6
+    transform scale(0.75)
+  40%
+    opacity 1
+    transform scale(1)
