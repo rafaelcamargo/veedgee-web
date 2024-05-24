@@ -9,7 +9,7 @@ export const LocaleSelect = () => {
   const handleChange = ({ target: { value } }) => handleLocaleChange(value);
 
   return (
-    <select aria-label={t('language')} value={currentLocale} onChange={handleChange}>
+    <select name="locale" aria-label={t('language')} value={currentLocale} onChange={handleChange}>
       {locales?.map(({ code, name }) => (
         <option key={code} value={code}>{name}</option>
       ))}
