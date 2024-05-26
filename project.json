@@ -13,9 +13,6 @@
     "images": {
       "files": "src/base/images/*.*"
     },
-    "robots": {
-      "file": "src/robots.txt"
-    },
     "tests": {
       "files": [
         "src/**/*.js",
@@ -54,9 +51,6 @@
         "production": "assets/images/[name]-[contenthash][ext]",
         "development": "assets/images/[name][ext]"
       }
-    },
-    "robots": {
-      "filename": "dist/[name][ext]"
     }
   }
 }

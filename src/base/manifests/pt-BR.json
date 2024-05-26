@@ -1,0 +1,27 @@
+{
+  "description": "Descubra o que de melhor acontece no Sul do Brasil.",
+  "screenshots": [
+    {
+      "src": "/assets/images/banner_veedgee_1270x760_02_pt.png",
+      "type": "image/png",
+      "sizes": "1270x760",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_760x1270_02_pt.png",
+      "type": "image/png",
+      "sizes": "760x1270"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_1270x760_03_pt.png",
+      "type": "image/png",
+      "sizes": "1270x760",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_760x1270_03_pt.png",
+      "type": "image/png",
+      "sizes": "760x1270"
+    }
+  ]
+}

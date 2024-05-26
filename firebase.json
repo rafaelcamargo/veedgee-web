@@ -10,8 +10,8 @@
       ]
     }],
     "rewrites": [{
-      "source": "**",
-      "destination": "/index.html"
+      "regex": "manifest.json?locale=pt-BR",
+      "destination": "/manifest-pt-BR.json"
     }]
   }
 }

@@ -6,4 +6,5 @@ module.exports = {
       DOMAIN: 'veedgee.compilorama.com'
     }
   },
+  SERVICE_WORKERS_ENABLED: true
 };

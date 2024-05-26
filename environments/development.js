@@ -7,4 +7,5 @@ module.exports = {
       OPTIONS: { trackLocalhost: false }
     }
   },
+  SERVICE_WORKERS_ENABLED: false
 };

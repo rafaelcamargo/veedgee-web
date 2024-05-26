@@ -1,0 +1,27 @@
+{
+  "description": "Discover the best events in the South of Brazil.",
+  "screenshots": [
+    {
+      "src": "/assets/images/banner_veedgee_1270x760_02_en.png",
+      "type": "image/png",
+      "sizes": "1270x760",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_760x1270_02_en.png",
+      "type": "image/png",
+      "sizes": "760x1270"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_1270x760_03_en.png",
+      "type": "image/png",
+      "sizes": "1270x760",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/assets/images/banner_veedgee_760x1270_03_en.png",
+      "type": "image/png",
+      "sizes": "760x1270"
+    }
+  ]
+}

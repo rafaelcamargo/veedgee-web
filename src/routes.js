@@ -6,6 +6,7 @@ module.exports = [
   },
   {
     path: '/events',
-    name: 'events'
+    name: 'events',
+    prerender: true
   }
 ];

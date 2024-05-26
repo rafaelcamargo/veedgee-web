@@ -1,5 +1,6 @@
 import dateService from '@src/base/services/date';
 import eventsResource from '@src/events/resources/events';
+import navigatorService from '@src/base/services/navigator';
 
 const _public = {};
 
@@ -38,8 +39,8 @@ function cacheEvents(response){
 }
 
 function isCacheValid(cache){
-  const TWENTY_FOUR_HOURS = 1000 * 60 * 60 * 24;
-  return cache && cache.createdAt > getNowTimestamp() - TWENTY_FOUR_HOURS;
+  const TWELVE_HOURS = 1000 * 60 * 60 * 12;
+  return !navigatorService.isOnline() || (cache && cache.createdAt > getNowTimestamp() - TWELVE_HOURS);
 }
 
 function getNowTimestamp(){

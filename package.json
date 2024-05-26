@@ -4,7 +4,7 @@
   "description": "Veedgee's Web Client",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "node ./scripts/build.js",
     "format": "eslint ./src/**/*.js",
     "start": "webpack-dev-server",
     "test": "jest",
