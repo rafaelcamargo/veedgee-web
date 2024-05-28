@@ -31,9 +31,7 @@ _public.isTomorrow = dateString => {
 _public.buildISOString = dateObj => dateObj.toISOString().split('T')[0];
 
 function clearTime(dateObj){
-  dateObj.setHours(0);
-  dateObj.setMinutes(0);
-  dateObj.setSeconds(0);
+  dateObj.setHours(0, 0, 0);
   return dateObj;
 }
 

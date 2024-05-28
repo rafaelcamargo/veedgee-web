@@ -8,6 +8,7 @@ import eventsMock from '@src/events/mocks/events';
 describe('Events Service', () => {
   function buildNowDateISOString(){
     const date = new Date();
+    date.setHours(0, 0, 0);
     return date.toISOString().split('T')[0];
   }
 

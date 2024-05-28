@@ -56,7 +56,7 @@ function removePastEvents(response){
 }
 
 function buildNowDateISOString(){
-  return dateService.buildISOString(dateService.getNow());
+  return dateService.getTodayISOString();
 }
 
 export default _public;

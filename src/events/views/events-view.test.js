@@ -88,7 +88,7 @@ describe('Events View', () => {
   });
 
   it('should contain an event list', async () => {
-    dateService.getNow = jest.fn(() => new Date(2024, 2, 23));
+    dateService.getNow = jest.fn(() => new Date(2024, 2, 23, 23, 59, 59));
     await mount();
     const eventHeadings = screen.getAllByRole('heading', { level: 2 });
     eventHeadings.forEach((heading, index) => {
