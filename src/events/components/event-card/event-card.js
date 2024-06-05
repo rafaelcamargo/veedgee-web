@@ -26,7 +26,9 @@ export const EventCard = ({ eventDetails, titleId }) => {
           )
         }
       </time>
-      <h2 id={titleId}>{title}</h2>
+      <div className="v-event-card-title-wrapper">
+        <h2 id={titleId}>{title}</h2>
+      </div>
       <a
         href={url}
         aria-label={t('view_event_details')}
