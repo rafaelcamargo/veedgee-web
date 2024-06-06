@@ -50,7 +50,8 @@ function filterAssetsByExtesion(assetFilenames, extensions){
 }
 
 function buildWebfontPreloadTags(webfontFilenames){
-  return webfontFilenames.map(filename => `<link rel="preload" href="${filename}" as="font">`).join('');
+  const template = '<link rel="preload" href="%s" as="font" crossorigin="anonymous">';
+  return webfontFilenames.map(filename => template.replace('%s', filename)).join('');
 }
 
 function generateManifestFiles(){
