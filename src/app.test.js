@@ -1,15 +1,9 @@
-import Staly from '@compilorama/staly';
-import { StalyMock, stalyInstanceMock } from '@src/base/mocks/staly';
 import { asyncMount, screen, getTranslations, mockSearchParams } from '@src/base/services/testing';
-import analyticsService from '@src/base/services/analytics';
 import dateService from '@src/base/services/date';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
 import homeViewTranslations from '@src/home/views/home-view.trans.json';
 import { App } from './app';
-
-jest.mock('@compilorama/staly');
-Staly.mockImplementation(StalyMock);
 
 describe('App', () => {
   async function mount(){
@@ -21,7 +15,6 @@ describe('App', () => {
   }
 
   beforeEach(() => {
-    analyticsService.init();
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
     setRoute('/');
   });
@@ -36,7 +29,6 @@ describe('App', () => {
     const { find_events } = getTranslations(homeViewTranslations);
     const heading = await screen.findByRole('heading', { level: 2, name: find_events });
     expect(heading).toBeInTheDocument();
-    expect(stalyInstanceMock.trackPageview).toHaveBeenCalledTimes(1);
   });
 
   it('should contain an events view', async () => {

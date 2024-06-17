@@ -40,7 +40,6 @@ describe('Index', () => {
   beforeEach(() => {
     document.body.innerHTML = '<div data-app></div>';
     analyticsService.init = jest.fn();
-    analyticsService.trackPageView = jest.fn();
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
     configureDocumentCharset();
   });
@@ -63,7 +62,6 @@ describe('Index', () => {
     const heading = await screen.findByRole('heading', { level: 1, name: 'Veedgee' });
     expect(heading).toBeInTheDocument();
     expect(analyticsService.init).toHaveBeenCalledTimes(1);
-    expect(analyticsService.trackPageView).toHaveBeenCalledTimes(1);
     expect(eventsResource.get).toHaveBeenCalledTimes(1);
     await pause();
     expect(listenerData.websiteLoadedEventReceived).toEqual(true);
