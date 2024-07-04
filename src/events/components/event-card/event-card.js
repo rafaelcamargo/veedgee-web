@@ -27,7 +27,9 @@ export const EventCard = ({ eventDetails, titleId }) => {
         }
       </time>
       <div className="v-event-card-title-wrapper">
-        <h2 id={titleId}>{title}</h2>
+        <h2 id={titleId} title={title}>
+          {handleTitle(title)}
+        </h2>
       </div>
       <a
         href={url}
@@ -62,4 +64,12 @@ function handleDateLabel(date, formatDate){
   if(dateService.isToday(date)) return t('today');
   if(dateService.isTomorrow(date)) return t('tomorrow');
   return formatDate(date);
+}
+
+function handleTitle(title){
+  return title?.length > 108 ? truncateTitle(title) : title;
+}
+
+function truncateTitle(title){
+  return `${title.slice(0,107).trim()}…`;
 }
