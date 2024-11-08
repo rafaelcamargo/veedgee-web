@@ -10,6 +10,7 @@ import {
 } from '@src/base/services/testing';
 import dateService from '@src/base/services/date';
 import viewportService from '@src/base/services/viewport';
+import windowService from '@src/base/services/window';
 import eventListTranslations from '@src/events/components/event-list/event-list.trans';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
@@ -68,6 +69,14 @@ describe('Events View', () => {
     viewportService.listenResize = jest.fn(listener => listener({ target: { innerWidth: width } }));
   }
 
+  function mockMobile({ model }){
+    const userAgent = {
+      'iphone': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Mobile/15E148 Safari/604.1',
+      'android': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6723.102 Mobile Safari/537.36'
+    }[model];
+    windowService.getUserAgent = jest.fn(() => userAgent);
+  }
+
   beforeEach(() => {
     dateService.getNow = (() => new Date(2024, 2, 1));
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
@@ -79,6 +88,7 @@ describe('Events View', () => {
 
   afterEach(() => {
     mockSearchParams('');
+    window.localStorage.removeItem('vmode');
   });
 
   it('should contain a link to homepage', async () => {
@@ -138,7 +148,7 @@ describe('Events View', () => {
     );
   });
 
-  it('should not show more than thirty events on initialization by default', async () => {
+  it('should show no more than thirty events on initialization by default', async () => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: buildEventsMock(31) }));
     await mount();
     expect(screen.getByRole('heading', { name: 'Event #1' })).toBeInTheDocument();
@@ -155,7 +165,7 @@ describe('Events View', () => {
     expect(screen.getByRole('heading', { name: 'Event #31' })).toBeInTheDocument();
   });
 
-  it('should optionally show more than thirty events', async () => {
+  it('should optionally load more events', async () => {
     mockSearchParams('limit=30');
     eventsResource.get = jest.fn(() => Promise.resolve({ data: buildEventsMock(31) }));
     const { user } = await mount();
@@ -177,7 +187,7 @@ describe('Events View', () => {
     expect(screen.queryByRole('button', { name: done })).not.toBeInTheDocument();
   });
 
-  it('should filter events by start, end date, and city', async () => {
+  it('should filter events by start date, end date, and city', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 3, 30));
     const events = buildEventsMock(8, [
       { date: '2024-04-30', city: 'Blumenau' },
@@ -369,5 +379,39 @@ describe('Events View', () => {
     await user.click(screen.getByRole('button', { name: done }));
     expect(window.scroll).toHaveBeenCalledWith({ top: 0, left: 0 });
     expect(getCounterWrapperElClassNames()).not.toContain('v-event-filters-counter-wrapper-center');
+  });
+
+  it('should not show an installation banner by default', async () => {
+    await mount();
+    expect(screen.queryByText('Install Veedgee on your iPhone')).not.toBeInTheDocument();
+    expect(screen.queryByText('Install Veedgee on your Android')).not.toBeInTheDocument();
+    expect(screen.queryByText('Loads faster and works offline')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'View instructions' })).not.toBeInTheDocument();
+  });
+
+  it('should not show an installation banner on pwa', async () => {
+    window.localStorage.setItem('vmode', 'pwa');
+    mockMobile({ model: 'iphone' });
+    await mount();
+    expect(screen.queryByText('Install Veedgee on your iPhone')).not.toBeInTheDocument();
+    expect(screen.queryByText('Install Veedgee on your Android')).not.toBeInTheDocument();
+    expect(screen.queryByText('Loads faster and works offline')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'View instructions' })).not.toBeInTheDocument();
+  });
+
+  it('should show an installation banner for iphone if device is an iphone', async () => {
+    mockMobile({ model: 'iphone' });
+    await mount();
+    expect(screen.getByText('Install Veedgee on your iPhone')).toBeInTheDocument();
+    expect(screen.getByText('Loads faster and works offline')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'View instructions' })).toHaveAttribute('href', '/install?device=iphone');
+  });
+
+  it('should show an installation banner for android if device is an android', async () => {
+    mockMobile({ model: 'android' });
+    await mount();
+    expect(screen.getByText('Install Veedgee on your Android')).toBeInTheDocument();
+    expect(screen.getByText('Loads faster and works offline')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'View instructions' })).toHaveAttribute('href', '/install?device=android');
   });
 });

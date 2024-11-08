@@ -4,6 +4,7 @@ import { Viewport } from '@src/base/components/viewport/viewport';
 import { useEventFilters } from '@src/events/hooks/use-event-filters';
 import { EventFilters } from '@src/events/components/event-filters/event-filters';
 import { EventList } from '@src/events/components/event-list/event-list';
+import { InstallationBanner } from '@src/installation/components/installation-banner/installation-banner';
 
 const EventsView = () => {
   const { filters, setFilters } = useEventFilters();
@@ -17,6 +18,7 @@ const EventsView = () => {
         }
       >
         <Container>
+          <InstallationBanner />
           <EventList filters={filters} onLoadMore={handleFilterChange} />
         </Container>
       </Viewport>

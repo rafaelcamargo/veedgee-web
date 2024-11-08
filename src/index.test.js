@@ -96,4 +96,11 @@ describe('Index', () => {
     await pause();
     expect(getManifestLinkTag()).toEqual(null);
   });
+
+  it('should save mode as pwa in local storage if the app is open as pwa', async () => {
+    mockSearchParams('ref=pwa');
+    act(() => init());
+    await pause();
+    expect(localStorage.getItem('vmode')).toEqual('pwa');
+  });
 });

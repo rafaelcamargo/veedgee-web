@@ -1,0 +1,14 @@
+{
+  "en-US": {
+    "install_iphone": "Install Veedgee on your iPhone",
+    "install_android": "Install Veedgee on your Android",
+    "faster_and_works_offline": "Loads faster and works offline",
+    "view_instructions": "View instructions"
+  },
+  "pt-BR": {
+    "install_iphone": "Instale o Veedgee no seu iPhone",
+    "install_android": "Instale o Veedgee no seu Android",
+    "faster_and_works_offline": "É mais rápido e funciona offline",
+    "view_instructions": "Ver instruções"
+  }
+}

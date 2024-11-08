@@ -16,6 +16,7 @@ export const init = () => {
 function initApplication(container){
   eventsService.get().then(dispatchWebsiteLoaded).catch(dispatchWebsiteLoaded);
   analyticsService.init();
+  pwaService.configAppMode();
   pwaService.appendManifestLinkIntoDocumentHead();
   createRoot(container).render(<App />);
 }
