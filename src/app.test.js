@@ -16,10 +16,10 @@ describe('App', () => {
 
   beforeEach(() => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
-    setRoute('/');
   });
 
   afterEach(() => {
+    setRoute('/');
     mockSearchParams('');
     localStorage.removeItem('vlocale');
   });
@@ -37,6 +37,13 @@ describe('App', () => {
     await mount();
     const firstEventHeading = await screen.findByRole('heading', { level: 2, name: eventsMock[0].title });
     expect(firstEventHeading).toBeInTheDocument();
+  });
+
+  it('should contain an installation view', async () => {
+    setRoute('/install');
+    await mount();
+    const heading = await screen.findByRole('heading', { level: 1, name: 'Installation' });
+    expect(heading).toBeInTheDocument();
   });
 
   it('should optionally set locale according "lang" search param found on url', async () => {

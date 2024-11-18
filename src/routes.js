@@ -8,5 +8,10 @@ module.exports = [
     path: '/events',
     name: 'events',
     prerender: true
+  },
+  {
+    path: '/install',
+    name: 'install',
+    prerender: true
   }
 ];

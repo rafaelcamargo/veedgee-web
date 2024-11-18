@@ -1,0 +1,38 @@
+{
+  "en-US": {
+    "homepage": "Homepage",
+    "installation": "Installation",
+    "intro": "Adding Veedgee to your home screen makes it easier to access, even when you're offline.",
+    "iphone_instructions": "Instructions for iPhone",
+    "iphone": "iPhone",
+    "tap_share": "Tap Share",
+    "share_icon_details": ", usually at the right top corner (Chrome) or at the bottom options bar (Safari)",
+    "tap": "Tap",
+    "add_to_homescreen": "Add to Home Screen",
+    "final_tap": "Tap",
+    "add": "Add",
+    "android_instructions": "Instructions for Android",
+    "android": "Android",
+    "tap_more": "Tap More",
+    "more_icon_details": ", on the right of the address bar",
+    "install": "Install"
+  },
+  "pt-BR": {
+    "homepage": "Página inicial",
+    "installation": "Instalação",
+    "intro": "Adicionando o Veedgee à tela principal do seu celular, você pode acessá-lo com mais facilidade, mesmo quando estiver sem acesso à internet.",
+    "iphone_instructions": "Instruções para iPhone",
+    "iphone": "iPhone",
+    "tap_share": "Toque no ícone Compartilhar",
+    "share_icon_details": ", geralmente localizado no canto superior direito (Chrome) ou na barra de opções inferior (Safari)",
+    "tap": "Toque na opção",
+    "add_to_homescreen": "Adicionar à Tela Principal",
+    "final_tap": "Por fim, toque em",
+    "add": "Adicionar",
+    "android_instructions": "Instruções para Android",
+    "android": "Android",
+    "tap_more": "Toque no ícone Opções",
+    "more_icon_details": ", à direita da barra de endereço",
+    "install": "Instalar"
+  }
+}

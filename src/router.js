@@ -4,6 +4,7 @@ import routes from '@src/routes';
 
 const HomeView = lazy(() => import('@src/home/views/home-view'));
 const EventsView = lazy(() => import('@src/events/views/events-view'));
+const InstallationView = lazy(() => import('@src/installation/views/installation-view'));
 
 export const Router = () => {
   return (
@@ -27,5 +28,6 @@ function getViewComponentByViewName(viewName){
   return {
     'home': HomeView,
     'events': EventsView,
+    'install': InstallationView
   }[viewName];
 }
