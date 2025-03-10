@@ -88,9 +88,11 @@ function buildNewLimit(currentLimit){
   return { [LIMIT_FILTER_NAME]: currentLimit + DEFAULT_LIMIT };
 }
 
-function filterEvents(eventsData, { city, startDate, endDate }){
+function filterEvents(eventsData, { title, city, startDate, endDate }){
   return eventsData?.filter(event => {
-    return isInDateRange(event.date, startDate, endDate) && isInCity(event.city, city);
+    return isInDateRange(event.date, startDate, endDate) &&
+      isInCity(event.city, city) &&
+      includesTextOnTitle(event.title, title);
   });
 }
 
@@ -101,6 +103,10 @@ function isInDateRange(eventDate, startDate, endDate){
 
 function isInCity(eventCity, city){
   return !city || cityService.getCityCode(eventCity) === city;
+}
+
+function includesTextOnTitle(eventTitle, title){
+  return !title || eventTitle.toLowerCase().includes(title.toLowerCase());
 }
 
 function hasMoreEvents(filteredEvents, limit){

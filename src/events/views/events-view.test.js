@@ -52,6 +52,11 @@ describe('Events View', () => {
     return params.get(paramName);
   }
 
+  async function filterByTitle(user, eventTitle){
+    const { title } = getTranslations(eventFiltersTranslations);
+    await user.type(screen.getByRole('textbox', { name: title  }), eventTitle);
+  }
+
   async function selectCity(user, cityName){
     const { city } = getTranslations(eventFiltersTranslations);
     await user.selectOptions(screen.getByRole('combobox', { name: city  }), [cityName]);
@@ -187,34 +192,36 @@ describe('Events View', () => {
     expect(screen.queryByRole('button', { name: done })).not.toBeInTheDocument();
   });
 
-  it('should filter events by start date, end date, and city', async () => {
+  it('should filter events by start date, end date, city, and title', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 3, 30));
     const events = buildEventsMock(8, [
-      { date: '2024-04-30', city: 'Blumenau' },
-      { date: '2024-04-30', city: 'Joinville' },
-      { date: '2024-05-01', city: 'Joinville' },
-      { date: '2024-05-01', city: 'Curitiba' },
-      { date: '2024-05-02', city: 'Joinville' },
-      { date: '2024-05-03', city: 'Joinville' },
-      { date: '2024-05-03', city: 'Florianópolis' },
-      { date: '2024-05-04', city: 'Joinville' }
+      { date: '2024-04-30', city: 'Blumenau', title: 'Tributo a Bob Dylan' },
+      { date: '2024-04-30', city: 'Joinville', title: 'Orquestra de Joinville' },
+      { date: '2024-05-01', city: 'Joinville', title: 'Orquestra de Joinville - Sessão Extra' },
+      { date: '2024-05-01', city: 'Curitiba', title: 'Orquestra de Curitiba' },
+      { date: '2024-05-02', city: 'Joinville', title: 'Orquestra de Joinville - Sessão Especial' },
+      { date: '2024-05-03', city: 'Joinville', title: 'Apresentação da Escola Bolshoi' },
+      { date: '2024-05-03', city: 'Florianópolis', title: 'Show Dazaranha' },
+      { date: '2024-05-04', city: 'Joinville', title: 'Show Nós na Aldeia' }
     ]);
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     mockSearchParams('limit=60');
     const { user } = await mount();
     const { start_date, to, end_date } = getTranslations(eventFiltersTranslations);
+    await filterByTitle(user, 'orquestra');
     await selectCity(user, 'Joinville');
     await selectDate(user, start_date, '2024-05-01');
     await selectDate(user, end_date, '2024-05-03');
     expect(screen.queryByText(to)).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Event #3' })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #4' })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Event #5' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Event #6' })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #7' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: 'Event #8' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Tributo a Bob Dylan' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Orquestra de Joinville' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Orquestra de Joinville - Sessão Extra' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Orquestra de Curitiba' })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Orquestra de Joinville - Sessão Especial' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Apresentação da Escola Bolshoi' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Show Dazaranha' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Show Nós na Aldeia' })).not.toBeInTheDocument();
+    expect(getSearchParam('title')).toEqual('orquestra');
     expect(getSearchParam('limit')).toEqual('30');
     expect(getSearchParam('city')).toEqual('joinville');
     expect(getSearchParam('startDate')).toEqual('2024-05-01');

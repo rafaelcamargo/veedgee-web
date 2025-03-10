@@ -1,5 +1,6 @@
 {
   "en-US": {
+    "title": "Filter by title",
     "city": "City",
     "all_cities": "All Cities",
     "start_date": "Start Date",
@@ -10,6 +11,7 @@
     "done": "Done"
   },
   "pt-BR": {
+    "title": "Filtrar por título",
     "city": "Cidade",
     "all_cities": "Todas as Cidades",
     "start_date": "Data Inicial",

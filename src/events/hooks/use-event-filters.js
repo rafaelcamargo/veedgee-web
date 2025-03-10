@@ -5,6 +5,7 @@ import {
   START_DATE_FILTER_NAME,
   END_DATE_FILTER_NAME,
   LIMIT_FILTER_NAME,
+  TITLE_FILTER_NAME,
   DEFAULT_LIMIT
 } from '@src/events/constants/event-filters';
 
@@ -27,7 +28,8 @@ function buildFilters(searchParams){
     CITY_FILTER_NAME,
     START_DATE_FILTER_NAME,
     END_DATE_FILTER_NAME,
-    LIMIT_FILTER_NAME
+    LIMIT_FILTER_NAME,
+    TITLE_FILTER_NAME
   ].reduce((filters, filterName) => {
     const value = buildFilterValue(searchParams, filterName);
     return value ? { ...filters, [filterName]: value } : filters;

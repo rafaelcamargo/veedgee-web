@@ -9,7 +9,8 @@ import {
   CITY_FILTER_NAME,
   START_DATE_FILTER_NAME,
   END_DATE_FILTER_NAME,
-  LIMIT_FILTER_NAME
+  LIMIT_FILTER_NAME,
+  TITLE_FILTER_NAME
 } from '@src/events/constants/event-filters';
 import translations from './event-filters.trans';
 
@@ -81,6 +82,17 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
       aria-hidden={!isFiltersVisibile}
     >
       { isMobile && <h3>{t('filters')}</h3> }
+      <div className="v-event-filter-field-group">
+        <div className="v-event-filter-field">
+          <input
+            name={TITLE_FILTER_NAME}
+            value={getFilterValue(TITLE_FILTER_NAME)}
+            aria-label={t('title')}
+            placeholder={t('title')}
+            onChange={handleFilterChange}
+          />
+        </div>
+      </div>
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
           <select
