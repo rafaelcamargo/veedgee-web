@@ -56,7 +56,11 @@ export const EventList = ({ filters, onLoadMore }) => {
           const label = `event-${eventDetails.id}`;
           return (
             <li key={eventDetails.id} aria-labelledby={label}>
-              <EventCard eventDetails={eventDetails} titleId={label} />
+              <EventCard
+                titleFilter={filters.title}
+                eventDetails={eventDetails}
+                titleId={label}
+              />
             </li>
           );
         })}

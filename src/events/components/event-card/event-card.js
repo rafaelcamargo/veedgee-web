@@ -3,9 +3,10 @@ import { Clock } from '@src/base/icons/clock';
 import { Pin } from '@src/base/icons/pin';
 import { Arrow } from '@src/base/icons/arrow';
 import dateService from '@src/base/services/date';
+import { highlightTerm } from '@src/base/services/text';
 import translations from './event-card.trans';
 
-export const EventCard = ({ eventDetails, titleId }) => {
+export const EventCard = ({ titleFilter, eventDetails, titleId }) => {
   const { t, formatDate, formatTime } = useTranslation(translations);
   const { title, date, time, city, state, url } = eventDetails;
 
@@ -27,9 +28,11 @@ export const EventCard = ({ eventDetails, titleId }) => {
         }
       </time>
       <div className="v-event-card-title-wrapper">
-        <h2 id={titleId} title={title}>
-          {handleTitle(title)}
-        </h2>
+        <h2
+          id={titleId}
+          title={title}
+          dangerouslySetInnerHTML={{ __html: handleTitle(title, titleFilter) }}
+        />
       </div>
       <a
         href={url}
@@ -66,8 +69,9 @@ function handleDateLabel(date, formatDate){
   return formatDate(date);
 }
 
-function handleTitle(title){
-  return title?.length > 108 ? truncateTitle(title) : title;
+function handleTitle(title, titleFilter){
+  const truncatedTitle = title?.length > 108 ? truncateTitle(title) : title;
+  return titleFilter ? highlightTerm(truncatedTitle, titleFilter) : truncatedTitle;
 }
 
 function truncateTitle(title){
