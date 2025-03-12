@@ -2,6 +2,7 @@ import {
   TestingRouter,
   asyncMount,
   act,
+  pause,
   screen,
   within,
   mockSearchParams,
@@ -212,6 +213,7 @@ describe('Events View', () => {
     await selectCity(user, 'Joinville');
     await selectDate(user, start_date, '2024-05-01');
     await selectDate(user, end_date, '2024-05-03');
+    await act(async () => await pause(1050));
     expect(screen.queryByText(to)).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Tributo a Bob Dylan' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Orquestra de Joinville' })).not.toBeInTheDocument();

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
+import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
 import { Filters } from '@src/base/icons/filters';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
@@ -84,7 +85,7 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
       { isMobile && <h3>{t('filters')}</h3> }
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
-          <input
+          <DebouncedInput
             name={TITLE_FILTER_NAME}
             value={getFilterValue(TITLE_FILTER_NAME)}
             aria-label={t('title')}
