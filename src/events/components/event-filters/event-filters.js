@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
 import { Filters } from '@src/base/icons/filters';
+import { Loupe } from '@src/base/icons/loupe';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
 import dateService from '@src/base/services/date';
@@ -85,11 +86,13 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
       { isMobile && <h3>{t('filters')}</h3> }
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
+          <Loupe aria-hidden="true" />
           <DebouncedInput
             name={TITLE_FILTER_NAME}
             value={getFilterValue(TITLE_FILTER_NAME)}
             aria-label={t('title')}
             placeholder={t('title')}
+            className="v-event-filter-title"
             onChange={handleFilterChange}
           />
         </div>

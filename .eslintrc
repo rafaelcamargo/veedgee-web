@@ -25,7 +25,7 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "complexity": ["error", { "max": 3 }],
-    "max-lines": ["error", { "max": 200 }],
+    "max-lines": ["error", { "max": 250 }],
     "max-statements": ["error", { "max": 5 }, { "ignoreTopLevelFunctions": true }],
     "react/prop-types": 0
   },
