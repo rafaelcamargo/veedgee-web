@@ -230,6 +230,20 @@ describe('Events View', () => {
     expect(getSearchParam('endDate')).toEqual('2024-05-03');
   });
 
+  it('should filter events by title ignoring accents', async () => {
+    dateService.getNow = jest.fn(() => new Date(2024, 3, 30));
+    const events = buildEventsMock(8, [
+      { date: '2024-04-30', city: 'Blumenau', title: 'Ratos Do Porão' },
+      { date: '2024-05-02', city: 'Joinville', title: 'Porão Da Liga - Em Pé Na Rede' }
+    ]);
+    eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
+    const { user } = await mount();
+    await filterByTitle(user, 'porao da liga');
+    await act(async () => await pause(1050));
+    expect(screen.queryByRole('heading', { name: 'Ratos Do Porão' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'Porão Da Liga - Em Pé Na Rede' })).toBeInTheDocument();
+  });
+
   it('should not show load more button if filtered events do not exceed current limit', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 2, 30));
     const events = buildEventsMock(35, [{ date: '2024-05-01', city: 'Curitiba' }]);

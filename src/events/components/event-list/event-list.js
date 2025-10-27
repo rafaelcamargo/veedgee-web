@@ -3,6 +3,7 @@ import { Button } from '@src/base/components/button/button';
 import { Loader } from '@src/base/components/loader/loader';
 import { useTranslation } from '@src/base/hooks/use-translation';
 import cityService from '@src/base/services/city';
+import { removeAccents } from '@src/base/services/text';
 import eventsService from '@src/events/services/events';
 import { EventCard } from '@src/events/components/event-card/event-card';
 import { LIMIT_FILTER_NAME, DEFAULT_LIMIT } from '@src/events/constants/event-filters';
@@ -110,7 +111,9 @@ function isInCity(eventCity, city){
 }
 
 function includesTextOnTitle(eventTitle, title){
-  return !title || eventTitle.toLowerCase().includes(title.toLowerCase());
+  const normalizedEventTitle = removeAccents(eventTitle);
+  const normalizedTitleFilter = removeAccents(title);
+  return !title || normalizedEventTitle.toLowerCase().includes(normalizedTitleFilter.trim().toLowerCase());
 }
 
 function hasMoreEvents(filteredEvents, limit){
