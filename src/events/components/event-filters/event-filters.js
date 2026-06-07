@@ -3,7 +3,7 @@ import { Button } from '@src/base/components/button/button';
 import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
 import { Filters } from '@src/base/icons/filters';
 import { Loupe } from '@src/base/icons/loupe';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import cityService from '@src/base/services/city';
 import dateService from '@src/base/services/date';
 import { useViewport } from '@src/base/hooks/use-viewport';
@@ -14,7 +14,7 @@ import {
   LIMIT_FILTER_NAME,
   TITLE_FILTER_NAME
 } from '@src/events/constants/event-filters';
-import translations from './event-filters.trans';
+import translations from './event-filters.t.js';
 
 // eslint-disable-next-line max-statements
 export const EventFilters = ({ filters, onChange }) => {

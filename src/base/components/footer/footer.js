@@ -1,7 +1,7 @@
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { Container } from '@src/base/components/container/container';
 import { LocaleSelect } from '@src/base/components/locale-select/locale-select';
-import translations from './footer.trans';
+import translations from './footer.t.js';
 
 export const Footer = () => {
   const { t } = useTranslation(translations);

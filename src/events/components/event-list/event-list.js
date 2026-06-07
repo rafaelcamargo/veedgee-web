@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { Loader } from '@src/base/components/loader/loader';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import cityService from '@src/base/services/city';
 import { removeAccents } from '@src/base/services/text';
 import eventsService from '@src/events/services/events';
 import { EventCard } from '@src/events/components/event-card/event-card';
 import { LIMIT_FILTER_NAME, DEFAULT_LIMIT } from '@src/events/constants/event-filters';
-import translations from './event-list.trans';
+import translations from './event-list.t.js';
 
 // eslint-disable-next-line
 export const EventList = ({ filters, onLoadMore }) => {

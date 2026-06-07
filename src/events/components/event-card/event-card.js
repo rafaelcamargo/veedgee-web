@@ -1,13 +1,14 @@
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { Clock } from '@src/base/icons/clock';
 import { Pin } from '@src/base/icons/pin';
 import { Arrow } from '@src/base/icons/arrow';
 import dateService from '@src/base/services/date';
 import { highlightTerm } from '@src/base/services/text';
-import translations from './event-card.trans';
+import translations from './event-card.t.js';
 
 export const EventCard = ({ titleFilter, eventDetails, titleId }) => {
-  const { t, formatDate, formatTime } = useTranslation(translations);
+  const { t, locale } = useTranslation(translations);
+  const localeCode = locale.code;
   const { title, date, time, city, state, url } = eventDetails;
 
   return (
@@ -17,12 +18,12 @@ export const EventCard = ({ titleFilter, eventDetails, titleId }) => {
         dateTime={buildDateTimeString(date, time)}
       >
         <span className="v-event-card-date">
-          {handleDateLabel(date, formatDate)}
+          {handleDateLabel(date, localeCode, t)}
         </span>
         {
           time && (
             <span className="v-event-card-time">
-              <Clock aria-hidden="true" /> {formatTime(time)}
+              <Clock aria-hidden="true" /> {formatTime(time, localeCode)}
             </span>
           )
         }
@@ -62,11 +63,18 @@ function buildDateTimeClassName(date){
   return classNames.join(' ');
 }
 
-function handleDateLabel(date, formatDate){
-  const { t } = useTranslation(translations);
+function handleDateLabel(date, localeCode, t){
   if(dateService.isToday(date)) return t('today');
   if(dateService.isTomorrow(date)) return t('tomorrow');
-  return formatDate(date);
+  return formatDate(date, localeCode);
+}
+
+function formatDate(date, localeCode){
+  return dateService.format(date, { locale: localeCode });
+}
+
+function formatTime(time, localeCode){
+  return dateService.formatTime(time, { locale: localeCode });
 }
 
 function handleTitle(title, titleFilter){

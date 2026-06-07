@@ -2,9 +2,9 @@ import './installation-banner.styl';
 import { Link } from 'react-router-dom';
 import { IPHONE, ANDROID } from '@src/base/constants/mobile-device-models';
 import { Harrow } from '@src/base/icons/harrow';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { getMobileDeviceModel } from '@src/base/services/device';
-import translations from './installation-banner.trans';
+import translations from './installation-banner.t.js';
 
 export const InstallationBanner = () => {
   const { t } = useTranslation(translations);

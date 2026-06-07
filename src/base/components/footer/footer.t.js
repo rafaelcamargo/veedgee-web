@@ -1,0 +1,10 @@
+const translations = {
+  'en-US': {
+    'credits': 'Created by Rafael Camargo and brought by Compilorama.'
+  },
+  'pt-BR': {
+    'credits': 'Criado por Rafael Camargo e servido por Compilorama.'
+  }
+};
+
+export default translations;

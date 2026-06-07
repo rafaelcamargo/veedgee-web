@@ -2,7 +2,7 @@ import { asyncMount, screen, getTranslations, mockSearchParams } from '@src/base
 import dateService from '@src/base/services/date';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
-import homeViewTranslations from '@src/home/views/home-view.trans.json';
+import homeViewTranslations from '@src/home/views/home-view.t.js';
 import { App } from './app';
 
 describe('App', () => {
@@ -21,7 +21,7 @@ describe('App', () => {
   afterEach(() => {
     setRoute('/');
     mockSearchParams('');
-    localStorage.removeItem('vlocale');
+    localStorage.removeItem('plocale');
   });
 
   it('should contain a homepage', async () => {
@@ -55,7 +55,7 @@ describe('App', () => {
   });
 
   it('should optionally set locale according language stored on local storage', async () => {
-    localStorage.setItem('vlocale', 'pt-BR');
+    localStorage.setItem('plocale', 'pt-BR');
     await mount();
     const { find_events } = homeViewTranslations['pt-BR'];
     const heading = await screen.findByRole('heading', { level: 2, name: find_events });

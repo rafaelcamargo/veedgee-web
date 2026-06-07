@@ -12,13 +12,13 @@ import {
 import dateService from '@src/base/services/date';
 import viewportService from '@src/base/services/viewport';
 import windowService from '@src/base/services/window';
-import eventListTranslations from '@src/events/components/event-list/event-list.trans';
+import eventListTranslations from '@src/events/components/event-list/event-list.t.js';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
-import topbarTranslations from '@src/base/components/topbar/topbar.trans';
-import localeSelectTranslations from '@src/base/components/locale-select/locale-select.trans';
-import eventCardTranslations from '@src/events/components/event-card/event-card.trans';
-import eventFiltersTranslations from '@src/events/components/event-filters/event-filters.trans';
+import topbarTranslations from '@src/base/components/topbar/topbar.t.js';
+import localeSelectTranslations from '@src/base/components/locale-select/locale-select.t.js';
+import eventCardTranslations from '@src/events/components/event-card/event-card.t.js';
+import eventFiltersTranslations from '@src/events/components/event-filters/event-filters.t.js';
 import EventsView from './events-view';
 
 describe('Events View', () => {

@@ -1,13 +1,13 @@
 import(/* webpackChunkName: 'installation-css' */ '@src/installation/index.styl');
 import { Link } from 'react-router-dom';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { Container } from '@src/base/components/container/container';
 import { Footer } from '@src/base/components/footer/footer';
 import { Logo } from '@src/base/components/logo/logo';
 import { More } from '@src/base/icons/more';
 import { Share } from '@src/base/icons/share';
 import windowService from '@src/base/services/window';
-import translations from './installation-view.trans.json';
+import translations from './installation-view.t.js';
 
 // eslint-disable-next-line complexity
 const InstallationView = () => {

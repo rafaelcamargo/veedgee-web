@@ -1,0 +1,26 @@
+const translations = {
+  'en-US': {
+    'title': 'Filter by title',
+    'city': 'City',
+    'all_cities': 'All Cities',
+    'start_date': 'Start Date',
+    'to': 'to',
+    'end_date': 'End Date',
+    'show_filters': 'Show filters',
+    'filters': 'Filters',
+    'done': 'Done'
+  },
+  'pt-BR': {
+    'title': 'Filtrar por título',
+    'city': 'Cidade',
+    'all_cities': 'Todas as Cidades',
+    'start_date': 'Data Inicial',
+    'end_date': 'Data Final',
+    'to': 'até',
+    'show_filters': 'Exibir filtros',
+    'filters': 'Filtros',
+    'done': 'Concluir'
+  }
+};
+
+export default translations;

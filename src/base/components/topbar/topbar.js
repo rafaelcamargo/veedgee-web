@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { Container } from '@src/base/components/container/container';
 import { Logo } from '@src/base/components/logo/logo';
-import translations from './topbar.trans';
+import translations from './topbar.t.js';
 
 export const Topbar = ({ children }) => {
   const { t } = useTranslation(translations);

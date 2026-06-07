@@ -13,6 +13,7 @@
   "author": "Rafael Camargo <hello@rafaelcamargo.com>",
   "license": "MIT",
   "dependencies": {
+    "@compilorama/polang": "^0.5.1",
     "@compilorama/statorama": "^0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

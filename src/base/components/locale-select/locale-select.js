@@ -1,18 +1,10 @@
-import { useContext } from 'react';
-import { useTranslation } from '@src/base/hooks/use-translation';
-import i18nContext from '@src/base/contexts/i18n';
-import translations from './locale-select.trans';
+import { LocaleSelect as PolangLocaleSelect, useTranslation } from '@compilorama/polang';
+import translations from './locale-select.t.js';
 
-export const LocaleSelect = () => {
-  const { currentLocale, handleLocaleChange, locales } = useContext(i18nContext);
+export const LocaleSelect = ({ ...rest }) => {
   const { t } = useTranslation(translations);
-  const handleChange = ({ target: { value } }) => handleLocaleChange(value);
 
   return (
-    <select name="locale" aria-label={t('language')} value={currentLocale} onChange={handleChange}>
-      {locales?.map(({ code, name }) => (
-        <option key={code} value={code}>{name}</option>
-      ))}
-    </select>
+    <PolangLocaleSelect name="locale" aria-label={t('language')} {...rest} />
   );
 };

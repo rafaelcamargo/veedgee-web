@@ -1,12 +1,12 @@
-import { useLocale } from '@src/base/hooks/use-locale';
-import I18n from '@src/base/contexts/i18n';
+import { I18nProvider as PolangI18nProvider } from '@compilorama/polang';
 
-export const I18nProvider = ({ children }) => {
-  const { currentLocale, handleLocaleChange, locales } = useLocale();
+const locales = [
+  { code: 'en-US', name: 'English' },
+  { code: 'pt-BR', name: 'Português' },
+];
 
-  return (
-    <I18n.Provider value={{ currentLocale, handleLocaleChange, locales }}>
-      {children}
-    </I18n.Provider>
-  );
-};
+export const I18nProvider = ({ children }) => (
+  <PolangI18nProvider locales={locales}>
+    {children}
+  </PolangI18nProvider>
+);

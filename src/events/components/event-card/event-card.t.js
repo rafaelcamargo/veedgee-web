@@ -1,0 +1,14 @@
+const translations = {
+  'en-US': {
+    'view_event_details': 'View event details',
+    'today': 'Today',
+    'tomorrow': 'Tomorrow'
+  },
+  'pt-BR': {
+    'view_event_details': 'Ver detalhes do evento',
+    'today': 'Hoje',
+    'tomorrow': 'Amanhã'
+  }
+};
+
+export default translations;

@@ -1,7 +1,7 @@
 import(/* webpackChunkName: 'home-css' */ '@src/home/index.styl');
 import { Link } from 'react-router-dom';
 import routes from '@src/routes';
-import { useTranslation } from '@src/base/hooks/use-translation';
+import { useTranslation } from '@compilorama/polang';
 import { Logo } from '@src/base/components/logo/logo';
 import { Container } from '@src/base/components/container/container';
 import { Tag } from '@src/base/components/tag/tag';
@@ -9,7 +9,7 @@ import { Footer } from '@src/base/components/footer/footer';
 import { Magnet } from '@src/base/icons/magnet';
 import { Magnifier } from '@src/base/icons/magnifier';
 import { Notification } from '@src/base/icons/notification';
-import translations from './home-view.trans.json';
+import translations from './home-view.t.js';
 
 const HomeView = () => {
   const { t } = useTranslation(translations);
