@@ -1,9 +1,9 @@
 const translations = {
   'en-US': {
-    'credits': 'Created by Rafael Camargo and brought by Compilorama.'
+    'credits': 'Created by {{ portfolioLink }} and brought by {{ compiloramaLink }}.'
   },
   'pt-BR': {
-    'credits': 'Criado por Rafael Camargo e servido por Compilorama.'
+    'credits': 'Criado por {{ portfolioLink }} e servido por {{ compiloramaLink }}.'
   }
 };
 

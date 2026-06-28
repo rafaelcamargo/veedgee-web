@@ -32,6 +32,22 @@ describe('Home View', () => {
     expect(screen.getByRole('combobox', { name: language })).toHaveValue('en-US');
   });
 
+  it('should contain footer credits links', async () => {
+    await mount();
+    const portfolioLink = screen.getByRole('link', { name: 'Rafael Camargo' });
+    const compiloramaLink = screen.getByRole('link', { name: 'Compilorama' });
+    expect(portfolioLink).toHaveAttribute(
+      'href',
+      'https://rafaelcamargo.com?utm_source=veedgee&locale=en-US'
+    );
+    expect(portfolioLink).toHaveAttribute('target', '_blank');
+    expect(compiloramaLink).toHaveAttribute(
+      'href',
+      'https://compilorama.com?utm_source=veedgee&locale=en-US'
+    );
+    expect(compiloramaLink).toHaveAttribute('target', '_blank');
+  });
+
   it('should optionally set pt-BR as locale', async () => {
     const { user } = await mount();
     const { language } = getTranslations(localeSelectTranslations);

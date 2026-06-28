@@ -4,7 +4,8 @@ import { LocaleSelect } from '@src/base/components/locale-select/locale-select';
 import translations from './footer.t.js';
 
 export const Footer = () => {
-  const { t } = useTranslation(translations);
+  const { t, locale } = useTranslation(translations);
+  const localeCode = locale.code;
 
   return (
     <div className="v-footer">
@@ -13,9 +14,28 @@ export const Footer = () => {
           <LocaleSelect />
         </div>
         <p className="v-footer-credits">
-          {t('credits')}
+          {t('credits', {
+            portfolioLink: (
+              <a {...buildExternalLinkProps('rafaelcamargo.com', localeCode)}>
+                Rafael Camargo
+              </a>
+            ),
+            compiloramaLink: (
+              <a {...buildExternalLinkProps('compilorama.com', localeCode)}>
+                Compilorama
+              </a>
+            )
+          })}
         </p>
       </Container>
     </div>
   );
 };
+
+function buildExternalLinkProps(website, localeCode) {
+  return {
+    href: `https://${website}?utm_source=veedgee&locale=${localeCode}`,
+    target: '_blank',
+    rel: 'noopener noreferrer'
+  };
+}
