@@ -110,7 +110,7 @@ describe('Events View', () => {
     eventHeadings.forEach((heading, index) => {
       expect(heading.textContent).toEqual(eventsMock[index].title);
     });
-    expect(eventHeadings).toHaveLength(3);
+    expect(eventHeadings).toHaveLength(eventsMock.length);
     expect(eventsResource.get).toHaveBeenCalledWith({ minDate: '2024-03-23' });
   });
 

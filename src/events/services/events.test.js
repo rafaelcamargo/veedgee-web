@@ -59,7 +59,7 @@ describe('Events Service', () => {
     window.localStorage.setItem('vevents', JSON.stringify(cache));
     const response = await eventsService.get();
     expect(eventsResource.get).not.toHaveBeenCalled();
-    expect(response).toEqual({ data: [eventsMock[2]] });
+    expect(response).toEqual({ data: [eventsMock[2], eventsMock[3], eventsMock[4]] });
   });
 
   it('should refetch events if cache is older than 12h', async () => {
