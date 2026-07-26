@@ -95,6 +95,7 @@ describe('Events View', () => {
   afterEach(() => {
     mockSearchParams('');
     window.localStorage.removeItem('vmode');
+    window.localStorage.removeItem('plocale');
   });
 
   it('should contain a link to homepage', async () => {
@@ -107,11 +108,40 @@ describe('Events View', () => {
     dateService.getNow = jest.fn(() => new Date(2024, 2, 23, 23, 59, 59));
     await mount();
     const eventHeadings = screen.getAllByRole('heading', { level: 2 });
+    const expectedTitles = [
+      'Rockfeel Fest Balneário Camboriú',
+      'Balbúrdia Groove',
+      'Acústico Navaranda',
+      'A Odisseia',
+      'Backstage Tour - Joinville Dance Festival 2026'
+    ];
     eventHeadings.forEach((heading, index) => {
-      expect(heading.textContent).toEqual(eventsMock[index].title);
+      expect(heading.textContent).toEqual(expectedTitles[index]);
     });
     expect(eventHeadings).toHaveLength(eventsMock.length);
     expect(eventsResource.get).toHaveBeenCalledWith({ minDate: '2024-03-23' });
+  });
+
+  it('should localize event title according to the current locale', async () => {
+    const { user } = await mount();
+    const { language } = getTranslations(localeSelectTranslations);
+    expect(screen.getByRole('heading', {
+      level: 2,
+      name: 'Backstage Tour - Joinville Dance Festival 2026'
+    })).toBeInTheDocument();
+    await user.selectOptions(screen.getByRole('combobox', { name: language }), 'pt-BR');
+    expect(screen.getByRole('heading', {
+      level: 2,
+      name: 'Tour Bastidores - Festival de Dança de Joinville 2026'
+    })).toBeInTheDocument();
+  });
+
+  it('should fallback to original title if event has no localized title', async () => {
+    await mount();
+    expect(screen.getByRole('heading', {
+      level: 2,
+      name: 'A Odisseia'
+    })).toBeInTheDocument();
   });
 
   it('should format event location', async () => {
