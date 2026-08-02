@@ -4,8 +4,8 @@ import { useTranslation } from '@compilorama/polang';
 import { Container } from '@src/base/components/container/container';
 import { Footer } from '@src/base/components/footer/footer';
 import { Logo } from '@src/base/components/logo/logo';
-import { More } from '@src/base/icons/more';
-import { Share } from '@src/base/icons/share';
+import More from '@src/base/icons/more';
+import Share from '@src/base/icons/share';
 import windowService from '@src/base/services/window';
 import translations from './installation-view.t.js';
 

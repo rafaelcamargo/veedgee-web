@@ -1,7 +1,7 @@
 import { useTranslation } from '@compilorama/polang';
-import { Clock } from '@src/base/icons/clock';
-import { Pin } from '@src/base/icons/pin';
-import { Arrow } from '@src/base/icons/arrow';
+import Arrow from '@src/base/icons/arrow';
+import Clock from '@src/base/icons/clock';
+import Pin from '@src/base/icons/pin';
 import dateService from '@src/base/services/date';
 import { highlightTerm } from '@src/base/services/text';
 import translations from './event-card.t.js';

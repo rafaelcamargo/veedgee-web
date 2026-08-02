@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
-import { Filters } from '@src/base/icons/filters';
-import { Loupe } from '@src/base/icons/loupe';
+import Filters from '@src/base/icons/filters';
+import Loupe from '@src/base/icons/loupe';
 import { useTranslation } from '@compilorama/polang';
 import cityService from '@src/base/services/city';
 import dateService from '@src/base/services/date';

@@ -6,9 +6,9 @@ import { Logo } from '@src/base/components/logo/logo';
 import { Container } from '@src/base/components/container/container';
 import { Tag } from '@src/base/components/tag/tag';
 import { Footer } from '@src/base/components/footer/footer';
-import { Magnet } from '@src/base/icons/magnet';
-import { Magnifier } from '@src/base/icons/magnifier';
-import { Notification } from '@src/base/icons/notification';
+import Magnet from '@src/base/icons/magnet';
+import Magnifier from '@src/base/icons/magnifier';
+import Notification from '@src/base/icons/notification';
 import translations from './home-view.t.js';
 
 const HomeView = () => {

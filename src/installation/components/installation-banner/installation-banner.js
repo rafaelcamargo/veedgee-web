@@ -1,7 +1,7 @@
 import './installation-banner.styl';
 import { Link } from 'react-router-dom';
 import { IPHONE, ANDROID } from '@src/base/constants/mobile-device-models';
-import { Harrow } from '@src/base/icons/harrow';
+import Harrow from '@src/base/icons/harrow';
 import { useTranslation } from '@compilorama/polang';
 import { getMobileDeviceModel } from '@src/base/services/device';
 import translations from './installation-banner.t.js';

@@ -1,6 +1,6 @@
 import { Icon } from '@src/base/components/icon/icon';
 
-export const Notification = props => {
+const Notification = props => {
   return (
     <Icon {...props} name="notification">
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 40 40">
@@ -15,3 +15,5 @@ export const Notification = props => {
     </Icon>
   );
 };
+
+export default Notification;

@@ -1,6 +1,6 @@
 import { Icon } from '@src/base/components/icon/icon';
 
-export const Magnifier = props => {
+const Magnifier = props => {
   return (
     <Icon {...props} name="magnifier">
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 40 40">
@@ -16,3 +16,5 @@ export const Magnifier = props => {
     </Icon>
   );
 };
+
+export default Magnifier;

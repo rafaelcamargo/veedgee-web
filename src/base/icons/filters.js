@@ -1,6 +1,6 @@
 import { Icon } from '@src/base/components/icon/icon';
 
-export const Filters = props => {
+const Filters = props => {
   return (
     <Icon {...props} name="filters">
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 40 40">
@@ -11,3 +11,5 @@ export const Filters = props => {
     </Icon>
   );
 };
+
+export default Filters;
