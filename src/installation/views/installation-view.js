@@ -28,7 +28,7 @@ const InstallationView = () => {
               {!device && <h2>{t('iphone')}</h2>}
               <ol>
                 <li>
-                  {t('tap_share')}<span><Share aria-hidden="true" /></span>{t('share_icon_details')};
+                  {t('tap_share')}<span><Share /></span>{t('share_icon_details')};
                 </li>
                 <li>{t('tap')} <b>{t('add_to_homescreen')}</b>;</li>
                 <li>{t('final_tap')} <b>{t('add')}</b>.</li>
@@ -42,7 +42,7 @@ const InstallationView = () => {
               {!device && <h2>{t('android')}</h2>}
               <ol>
                 <li>
-                  {t('tap_more')}<span><More aria-hidden="true" /></span>{t('more_icon_details')};
+                  {t('tap_more')}<span><More /></span>{t('more_icon_details')};
                 </li>
                 <li>{t('tap')} <b>{t('add_to_homescreen')}</b>;</li>
                 <li>{t('final_tap')} <b>{t('install')}</b>.</li>

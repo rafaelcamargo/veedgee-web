@@ -35,7 +35,7 @@ const HomeView = () => {
               buildHowItWorksItems(t).map(({ Icon, text, tagText }, index) => (
                 <li key={index}>
                   <div className="v-home-about-item-icon-wrapper">
-                    <Icon aria-hidden="true" />
+                    <Icon />
                   </div>
                   <div>
                     <p>

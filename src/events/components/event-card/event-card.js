@@ -4,30 +4,34 @@ import Clock from '@src/base/icons/clock';
 import Pin from '@src/base/icons/pin';
 import dateService from '@src/base/services/date';
 import { highlightTerm } from '@src/base/services/text';
+import { EventCategoryTag } from '@src/events/components/event-category-tag/event-category-tag';
 import translations from './event-card.t.js';
 
 export const EventCard = ({ titleFilter, eventDetails, titleId }) => {
   const { t, locale } = useTranslation(translations);
   const localeCode = locale.code;
-  const { title, date, time, city, state, url } = eventDetails;
+  const { id, title, date, time, city, state, url, category } = eventDetails;
 
   return (
     <div className="v-event-card">
-      <time
-        className={buildDateTimeClassName(date)}
-        dateTime={buildDateTimeString(date, time)}
-      >
-        <span className="v-event-card-date">
-          {handleDateLabel(date, localeCode, t)}
-        </span>
-        {
-          time && (
-            <span className="v-event-card-time">
-              <Clock aria-hidden="true" /> {formatTime(time, localeCode)}
-            </span>
-          )
-        }
-      </time>
+      <div className="v-event-card-header" id={`eventCardHeader_${id}`}>
+        { category && <EventCategoryTag category={category} /> }
+        <time
+          className={buildDateTimeClassName(date)}
+          dateTime={buildDateTimeString(date, time)}
+        >
+          <span className="v-event-card-date">
+            {handleDateLabel(date, localeCode, t)}
+          </span>
+          {
+            time && (
+              <span className="v-event-card-time">
+                <Clock /> {formatTime(time, localeCode)}
+              </span>
+            )
+          }
+        </time>
+      </div>
       <div className="v-event-card-title-wrapper">
         <h2
           id={titleId}
@@ -42,10 +46,10 @@ export const EventCard = ({ titleFilter, eventDetails, titleId }) => {
         rel="noreferrer noopener"
         target="_blank"
       >
-        <Arrow aria-hidden="true" />
+        <Arrow />
       </a>
       <address>
-        <Pin aria-hidden="true" /> {`${city}, ${state}`}
+        <Pin /> {`${city}, ${state}`}
       </address>
     </div>
   );

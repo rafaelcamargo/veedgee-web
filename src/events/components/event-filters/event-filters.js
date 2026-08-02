@@ -86,7 +86,7 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
       { isMobile && <h3>{t('filters')}</h3> }
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
-          <Loupe aria-hidden="true" />
+          <Loupe />
           <DebouncedInput
             name={TITLE_FILTER_NAME}
             value={getFilterValue(TITLE_FILTER_NAME)}
