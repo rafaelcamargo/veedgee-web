@@ -9,7 +9,10 @@ export const EventCategoryTag = ({ category }) => {
   const Icon = CATEGORY_ICONS[category];
 
   return (
-    <div className="v-event-category-tag">
+    <div
+      className="v-event-category-tag"
+      data-tooltip={getCategoryName(category)}
+    >
       {
         Icon && (
           <Suspense fallback={<></>}>

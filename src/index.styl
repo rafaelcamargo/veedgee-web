@@ -75,3 +75,39 @@ select
 mark
   color var(--vcolor-red-darker)
   background-color var(--vcolor-red-light)
+
+[data-tooltip]
+  position relative
+  &::before
+    content ''
+    position absolute
+    bottom 100%
+    left 50%
+    transform translateX(-50%)
+    border-width 6px 5px 0
+    border-style solid
+    border-color var(--vcolor-darkest) transparent transparent
+    opacity 0
+    visibility hidden
+    pointer-events none
+    z-index var(--vlayer-high)
+  &::after
+    content attr(data-tooltip)
+    position absolute
+    bottom calc(100% + 6px)
+    left 50%
+    transform translateX(-50%)
+    padding 6px 10px
+    background-color var(--vcolor-darkest)
+    color var(--vcolor-lightest)
+    font-size var(--vfont-size-xxs)
+    border-radius 4px
+    white-space nowrap
+    opacity 0
+    visibility hidden
+    pointer-events none
+    z-index var(--vlayer-high)
+  &:hover::before,
+  &:hover::after
+    opacity 1
+    visibility visible
