@@ -83,10 +83,12 @@ function buildNewLimit(currentLimit){
   return { [LIMIT_FILTER_NAME]: currentLimit + DEFAULT_LIMIT };
 }
 
-function filterEvents(events, { title, city, startDate, endDate }){
+function filterEvents(events, { title, city, category, startDate, endDate }){
+  // eslint-disable-next-line
   return events?.filter(event => {
     return isInDateRange(event.date, startDate, endDate) &&
       isInCity(event.city, city) &&
+      isInCategory(event.category, category) &&
       includesTextOnTitle(event.title, title);
   });
 }
@@ -98,6 +100,10 @@ function isInDateRange(eventDate, startDate, endDate){
 
 function isInCity(eventCity, city){
   return !city || cityService.getCityCode(eventCity) === city;
+}
+
+function isInCategory(eventCategory, category){
+  return !category || eventCategory === category;
 }
 
 function includesTextOnTitle(eventTitle, title){

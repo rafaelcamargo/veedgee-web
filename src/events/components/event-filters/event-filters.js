@@ -1,61 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
+import { Drawer } from '@src/base/components/drawer/drawer';
 import Filters from '@src/base/icons/filters';
 import Loupe from '@src/base/icons/loupe';
 import { useTranslation } from '@compilorama/polang';
 import cityService from '@src/base/services/city';
 import dateService from '@src/base/services/date';
-import { useViewport } from '@src/base/hooks/use-viewport';
 import {
   CITY_FILTER_NAME,
+  CATEGORY_FILTER_NAME,
   START_DATE_FILTER_NAME,
   END_DATE_FILTER_NAME,
-  LIMIT_FILTER_NAME,
   TITLE_FILTER_NAME
 } from '@src/events/constants/event-filters';
+import { useEventCategories } from '@src/events/hooks/use-event-categories';
 import translations from './event-filters.t.js';
 
-// eslint-disable-next-line max-statements
 export const EventFilters = ({ filters, onChange }) => {
-  const { isMobile } = useViewport();
-  const [isFiltersVisibile, setFiltersVisibility] = useState();
-  const toggleFiltersVisibility = () => setFiltersVisibility(!isFiltersVisibile);
-
-  useEffect(() => {
-    setFiltersVisibility(!isMobile);
-  }, [isMobile]);
+  const [isDrawerOpen, setDrawerVisibility] = useState(false);
+  const closeDrawer = () => setDrawerVisibility(false);
 
   return (
     <div className="v-event-filters-wrapper">
-      { isMobile && (
-        <>
-          <FiltersCounter
-            filters={filters}
-            isFiltersVisibile={isFiltersVisibile}
-          />
-          <FiltersVisibilityButton
-            filters={filters}
-            isFiltersVisibile={isFiltersVisibile}
-            onClick={toggleFiltersVisibility}
-          />
-        </>
-      )}
-      <FilterFields
-        filters={filters}
-        isFiltersVisibile={isFiltersVisibile}
-        isMobile={isMobile}
-        onChange={onChange}
-        onFinish={toggleFiltersVisibility}
-      />
+      <FiltersButton onClick={() => setDrawerVisibility(true)} />
+      <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
+        <FilterFields
+          filters={filters}
+          onChange={onChange}
+          onFinish={closeDrawer}
+        />
+      </Drawer>
     </div>
   );
 };
 
-function FiltersVisibilityButton({ isFiltersVisibile, onClick }){
+function FiltersButton({ onClick }){
   const { t } = useTranslation(translations);
 
-  return !isFiltersVisibile && (
+  return (
     <Button
       aria-label={t('show_filters')}
       theme="icon-right"
@@ -68,8 +51,10 @@ function FiltersVisibilityButton({ isFiltersVisibile, onClick }){
   );
 }
 
-function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish }){
+// eslint-disable-next-line
+function FilterFields({ filters, onChange, onFinish }){
   const { t } = useTranslation(translations);
+  const { getCategories } = useEventCategories();
   const getFilterValue = attrName => filters[attrName] || '';
   const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
   const onFinishButtonClick = () => {
@@ -80,10 +65,8 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
   return (
     <div
       id="eventFilterFields"
-      className={buildFilterFieldsClassName(isFiltersVisibile)}
-      aria-hidden={!isFiltersVisibile}
+      className="v-event-filter-fields"
     >
-      { isMobile && <h3>{t('filters')}</h3> }
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
           <Loupe />
@@ -118,6 +101,25 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
       </div>
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
+          <select
+            name={CATEGORY_FILTER_NAME}
+            value={getFilterValue(CATEGORY_FILTER_NAME)}
+            aria-label={t('category')}
+            onChange={handleFilterChange}
+          >
+            <option value="">{t('all_categories')}</option>
+            {
+              getCategories().map(({ id, name }) => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
+      <div className="v-event-filter-field-group">
+        <div className="v-event-filter-field">
           <input
             type="date"
             min={dateService.getTodayISOString()}
@@ -127,11 +129,9 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
             onChange={handleFilterChange}
           />
         </div>
-        { isMobile && (
-          <div className="v-event-filter-date-field-divider">
-            {t('to')}
-          </div>
-        )}
+        <div className="v-event-filter-date-field-divider">
+          {t('to')}
+        </div>
         <div className="v-event-filter-field">
           <input
             type="date"
@@ -143,60 +143,11 @@ function FilterFields({ filters, isFiltersVisibile, isMobile, onChange, onFinish
           />
         </div>
       </div>
-      {handleDoneButton(isMobile, onFinishButtonClick)}
-    </div>
-  );
-}
-
-function handleDoneButton(isMobile, onClick){
-  const { t } = useTranslation(translations);
-
-  return isMobile && (
-    <div className="v-event-filter-actions">
-      <Button theme="primary" onClick={onClick}>
-        {t('done')}
-      </Button>
-    </div>
-  );
-}
-
-function buildFilterFieldsClassName(isFiltersVisibile){
-  const baseClassName = 'v-event-filter-fields';
-  return isFiltersVisibile ? `${baseClassName} v-event-filter-fields-visible` : baseClassName;
-}
-
-function FiltersCounter({ filters, isFiltersVisibile }){
-  const count = countFilters(filters);
-  return (
-    <div
-      id="eventFiltersCounterWrapper"
-      className={buildFiltersCounterWrapperClassName(isFiltersVisibile)}
-    >
-      <div
-        id="eventFiltersCounter"
-        aria-hidden={!count}
-        className={buildFiltersCounterClassName(count)}
-      >
-        {count}
+      <div className="v-event-filter-actions">
+        <Button theme="primary" onClick={onFinishButtonClick}>
+          {t('done')}
+        </Button>
       </div>
     </div>
   );
-}
-
-function countFilters(filters){
-  return Object.keys(filters)
-    .filter(filterName => ![START_DATE_FILTER_NAME, LIMIT_FILTER_NAME].includes(filterName))
-    .length;
-}
-
-function buildFiltersCounterWrapperClassName(isFiltersVisibile){
-  const className = ['v-event-filters-counter-wrapper'];
-  if(isFiltersVisibile) className.push('v-event-filters-counter-wrapper-center');
-  return className.join(' ');
-}
-
-function buildFiltersCounterClassName(count){
-  const className = ['v-event-filters-counter'];
-  if(count > 0) className.push('v-event-filters-counter-visible');
-  return className.join(' ');
 }

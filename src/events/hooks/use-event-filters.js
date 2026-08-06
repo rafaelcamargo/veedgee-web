@@ -2,6 +2,7 @@ import { useSearchParams } from '@src/base/hooks/use-search-params';
 import dateService from '@src/base/services/date';
 import {
   CITY_FILTER_NAME,
+  CATEGORY_FILTER_NAME,
   START_DATE_FILTER_NAME,
   END_DATE_FILTER_NAME,
   LIMIT_FILTER_NAME,
@@ -26,6 +27,7 @@ export const useEventFilters = () => {
 function buildFilters(searchParams){
   return [
     CITY_FILTER_NAME,
+    CATEGORY_FILTER_NAME,
     START_DATE_FILTER_NAME,
     END_DATE_FILTER_NAME,
     LIMIT_FILTER_NAME,
@@ -55,6 +57,7 @@ function buildInitialLimit(customLimit){
 function shouldResetLimit(newFilters, currentFilters){
   return [
     CITY_FILTER_NAME,
+    CATEGORY_FILTER_NAME,
     START_DATE_FILTER_NAME,
     END_DATE_FILTER_NAME
   ].some(filterName => {

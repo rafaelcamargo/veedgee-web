@@ -10,7 +10,6 @@ import {
   flushEventsCache
 } from '@src/base/services/testing';
 import dateService from '@src/base/services/date';
-import viewportService from '@src/base/services/viewport';
 import windowService from '@src/base/services/window';
 import eventListTranslations from '@src/events/components/event-list/event-list.t.js';
 import eventsMock from '@src/events/mocks/events';
@@ -53,6 +52,16 @@ describe('Events View', () => {
     return params.get(paramName);
   }
 
+  async function openFilters(user){
+    const { show_filters } = getTranslations(eventFiltersTranslations);
+    await user.click(screen.getByRole('button', { name: show_filters }));
+  }
+
+  async function closeFilters(user){
+    const { done } = getTranslations(eventFiltersTranslations);
+    await user.click(screen.getByRole('button', { name: done }));
+  }
+
   async function filterByTitle(user, eventTitle){
     const { title } = getTranslations(eventFiltersTranslations);
     await user.type(screen.getByRole('textbox', { name: title  }), eventTitle);
@@ -63,16 +72,15 @@ describe('Events View', () => {
     await user.selectOptions(screen.getByRole('combobox', { name: city  }), [cityName]);
   }
 
+  async function selectCategory(user, categoryName){
+    const { category } = getTranslations(eventFiltersTranslations);
+    await user.selectOptions(screen.getByRole('combobox', { name: category  }), [categoryName]);
+  }
+
   async function selectDate(user, labelText, dateString){
     const dateInput = screen.getByLabelText(labelText);
     await user.clear(dateInput);
     await user.type(dateInput, dateString);
-  }
-
-  function simulateScreenType(type){
-    const width = type == 'mobile' ? 767 : 768;
-    viewportService.getWidth = jest.fn(() => width);
-    viewportService.listenResize = jest.fn(listener => listener({ target: { innerWidth: width } }));
   }
 
   function mockMobile({ model }){
@@ -86,9 +94,7 @@ describe('Events View', () => {
   beforeEach(() => {
     dateService.getNow = (() => new Date(2024, 2, 1));
     eventsResource.get = jest.fn(() => Promise.resolve({ data: eventsMock }));
-    viewportService.listenResize = jest.fn();
     window.scroll = jest.fn();
-    simulateScreenType('desktop');
     flushEventsCache();
   });
 
@@ -215,12 +221,14 @@ describe('Events View', () => {
     expect(screen.queryByRole('button', { name: load_more })).not.toBeInTheDocument();
   });
 
-  it('should not show mobile filter elements on desktop', async () => {
-    simulateScreenType('desktop');
-    await mount();
-    const { show_filters, done } = getTranslations(eventFiltersTranslations);
-    expect(screen.queryByRole('button', { name: show_filters })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: done })).not.toBeInTheDocument();
+  it('should filter events by category', async () => {
+    const { user } = await mount();
+    await openFilters(user);
+    await selectCategory(user, 'Movies');
+    await closeFilters(user);
+    const eventHeadings = screen.getAllByRole('heading', { level: 2 });
+    expect(eventHeadings).toHaveLength(1);
+    expect(eventHeadings[0]).toHaveTextContent('A Odisseia');
   });
 
   it('should filter events by start date, end date, city, and title', async () => {
@@ -238,13 +246,14 @@ describe('Events View', () => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     mockSearchParams('limit=60');
     const { user } = await mount();
-    const { start_date, to, end_date } = getTranslations(eventFiltersTranslations);
+    const { start_date, end_date } = getTranslations(eventFiltersTranslations);
+    await openFilters(user);
     await filterByTitle(user, 'orquestra');
     await selectCity(user, 'Joinville');
     await selectDate(user, start_date, '2024-05-01');
     await selectDate(user, end_date, '2024-05-03');
+    await closeFilters(user);
     await act(async () => await pause(1050));
-    expect(screen.queryByText(to)).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Tributo a Bob Dylan' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Orquestra de Joinville' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Orquestra de Joinville - Sessão Extra' })).toBeInTheDocument();
@@ -268,7 +277,9 @@ describe('Events View', () => {
     ]);
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     const { user } = await mount();
+    await openFilters(user);
     await filterByTitle(user, 'porao da liga');
+    await closeFilters(user);
     await act(async () => await pause(1050));
     expect(screen.queryByRole('heading', { name: 'Ratos Do Porão' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Porão Da Liga - Em Pé Na Rede' })).toBeInTheDocument();
@@ -282,9 +293,11 @@ describe('Events View', () => {
     const { user } = await mount();
     const { start_date, end_date } = getTranslations(eventFiltersTranslations);
     const { load_more } = getTranslations(eventListTranslations);
+    await openFilters(user);
     await selectCity(user, 'Curitiba');
     await selectDate(user, start_date, '2024-05-01');
     await selectDate(user, end_date, '2024-05-01');
+    await closeFilters(user);
     expect(screen.getByRole('heading', { name: 'Event #1' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #35' })).not.toBeInTheDocument();
@@ -300,14 +313,16 @@ describe('Events View', () => {
     ]);
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     mockSearchParams('city=sao-jose&startDate=2024-05-04&endDate=2024-05-05');
-    await mount();
+    const { user } = await mount();
     const { city, start_date, end_date } = getTranslations(eventFiltersTranslations);
     expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Event #2' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
+    await openFilters(user);
     expect(screen.getByRole('combobox', { name: city })).toHaveValue('sao-jose');
     expect(screen.getByLabelText(start_date)).toHaveValue('2024-05-04');
     expect(screen.getByLabelText(end_date)).toHaveValue('2024-05-05');
+    await closeFilters(user);
   });
 
   it('should clear end date filter if start date is ahead end date', async () => {
@@ -320,11 +335,15 @@ describe('Events View', () => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     const { user } = await mount();
     const { start_date, end_date } = getTranslations(eventFiltersTranslations);
+    await openFilters(user);
     await selectDate(user, end_date, '2024-05-04');
+    await closeFilters(user);
     expect(screen.getByRole('heading', { name: 'Event #1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Event #2' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
+    await openFilters(user);
     await selectDate(user, start_date, '2024-05-10');
+    await closeFilters(user);
     expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Event #3' })).toBeInTheDocument();
@@ -340,7 +359,9 @@ describe('Events View', () => {
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     const { user } = await mount();
     const { no_results, try_redo_filters } = getTranslations(eventListTranslations);
+    await openFilters(user);
     await selectCity(user, 'Curitiba');
+    await closeFilters(user);
     expect(screen.queryByRole('heading', { name: 'Event #1' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #2' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
@@ -384,54 +405,6 @@ describe('Events View', () => {
     expect(secondEventTime.classList).toContain('v-event-card-datetime-featured');
     expect(screen.getByText('May 5, 2024')).toBeInTheDocument();
     expect(thirdEventTime.classList).not.toContain('v-event-card-datetime-featured');
-  });
-
-  it('should not show filters on mobile by default', async () => {
-    simulateScreenType('mobile');
-    const { user, container } = await mount();
-    const { show_filters, done } = getTranslations(eventFiltersTranslations);
-    const eventFilterFieldEl = container.querySelector('#eventFilterFields');
-    expect(eventFilterFieldEl.classList).not.toContain('v-event-filter-fields-visible');
-    expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'true');
-    await user.click(screen.getByRole('button', { name: show_filters }));
-    expect(eventFilterFieldEl.classList).toContain('v-event-filter-fields-visible');
-    expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'false');
-    await user.click(screen.getByRole('button', { name: done }));
-    expect(eventFilterFieldEl.classList).not.toContain('v-event-filter-fields-visible');
-    expect(eventFilterFieldEl).toHaveAttribute('aria-hidden', 'true');
-  });
-
-  it('should show filters counter on mobile', async () => {
-    simulateScreenType('mobile');
-    const { user, container } = await mount();
-    const { all_cities, to, end_date, show_filters, done } = getTranslations(eventFiltersTranslations);
-    const eventFilterCounterEl = container.querySelector('#eventFiltersCounter');
-    const eventFilterCounterWrapperEl = container.querySelector('#eventFiltersCounterWrapper');
-    const getCounterElClassNames = () => eventFilterCounterEl.classList;
-    const getCounterWrapperElClassNames = () => eventFilterCounterWrapperEl.classList;
-    expect(getCounterElClassNames()).not.toContain('v-event-filters-counter-visible');
-    expect(getCounterWrapperElClassNames()).not.toContain('v-event-filters-counter-wrapper-center');
-    expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'true');
-    expect(eventFilterCounterEl.textContent).toEqual('0');
-    await user.click(screen.getByRole('button', { name: show_filters }));
-    await selectCity(user, 'Curitiba');
-    await selectDate(user, end_date, '2024-05-05');
-    expect(screen.getByText(to)).toBeInTheDocument();
-    expect(getCounterElClassNames()).toContain('v-event-filters-counter-visible');
-    expect(getCounterWrapperElClassNames()).toContain('v-event-filters-counter-wrapper-center');
-    expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'false');
-    expect(eventFilterCounterEl.textContent).toEqual('2');
-    await selectCity(user, all_cities);
-    expect(getCounterElClassNames()).toContain('v-event-filters-counter-visible');
-    expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'false');
-    expect(eventFilterCounterEl.textContent).toEqual('1');
-    await user.clear(screen.getByLabelText(end_date));
-    expect(getCounterElClassNames()).not.toContain('v-event-filters-counter-visible');
-    expect(eventFilterCounterEl).toHaveAttribute('aria-hidden', 'true');
-    expect(eventFilterCounterEl.textContent).toEqual('0');
-    await user.click(screen.getByRole('button', { name: done }));
-    expect(window.scroll).toHaveBeenCalledWith({ top: 0, left: 0 });
-    expect(getCounterWrapperElClassNames()).not.toContain('v-event-filters-counter-wrapper-center');
   });
 
   it('should not show an installation banner by default', async () => {

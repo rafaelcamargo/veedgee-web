@@ -1,4 +1,5 @@
 export const CITY_FILTER_NAME = 'city';
+export const CATEGORY_FILTER_NAME = 'category';
 export const START_DATE_FILTER_NAME = 'startDate';
 export const END_DATE_FILTER_NAME = 'endDate';
 export const LIMIT_FILTER_NAME = 'limit';

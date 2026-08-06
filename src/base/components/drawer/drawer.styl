@@ -1,0 +1,38 @@
+.v-drawer-overlay
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  background-color var(--vcolor-darkest)
+  opacity 0
+  pointer-events none
+  transition opacity 200ms ease-out
+  z-index var(--vlayer-middle)
+  &.is-open
+    opacity 0.5
+    pointer-events auto
+
+.v-drawer
+  position fixed
+  top 0
+  right 0
+  max-width 480px
+  height 100vh
+  padding 30px
+  background-color var(--vcolor-lightest)
+  box-sizing border-box
+  transform translateX(100%)
+  transition transform 200ms ease-out
+  pointer-events none
+  z-index var(--vlayer-high)
+  &.is-open
+    transform translateX(0)
+    pointer-events auto
+
+.v-drawer-close
+  display block
+  margin-left auto
+
+.v-drawer-body
+  margin-top 20px
