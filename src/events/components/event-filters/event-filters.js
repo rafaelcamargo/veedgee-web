@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { DebouncedInput } from '@src/base/components/debounced-input/debounced-input';
 import { Drawer } from '@src/base/components/drawer/drawer';
-import Filters from '@src/base/icons/filters';
+import Funnel from '@src/base/icons/funnel';
 import Loupe from '@src/base/icons/loupe';
 import { useTranslation } from '@compilorama/polang';
 import cityService from '@src/base/services/city';
@@ -30,7 +30,7 @@ export const EventFilters = ({ filters, onChange }) => {
         aria-label={t('show_filters')}
         onClick={() => setDrawerVisibility(true)}
       >
-        <Filters />
+        <Funnel />
       </Button>
       <Drawer isOpen={isDrawerOpen} title={t('filters')} onClose={closeDrawer}>
         <FilterFields

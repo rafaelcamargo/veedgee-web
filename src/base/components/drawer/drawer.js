@@ -9,18 +9,20 @@ export const Drawer = ({ isOpen, title, children, onClose }) => {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div
-        className={buildClassName(isOpen)}
-        role="dialog"
-        aria-hidden={!isOpen}
-        aria-modal="true"
-      >
-        <div className="v-drawer-header">
-          <h3 className="v-drawer-title">{title}</h3>
-          <CloseButton onClick={onClose} />
-        </div>
-        <div className="v-drawer-body">
-          {children}
+      <div className={buildWrapperClassName(isOpen)}>
+        <div
+          className="v-drawer"
+          role="dialog"
+          aria-hidden={!isOpen}
+          aria-modal="true"
+        >
+          <div className="v-drawer-header">
+            <h3 className="v-drawer-title">{title}</h3>
+            <CloseButton onClick={onClose} />
+          </div>
+          <div className="v-drawer-body">
+            {children}
+          </div>
         </div>
       </div>
     </>,
@@ -34,8 +36,8 @@ function buildOverlayClassName(isOpen){
   return classNames.join(' ');
 }
 
-function buildClassName(isOpen){
-  const classNames = ['v-drawer'];
+function buildWrapperClassName(isOpen){
+  const classNames = ['v-drawer-wrapper'];
   if(isOpen) classNames.push('is-open');
   return classNames.join(' ');
 }
