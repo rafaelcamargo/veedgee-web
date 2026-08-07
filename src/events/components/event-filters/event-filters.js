@@ -21,9 +21,14 @@ export const EventFilters = ({ filters, onChange }) => {
   const { t } = useTranslation(translations);
   const [isDrawerOpen, setDrawerVisibility] = useState(false);
   const closeDrawer = () => setDrawerVisibility(false);
+  const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
 
   return (
     <div className="v-event-filters-wrapper">
+      <CityFilter
+        value={filters[CITY_FILTER_NAME] || ''}
+        onChange={handleFilterChange}
+      />
       <Button
         theme="icon"
         className="v-event-filters-trigger"
@@ -79,25 +84,10 @@ function FilterFields({ filters, onChange, onFinish }){
           />
         </div>
       </div>
-      <div className="v-event-filter-field-group">
-        <div className="v-event-filter-field">
-          <select
-            name={CITY_FILTER_NAME}
-            value={getFilterValue(CITY_FILTER_NAME)}
-            aria-label={t('city')}
-            onChange={handleFilterChange}
-          >
-            <option value="">{t('all_cities')}</option>
-            {
-              cityService.getCities().map(({ code, name }) => (
-                <option key={code} value={code}>
-                  {name}
-                </option>
-              ))
-            }
-          </select>
-        </div>
-      </div>
+      <CityFilter
+        value={getFilterValue(CITY_FILTER_NAME)}
+        onChange={handleFilterChange}
+      />
       <div className="v-event-filter-field-group">
         <div className="v-event-filter-field">
           <select
@@ -149,6 +139,32 @@ function FilterFields({ filters, onChange, onFinish }){
         <Button theme="primary" onClick={onFinishButtonClick}>
           {t('done')}
         </Button>
+      </div>
+    </div>
+  );
+}
+
+// eslint-disable-next-line
+function CityFilter({ value, onChange }){
+  const { t } = useTranslation(translations);
+  return (
+    <div className="v-event-filter-field-group v-event-filter-field-city">
+      <div className="v-event-filter-field">
+        <select
+          name={CITY_FILTER_NAME}
+          value={value}
+          aria-label={t('city')}
+          onChange={onChange}
+        >
+          <option value="">{t('all_cities')}</option>
+          {
+            cityService.getCities().map(({ code, name }) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
+            ))
+          }
+        </select>
       </div>
     </div>
   );

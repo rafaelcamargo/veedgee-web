@@ -1,6 +1,26 @@
 @import '@mixins'
 
 .v-event-filters-wrapper
+  display flex
+  align-items center
+  gap 12px
+  .v-event-filter-field-group
+    width auto
+    margin-top 0
+  .v-event-filter-field-city
+    select
+      margin-right 5px
+      padding-left 0px
+      padding-right 30px
+      min-width 0
+      background-color transparent
+      background-image url('../../../base/images/icon-pin.svg')
+      background-size 28px
+      text-align right
+      direction rtl
+      border 0
+      option
+        direction ltr
   .v-event-filters-trigger
     .v-icon
       [data-stroke]

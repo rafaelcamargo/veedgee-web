@@ -69,7 +69,11 @@ describe('Events View', () => {
 
   async function selectCity(user, cityName){
     const { city } = getTranslations(eventFiltersTranslations);
-    await user.selectOptions(screen.getByRole('combobox', { name: city  }), [cityName]);
+    const dialog = screen.queryByRole('dialog');
+    const citySelect = dialog
+      ? within(dialog).getByRole('combobox', { name: city })
+      : screen.getByRole('combobox', { name: city });
+    await user.selectOptions(citySelect, [cityName]);
   }
 
   async function selectCategory(user, categoryName){
@@ -221,6 +225,12 @@ describe('Events View', () => {
     expect(screen.queryByRole('button', { name: load_more })).not.toBeInTheDocument();
   });
 
+  it('should be able to filter by city without open filters drawer', async () => {
+    const { user } = await mount();
+    await selectCity(user, 'Joinville');
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(1);
+  });
+
   it('should filter events by category', async () => {
     const { user } = await mount();
     await openFilters(user);
@@ -319,7 +329,7 @@ describe('Events View', () => {
     expect(screen.getByRole('heading', { name: 'Event #2' })).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Event #3' })).not.toBeInTheDocument();
     await openFilters(user);
-    expect(screen.getByRole('combobox', { name: city })).toHaveValue('sao-jose');
+    expect(within(screen.getByRole('dialog')).getByRole('combobox', { name: city })).toHaveValue('sao-jose');
     expect(screen.getByLabelText(start_date)).toHaveValue('2024-05-04');
     expect(screen.getByLabelText(end_date)).toHaveValue('2024-05-05');
     await closeFilters(user);
@@ -362,7 +372,7 @@ describe('Events View', () => {
     expect(screen.queryAllByRole('listitem')).toHaveLength(0);
     await user.click(screen.getByRole('button', { name: reset }));
     expect(screen.getByRole('textbox', { name: title })).toHaveValue('');
-    expect(screen.getByRole('combobox', { name: city })).toHaveValue('');
+    expect(within(screen.getByRole('dialog')).getByRole('combobox', { name: city })).toHaveValue('');
     expect(screen.getByRole('combobox', { name: category })).toHaveValue('');
     expect(screen.getByLabelText(start_date)).toHaveValue('2024-03-01');
     expect(screen.getByLabelText(end_date)).toHaveValue('');
