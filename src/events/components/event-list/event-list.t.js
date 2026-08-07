@@ -10,7 +10,7 @@ const translations = {
   },
   'pt-BR': {
     'loading': 'Carregando os eventos',
-    'load_more': 'Mostar mais',
+    'load_more': 'Mostrar mais',
     'no_results': 'Não sobraram eventos',
     'try_redo_filters': 'Experimente outras datas ou categorias.',
     'something_went_wrong': 'Foi mal, algo deu errado.',
