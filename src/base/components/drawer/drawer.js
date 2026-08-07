@@ -1,12 +1,7 @@
 import { createPortal } from 'react-dom';
-import { useTranslation } from '@compilorama/polang';
-import { Button } from '@src/base/components/button/button';
-import Close from '@src/base/icons/close';
-import translations from './drawer.t.js';
+import { CloseButton } from '@src/base/components/close-button/close-button';
 
-export const Drawer = ({ children, isOpen, onClose }) => {
-  const { t } = useTranslation(translations);
-
+export const Drawer = ({ isOpen, title, children, onClose }) => {
   return createPortal(
     <>
       <div
@@ -20,14 +15,10 @@ export const Drawer = ({ children, isOpen, onClose }) => {
         aria-hidden={!isOpen}
         aria-modal="true"
       >
-        <Button
-          aria-label={t('close')}
-          theme="icon"
-          className="v-drawer-close"
-          onClick={onClose}
-        >
-          <Close />
-        </Button>
+        <div className="v-drawer-header">
+          <h3 className="v-drawer-title">{title}</h3>
+          <CloseButton onClick={onClose} />
+        </div>
         <div className="v-drawer-body">
           {children}
         </div>

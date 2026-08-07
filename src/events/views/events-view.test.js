@@ -349,6 +349,27 @@ describe('Events View', () => {
     expect(screen.getByRole('heading', { name: 'Event #3' })).toBeInTheDocument();
   });
 
+  it('should reset filters', async () => {
+    const { user } = await mount();
+    const { title, city, category, start_date, end_date, reset } = getTranslations(eventFiltersTranslations);
+    await openFilters(user);
+    await selectCity(user, 'Curitiba');
+    await selectDate(user, start_date, '2024-05-04');
+    await selectDate(user, end_date, '2026-07-27');
+    await selectCategory(user, 'Movies');
+    await filterByTitle(user, 'Toy');
+    await act(async () => await pause(1050));
+    expect(screen.queryAllByRole('listitem')).toHaveLength(0);
+    await user.click(screen.getByRole('button', { name: reset }));
+    expect(screen.getByRole('textbox', { name: title })).toHaveValue('');
+    expect(screen.getByRole('combobox', { name: city })).toHaveValue('');
+    expect(screen.getByRole('combobox', { name: category })).toHaveValue('');
+    expect(screen.getByLabelText(start_date)).toHaveValue('2024-03-01');
+    expect(screen.getByLabelText(end_date)).toHaveValue('');
+    await closeFilters(user);
+    expect(screen.getAllByRole('heading', { level: 2 })).toHaveLength(5);
+  });
+
   it('should show no results message if no event has been found', async () => {
     dateService.getNow = jest.fn(() => new Date(2024, 4, 3));
     const events = buildEventsMock(8, [

@@ -1,17 +1,12 @@
-.v-event-filters-visibility-toggler
-  position relative
-  z-index var(--vlayer-low)
-  &.v-button-icon-right
+.v-event-filters-wrapper
+  .v-event-filters-trigger
     .v-icon
-      top -1px
+      [data-stroke]
+        stroke-width 2px
 
 .v-event-filter-fields
   display flex
   flex-direction column
-  h3
-    margin-bottom 40px
-    color var(--vcolor-grey-dark)
-    text-align center
 
 .v-event-filter-field
   position relative
@@ -44,5 +39,9 @@
     margin-top 20px
 
 .v-event-filter-actions
+  display flex
+  gap 20px
   margin-top 40px
-  text-align center
+  .v-button
+    flex 1
+    min-width 0

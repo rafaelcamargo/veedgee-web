@@ -18,13 +18,21 @@ import { useEventCategories } from '@src/events/hooks/use-event-categories';
 import translations from './event-filters.t.js';
 
 export const EventFilters = ({ filters, onChange }) => {
+  const { t } = useTranslation(translations);
   const [isDrawerOpen, setDrawerVisibility] = useState(false);
   const closeDrawer = () => setDrawerVisibility(false);
 
   return (
     <div className="v-event-filters-wrapper">
-      <FiltersButton onClick={() => setDrawerVisibility(true)} />
-      <Drawer isOpen={isDrawerOpen} onClose={closeDrawer}>
+      <Button
+        theme="icon"
+        className="v-event-filters-trigger"
+        aria-label={t('show_filters')}
+        onClick={() => setDrawerVisibility(true)}
+      >
+        <Filters />
+      </Button>
+      <Drawer isOpen={isDrawerOpen} title={t('filters')} onClose={closeDrawer}>
         <FilterFields
           filters={filters}
           onChange={onChange}
@@ -35,28 +43,19 @@ export const EventFilters = ({ filters, onChange }) => {
   );
 };
 
-function FiltersButton({ onClick }){
-  const { t } = useTranslation(translations);
-
-  return (
-    <Button
-      aria-label={t('show_filters')}
-      theme="icon-right"
-      className="v-event-filters-visibility-toggler"
-      onClick={onClick}
-    >
-      {t('filters')}
-      <Filters />
-    </Button>
-  );
-}
-
 // eslint-disable-next-line
 function FilterFields({ filters, onChange, onFinish }){
   const { t } = useTranslation(translations);
   const { getCategories } = useEventCategories();
   const getFilterValue = attrName => filters[attrName] || '';
   const handleFilterChange = ({ target: { name, value } }) => onChange({ [name]: value });
+  const resetFilters = () => onChange({
+    [TITLE_FILTER_NAME]: '',
+    [CITY_FILTER_NAME]: '',
+    [CATEGORY_FILTER_NAME]: '',
+    [START_DATE_FILTER_NAME]: dateService.getTodayISOString(),
+    [END_DATE_FILTER_NAME]: ''
+  });
   const onFinishButtonClick = () => {
     window.scroll({ top: 0, left: 0 });
     onFinish();
@@ -144,6 +143,9 @@ function FilterFields({ filters, onChange, onFinish }){
         </div>
       </div>
       <div className="v-event-filter-actions">
+        <Button onClick={resetFilters}>
+          {t('reset')}
+        </Button>
         <Button theme="primary" onClick={onFinishButtonClick}>
           {t('done')}
         </Button>

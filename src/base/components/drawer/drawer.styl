@@ -4,13 +4,13 @@
   right 0
   bottom 0
   left 0
-  background-color var(--vcolor-darkest)
+  background-color var(--vcolor-grey-darker)
   opacity 0
   pointer-events none
   transition opacity 200ms ease-out
   z-index var(--vlayer-middle)
   &.is-open
-    opacity 0.5
+    opacity 0.6
     pointer-events auto
 
 .v-drawer
@@ -30,9 +30,12 @@
     transform translateX(0)
     pointer-events auto
 
-.v-drawer-close
-  display block
-  margin-left auto
+.v-drawer-header
+  display flex
+  justify-content space-between
+
+.v-drawer-title
+  line-height 28px
 
 .v-drawer-body
-  margin-top 20px
+  margin-top 40px

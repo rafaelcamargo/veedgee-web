@@ -1,8 +1,12 @@
 .v-button
-  padding 10px 0
+  display flex
+  align-items center
+  justify-content center
+  height 40px
   min-width 200px
+  padding 0
   background-color var(--vcolor-grey-light)
-  color var(--vcolor-grey-darker)
+  color var(--vcolor-grey-dark)
   font-size var(--vfont-size-sm)
   font-weight bold
   line-height 1
@@ -19,8 +23,8 @@
   &:focus,
   &:hover,
   &:active
-    border-color var(--vcolor-grey-dark)
-    color var(--vcolor-darkest)
+    background-color var(--vcolor-grey-mid-light)
+    border-color var(--vcolor-grey-mid-light)
   &.v-button-primary
     background-color var(--vcolor-primary)
     color var(--vcolor-lightest)
@@ -28,22 +32,9 @@
     &:focus,
     &:hover,
     &:active
-      background-color var(--vcolor-red-dark)
-      border-color var(--vcolor-red-dark)
+      background-color var(--vcolor-red-mid-light)
+      border-color var(--vcolor-red-mid-light)
   &.v-button-icon
     position relative
-    min-width 40px
-    min-height 40px
-    .v-icon
-      position absolute
-      top 0
-      left 0
-    &.v-button-icon-right
-        left auto
-        right 0
-        min-width 40px
-        padding 0 40px 0 10px
-        .v-icon
-          position absolute
-          left auto
-          right 0
+    min-width 0
+    width 40px

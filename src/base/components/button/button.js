@@ -17,7 +17,6 @@ function buildClassName(theme, className){
 function getThemeClassName(theme){
   return {
     'primary': 'v-button-primary',
-    'icon': 'v-button-icon',
-    'icon-right': 'v-button-icon v-button-icon-right'
+    'icon': 'v-button-icon'
   }[theme];
 }

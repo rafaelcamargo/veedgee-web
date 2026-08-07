@@ -10,6 +10,7 @@ const translations = {
     'end_date': 'End Date',
     'show_filters': 'Show filters',
     'filters': 'Filters',
+    'reset': 'Reset',
     'done': 'Done'
   },
   'pt-BR': {
@@ -23,6 +24,7 @@ const translations = {
     'to': 'até',
     'show_filters': 'Exibir filtros',
     'filters': 'Filtros',
+    'reset': 'Limpar',
     'done': 'Concluir'
   }
 };
