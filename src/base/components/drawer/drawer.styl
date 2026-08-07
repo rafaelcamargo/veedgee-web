@@ -6,9 +6,9 @@
   right 0
   bottom 0
   left 0
-  background-color hsla(228, 5%, 25%, .25)
-  backdrop-filter blur(1px)
-  -webkit-backdrop-filter blur(1px)
+  background-color transparent
+  backdrop-filter blur(2px)
+  -webkit-backdrop-filter blur(2px)
   opacity 0
   pointer-events none
   transition opacity 200ms ease-out
@@ -19,14 +19,13 @@
 
 .v-drawer-wrapper
   position fixed
-  top 0
   right 0
   bottom 0
+  left 0
   width 100%
-  max-width 480px
-  padding-left 20px
+  height calc(100vh - 260px)
   box-sizing border-box
-  transform translate3d(100%, 0, 0)
+  transform translate3d(0, 100%, 0)
   transition transform 200ms ease-out
   will-change transform
   pointer-events none
@@ -41,7 +40,8 @@
   padding 30px
   background-color var(--vcolor-lightest)
   box-sizing border-box
-  border-radius 24px 0 0 24px
+  border-radius 36px 36px 0 0
+  box-shadow -16px 0 48px 0 hsla(0, 0%, 0%, .15)
   overflow hidden
 
 .v-drawer-header
@@ -55,8 +55,18 @@
   margin-top 40px
 
 +breakpoint('sm')
+  .v-drawer-overlay
+    background-color hsla(228, 5%, 25%, .25)
+    backdrop-filter blur(1px)
+    -webkit-backdrop-filter blur(1px)
   .v-drawer-wrapper
+    top 0
+    left auto
+    height auto
+    max-width 480px
     padding 20px
+    transform translate3d(100%, 0, 0)
+    &.is-open
+      transform translate3d(0, 0, 0)
   .v-drawer
     border-radius 24px
-    box-shadow -12px 0 36px 0 hsla(0, 0%, 0%, .15)
