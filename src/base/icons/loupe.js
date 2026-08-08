@@ -3,8 +3,8 @@ import { Icon } from '@src/base/components/icon/icon';
 const Loupe = props => {
   return (
     <Icon {...props} name="loupe">
-      <path data-shape d="M18.2,13c2.87,0,5.2,2.33,5.2,5.2s-2.33,5.2-5.2,5.2S13,21.07,13,18.2S15.33,13,18.2,13 M18.2,11c-3.98,0-7.2,3.22-7.2,7.2s3.22,7.2,7.2,7.2s7.2-3.22,7.2-7.2S22.18,11,18.2,11L18.2,11z"/>
-      <line data-stroke x1="23.25" y1="23.29" x2="29" y2="29"/>
+      <circle data-stroke cx="19.249" cy="19.249" r="9.249" />
+      <path data-stroke d="M25.79,25.79L30,30" />
     </Icon>
   );
 };

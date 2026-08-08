@@ -1,14 +1,17 @@
 @import '@mixins'
 
 .v-event-category-tag
+  --vicon-size 30px
   display flex
   justify-content center
   align-items center
   width 26px
   height 26px
   .v-icon
-    width 26px
-    height 26px
+    width var(--vicon-size)
+    height var(--vicon-size)
+    [data-stroke]
+      stroke-width 1.33px
 
 .v-event-category-caption
   sr-only()
