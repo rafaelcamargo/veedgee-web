@@ -1,6 +1,6 @@
 const translations = {
   'en-US': {
-    'title': 'Filter by title',
+    'title': 'Filter by title...',
     'city': 'City',
     'all_cities': 'All Cities',
     'category': 'Category',
@@ -16,7 +16,7 @@ const translations = {
     'done': 'Done'
   },
   'pt-BR': {
-    'title': 'Filtrar por título',
+    'title': 'Filtrar por título...',
     'city': 'Cidade',
     'all_cities': 'Todas as Cidades',
     'category': 'Categoria',
