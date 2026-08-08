@@ -23,7 +23,8 @@
   bottom 0
   left 0
   width 100%
-  height calc(100vh - 260px)
+  max-height calc(100vh - 200px)
+  max-height calc(100dvh - 200px)
   box-sizing border-box
   transform translate3d(0, 100%, 0)
   transition transform 200ms ease-out
@@ -35,11 +36,13 @@
     pointer-events auto
 
 .v-drawer
+  display flex
+  flex-direction column
+  flex 1
   width 100%
+  max-height inherit
   height 100%
-  padding 30px
   background-color var(--vcolor-lightest)
-  box-sizing border-box
   border-radius 36px 36px 0 0
   box-shadow -16px 0 48px 0 hsla(0, 0%, 0%, .15)
   overflow hidden
@@ -47,12 +50,21 @@
 .v-drawer-header
   display flex
   justify-content space-between
+  padding 30px
+  background-color var(--vcolor-lightest)
+  box-shadow 0 6px 12px 0 var(--vcolor-lightest)
+  z-index 1
 
 .v-drawer-title
   line-height 28px
 
 .v-drawer-body
-  margin-top 40px
+  height auto
+  padding 30px 30px calc(50px + env(safe-area-inset-bottom, 0px)) 30px
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+  overscroll-behavior contain
+  box-sizing border-box
 
 +breakpoint('sm')
   .v-drawer-overlay
@@ -62,7 +74,8 @@
   .v-drawer-wrapper
     top 0
     left auto
-    height auto
+    height 100vh
+    max-height none
     max-width 480px
     padding 20px
     transform translate3d(100%, 0, 0)
@@ -70,3 +83,7 @@
       transform translate3d(0, 0, 0)
   .v-drawer
     border-radius 24px
+  .v-drawer-body
+    min-height 0
+    padding 30px
+    overflow-y auto
