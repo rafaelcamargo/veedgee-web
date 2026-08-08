@@ -1,7 +1,7 @@
 export const DrawerImage = ({ src, alt, description }) => {
   return (
     <div className="v-drawer-image">
-      <img src={src} alt={alt} />
+      {isValidSrc(src) && <img src={src} alt={alt} />}
       <div className="v-drawer-image-gradient" aria-hidden="true" />
       {
         description && (
@@ -13,3 +13,7 @@ export const DrawerImage = ({ src, alt, description }) => {
     </div>
   );
 };
+
+function isValidSrc(src){
+  return encodeURI(src) === src;
+}
