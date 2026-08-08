@@ -12,6 +12,22 @@
 @font-face {
   font-family Inter
   font-style normal
+  font-weight 400
+  font-display swap
+  src url('@src/base/fonts/Inter-Regular.woff2') format('woff2')
+}
+
+@font-face {
+  font-family Inter
+  font-style normal
+  font-weight 500
+  font-display swap
+  src url('@src/base/fonts/Inter-Medium.woff2') format('woff2')
+}
+
+@font-face {
+  font-family Inter
+  font-style normal
   font-weight 700
   font-display swap
   src url('@src/base/fonts/Inter-Bold.woff2') format('woff2')
@@ -27,7 +43,7 @@ body
   margin 0
   color var(--vcolor-darkest)
   font-size 16px
-  font-weight 300
+  font-weight 400
 
 html:has(.v-drawer-overlay.is-open)
   overflow hidden
