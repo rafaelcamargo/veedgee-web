@@ -14,10 +14,14 @@ import windowService from '@src/base/services/window';
 import eventListTranslations from '@src/events/components/event-list/event-list.t.js';
 import eventsMock from '@src/events/mocks/events';
 import eventsResource from '@src/events/resources/events';
+import closeButtonTranslations from '@src/base/components/close-button/close-button.t.js';
 import topbarTranslations from '@src/base/components/topbar/topbar.t.js';
 import localeSelectTranslations from '@src/base/components/locale-select/locale-select.t.js';
 import eventCardTranslations from '@src/events/components/event-card/event-card.t.js';
+import eventDatetimeTranslations from '@src/events/components/event-datetime/event-datetime.t.js';
+import eventDrawerTranslations from '@src/events/components/event-drawer/event-drawer.t.js';
 import eventFiltersTranslations from '@src/events/components/event-filters/event-filters.t.js';
+import eventCategoriesTranslations from '@src/events/hooks/use-event-categories.t.js';
 import EventsView from './events-view';
 
 describe('Events View', () => {
@@ -176,18 +180,13 @@ describe('Events View', () => {
   it('should optionally format date and time in Portuguese', async () => {
     const { user } = await mount();
     const { language } = getTranslations(localeSelectTranslations);
-    const { view_event_details } = eventCardTranslations['pt-BR'];
     await user.selectOptions(screen.getByRole('combobox', { name: language }), 'pt-BR');
     const [firstEvent, secondEvent] = eventsMock;
     const firstEventItem = screen.getByRole('listitem', { name: firstEvent.title });
     const secondEventItem = screen.getByRole('listitem', { name: secondEvent.title });
-    const firstEventItemLink = within(firstEventItem).getByRole('link', { name: view_event_details });
-    const secondEventItemLink = within(secondEventItem).getByRole('link', { name: view_event_details });
     expect(within(firstEventItem).getByText('23 mar, 2024'));
-    expect(firstEventItemLink).toHaveAttribute('href', firstEvent.url);
     expect(within(secondEventItem).getByText('14 abr, 2024'));
     expect(within(secondEventItem).getByText('17:00'));
-    expect(secondEventItemLink).toHaveAttribute('href', secondEvent.url);
     await user.selectOptions(
       screen.getByRole('combobox', { name: localeSelectTranslations['pt-BR'].language }),
       'en-US'
@@ -428,14 +427,58 @@ describe('Events View', () => {
     ]);
     eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
     const { container } = await mount();
-    const { today, tomorrow } = getTranslations(eventCardTranslations);
+    const { today, tomorrow } = getTranslations(eventDatetimeTranslations);
     const [firstEventTime, secondEventTime, thirdEventTime] = container.querySelectorAll('time');
     expect(screen.getByText(today)).toBeInTheDocument();
-    expect(firstEventTime.classList).toContain('v-event-card-datetime-featured');
+    expect(firstEventTime.classList).toContain('is-featured');
     expect(screen.getByText(tomorrow)).toBeInTheDocument();
-    expect(secondEventTime.classList).toContain('v-event-card-datetime-featured');
+    expect(secondEventTime.classList).toContain('is-featured');
     expect(screen.getByText('May 5, 2024')).toBeInTheDocument();
-    expect(thirdEventTime.classList).not.toContain('v-event-card-datetime-featured');
+    expect(thirdEventTime.classList).not.toContain('is-featured');
+  });
+
+  it('should open the event drawer', async () => {
+    const { user } = await mount();
+    const { view_event_details } = getTranslations(eventCardTranslations);
+    const { event_website } = getTranslations(eventDrawerTranslations);
+    const { dance } = getTranslations(eventCategoriesTranslations);
+    const eventDetails = eventsMock[4];
+    const eventItem = screen.getByRole('listitem', { name: 'Backstage Tour - Joinville Dance Festival 2026' });
+    await user.click(within(eventItem).getByRole('button', { name: view_event_details }));
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toHaveAttribute('aria-hidden', 'false');
+    expect(within(dialog).getByRole('img')).toHaveAttribute('src', eventDetails.image);
+    expect(dialog.querySelector('.v-icon-shoe')).toBeInTheDocument();
+    expect(within(dialog).getByText(dance)).toBeInTheDocument();
+    expect(within(dialog).getByRole('heading', {
+      level: 3,
+      name: 'Backstage Tour - Joinville Dance Festival 2026'
+    })).toBeInTheDocument();
+    expect(within(dialog).getByText(
+      'An exclusive experience to explore the backstage of the world\'s largest dance festival, following the technical routine and dancers\' preparations.'
+    )).toBeInTheDocument();
+    const eventWebsiteLink = within(dialog).getByRole('link', { name: event_website });
+    expect(eventWebsiteLink).toHaveAttribute('href', eventDetails.url);
+    expect(eventWebsiteLink).toHaveAttribute('target', '_blank');
+    expect(eventWebsiteLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  it('should close the event drawer', async () => {
+    const { user } = await mount();
+    const { view_event_details } = getTranslations(eventCardTranslations);
+    const { close } = getTranslations(closeButtonTranslations);
+    const eventItem = screen.getByRole('listitem', { name: 'Backstage Tour - Joinville Dance Festival 2026' });
+    await user.click(within(eventItem).getByRole('button', { name: view_event_details }));
+    expect(within(screen.getByRole('dialog')).getByRole('heading', {
+      level: 3,
+      name: 'Backstage Tour - Joinville Dance Festival 2026'
+    })).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: close }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', {
+      level: 3,
+      name: 'Backstage Tour - Joinville Dance Festival 2026'
+    })).not.toBeInTheDocument();
   });
 
   it('should not show an installation banner by default', async () => {

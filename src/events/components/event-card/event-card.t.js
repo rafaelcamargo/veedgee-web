@@ -1,13 +1,9 @@
 const translations = {
   'en-US': {
-    'view_event_details': 'View event details',
-    'today': 'Today',
-    'tomorrow': 'Tomorrow'
+    'view_event_details': 'View event details'
   },
   'pt-BR': {
-    'view_event_details': 'Ver detalhes do evento',
-    'today': 'Hoje',
-    'tomorrow': 'Amanhã'
+    'view_event_details': 'Ver detalhes do evento'
   }
 };
 

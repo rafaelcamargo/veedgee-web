@@ -1,0 +1,27 @@
+.v-event-datetime
+  display flex
+  flex 1
+  justify-content space-between
+  align-items center
+  font-size var(--vfont-size-xxs)
+  font-weight bold
+  text-transform uppercase
+  &.is-featured
+    .v-event-datetime-date
+      background-color var(--vcolor-blue-light)
+      color var(--vcolor-blue-dark)
+      border 1px solid var(--vcolor-blue)
+
+.v-event-datetime-date
+  padding 5px 20px
+  min-width 120px
+  color var(--vcolor-primary)
+  text-align center
+  border 1px solid var(--vcolor-primary)
+  border-radius 4px
+  box-sizing border-box
+
+.v-event-datetime-time
+  display flex
+  align-items center
+  color var(--vcolor-grey-dark)

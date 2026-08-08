@@ -6,15 +6,20 @@
   height 240px
   background-color var(--vcolor-lightest)
   border-radius 12px
-  a
+  .v-event-card-details-link
     position absolute
     right 20px
     bottom 30px
     display flex
+    align-items center
+    justify-content center
     width 60px
     height 60px
+    padding 0
     background-color var(--vcolor-red-light)
+    border 0
     border-radius 50%
+    cursor pointer
     z-index var(--vlayer-base)
   address
     display flex
@@ -40,34 +45,6 @@
   align-items center
   gap 8px
 
-.v-event-card-datetime
-  display flex
-  flex 1
-  justify-content space-between
-  align-items center
-  font-size var(--vfont-size-xxs)
-  font-weight bold
-  text-transform uppercase
-  &.v-event-card-datetime-featured
-    .v-event-card-date
-      background-color var(--vcolor-blue-light)
-      color var(--vcolor-blue-dark)
-      border 1px solid var(--vcolor-blue)
-
-.v-event-card-date
-  padding 5px 20px
-  min-width 120px
-  color var(--vcolor-primary)
-  text-align center
-  border 1px solid var(--vcolor-primary)
-  border-radius 4px
-  box-sizing border-box
-
-.v-event-card-time
-  display flex
-  align-items center
-  color var(--vcolor-grey-dark)
-
 .v-event-card-title-wrapper
   position relative
   flex 1
@@ -79,8 +56,3 @@
     position absolute
     top 0
     left 0
-
-.v-event-card-details-link
-  display flex
-  align-items center
-  justify-content center

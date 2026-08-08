@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '@src/base/components/button/button';
 import { Loader } from '@src/base/components/loader/loader';
 import { useTranslation } from '@compilorama/polang';
@@ -5,6 +6,7 @@ import cityService from '@src/base/services/city';
 import { removeAccents } from '@src/base/services/text';
 import { useEvents } from '@src/events/hooks/use-events';
 import { EventCard } from '@src/events/components/event-card/event-card';
+import { EventDrawer } from '@src/events/components/event-drawer/event-drawer';
 import { LIMIT_FILTER_NAME, DEFAULT_LIMIT } from '@src/events/constants/event-filters';
 import translations from './event-list.t.js';
 
@@ -12,6 +14,7 @@ import translations from './event-list.t.js';
 export const EventList = ({ filters, onLoadMore }) => {
   const { t } = useTranslation(translations);
   const { data: events, loading, failed, fetchEvents } = useEvents();
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const filteredEvents = filterEvents(events, filters);
 
   return (
@@ -51,6 +54,7 @@ export const EventList = ({ filters, onLoadMore }) => {
                 titleFilter={filters.title}
                 eventDetails={eventDetails}
                 titleId={label}
+                onViewDetails={eventDetails => setSelectedEvent(eventDetails)}
               />
             </li>
           );
@@ -67,6 +71,11 @@ export const EventList = ({ filters, onLoadMore }) => {
           </Button>
         )
       }
+      <EventDrawer
+        eventDetails={selectedEvent}
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+      />
     </div>
   );
 };

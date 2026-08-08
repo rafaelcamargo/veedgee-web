@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CloseButton } from '@src/base/components/close-button/close-button';
 
-export const Drawer = ({ isOpen, title, children, onClose }) => {
+export const Drawer = ({ isOpen, title, image, children, onClose, noHeader }) => {
   return createPortal(
     <>
       <div
@@ -16,10 +16,15 @@ export const Drawer = ({ isOpen, title, children, onClose }) => {
           aria-hidden={!isOpen}
           aria-modal="true"
         >
-          <div className="v-drawer-header">
-            <h3 className="v-drawer-title">{title}</h3>
-            <CloseButton onClick={onClose} />
-          </div>
+          <CloseButton onClick={onClose} />
+          {
+            !noHeader && (
+              <div className="v-drawer-header">
+                <h3 className="v-drawer-title">{title}</h3>
+              </div>
+            )
+          }
+          {image}
           <div className="v-drawer-body">
             {children}
           </div>
