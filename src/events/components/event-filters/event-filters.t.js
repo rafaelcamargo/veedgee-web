@@ -9,6 +9,8 @@ const translations = {
     'to': 'to',
     'end_date': 'End Date',
     'show_filters': 'Show filters',
+    'filter_by_city': 'Filter by city',
+    'more_filters': 'More filters',
     'filters': 'Filters',
     'reset': 'Reset',
     'done': 'Done'
@@ -23,6 +25,8 @@ const translations = {
     'end_date': 'Data Final',
     'to': 'até',
     'show_filters': 'Exibir filtros',
+    'filter_by_city': 'Filtrar por cidade',
+    'more_filters': 'Mais filtros',
     'filters': 'Filtros',
     'reset': 'Limpar',
     'done': 'Concluir'

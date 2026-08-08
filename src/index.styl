@@ -1,4 +1,5 @@
 @import 'vars'
+@import '@mixins'
 
 @font-face {
   font-family Inter
@@ -74,6 +75,7 @@ select
   background-image url('@src/base/images/icon-arrows_40x40.svg?v=1')
   background-position right center
   background-repeat no-repeat
+  cursor pointer
 
 mark
   color var(--vcolor-red-darker)
@@ -91,8 +93,8 @@ mark
     border-style solid
     border-color var(--vcolor-darkest) transparent transparent
     opacity 0
-    visibility hidden
     pointer-events none
+    transition opacity 200ms ease
     z-index var(--vlayer-high)
   &::after
     content attr(data-tooltip)
@@ -104,13 +106,24 @@ mark
     background-color var(--vcolor-darkest)
     color var(--vcolor-lightest)
     font-size var(--vfont-size-xxs)
+    font-weight normal
     border-radius 4px
     white-space nowrap
     opacity 0
-    visibility hidden
     pointer-events none
+    transition opacity 200ms ease
     z-index var(--vlayer-high)
-  &:hover::before,
-  &:hover::after
-    opacity 1
-    visibility visible
+  +breakpoint('lg')
+    &:hover::before,
+    &:hover::after
+      opacity 1
+
+[data-tooltip][data-tooltip-position="bottom"]
+  &::before
+    top 100%
+    bottom auto
+    border-width 0 5px 6px
+    border-color transparent transparent var(--vcolor-darkest)
+  &::after
+    top calc(100% + 6px)
+    bottom auto

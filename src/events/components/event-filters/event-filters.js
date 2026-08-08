@@ -28,11 +28,15 @@ export const EventFilters = ({ filters, onChange }) => {
       <CityFilter
         value={filters[CITY_FILTER_NAME] || ''}
         onChange={handleFilterChange}
+        data-tooltip={t('filter_by_city')}
+        data-tooltip-position="bottom"
       />
       <Button
         theme="icon"
         className="v-event-filters-trigger"
         aria-label={t('show_filters')}
+        data-tooltip={t('more_filters')}
+        data-tooltip-position="bottom"
         onClick={() => setDrawerVisibility(true)}
       >
         <Funnel />
@@ -145,10 +149,13 @@ function FilterFields({ filters, onChange, onFinish }){
 }
 
 // eslint-disable-next-line
-function CityFilter({ value, onChange }){
+function CityFilter({ value, onChange, ...rest }){
   const { t } = useTranslation(translations);
   return (
-    <div className="v-event-filter-field-group v-event-filter-field-city">
+    <div
+      className="v-event-filter-field-group v-event-filter-field-city"
+      {...rest}
+    >
       <div className="v-event-filter-field">
         <select
           name={CITY_FILTER_NAME}
