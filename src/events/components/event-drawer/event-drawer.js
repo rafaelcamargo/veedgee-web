@@ -11,6 +11,7 @@ export const EventDrawer = ({ eventDetails, isOpen, onClose }) => {
 
   return (
     <Drawer
+      size="lg"
       isOpen={isOpen}
       image={buildImage({ image, category, title })}
       onClose={onClose}

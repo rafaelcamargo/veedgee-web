@@ -18,13 +18,14 @@
     pointer-events auto
 
 .v-drawer-wrapper
+  --vdrawer-offset 200px
   position fixed
   right 0
   bottom 0
   left 0
   width 100%
-  max-height calc(100vh - 200px)
-  max-height calc(100dvh - 200px)
+  height calc(100vh - var(--vdrawer-offset))
+  height calc(100dvh - var(--vdrawer-offset))
   box-sizing border-box
   transform translate3d(0, 100%, 0)
   transition transform 200ms ease-out
@@ -34,6 +35,10 @@
   &.is-open
     transform translate3d(0, 0, 0)
     pointer-events auto
+  &.is-large
+    --vdrawer-offset 50px
+  &.is-small
+    --vdrawer-offset 400px
 
 .v-drawer
   position relative
@@ -41,7 +46,6 @@
   flex-direction column
   flex 1
   width 100%
-  max-height inherit
   height 100%
   background-color var(--vcolor-lightest)
   border-radius 36px 36px 0 0
@@ -67,6 +71,7 @@
 .v-drawer-body
   position relative
   height auto
+  min-height 0
   padding 30px 30px calc(50px + env(safe-area-inset-bottom, 0px)) 30px
   overflow-y auto
   -webkit-overflow-scrolling touch
@@ -81,7 +86,6 @@
     top 0
     left auto
     height 100vh
-    max-height none
     max-width 480px
     padding 20px
     transform translate3d(100%, 0, 0)
