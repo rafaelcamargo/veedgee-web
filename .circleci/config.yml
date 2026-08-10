@@ -78,6 +78,17 @@ jobs:
       - run:
           name: Test
           command: npm run test -- --maxWorkers=2 --coverage --coverageReporters=lcov
+      - persist_to_workspace:
+          root: "."
+          paths:
+            - "coverage/*"
+
+  upload-coverage:
+    <<: *defaults
+
+    steps:
+      - attach_workspace:
+          at: ~/app
       - coveralls/upload:
           verbose: true
 
@@ -106,6 +117,9 @@ workflows:
       - test:
           requires:
             - install
+      - upload-coverage:
+          requires:
+            - test
       - deploy:
           requires:
             - build
