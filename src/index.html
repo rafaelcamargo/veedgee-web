@@ -27,6 +27,7 @@
       margin: 0;
       padding: 0;
       min-height: 100vh;
+      min-height: 100dvh;
     }
     @keyframes bar {
       0% { opacity: 0; }
@@ -58,16 +59,17 @@
       100% { top: 50px; }
     }
     @keyframes splashWrapperComplete {
-      0% { height: 100vh; }
-      100% { height: 0; }
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(0); }
     }
     .v-splash-wrapper {
       position: fixed;
       top: 0;
+      right: 0;
+      bottom: 0;
       left: 0;
-      width: 100%;
-      height: 100vh;
       background-color: #fff;
+      transform-origin: top;
       z-index: 20;
     }
     .v-splash-wrapper.is-complete {
@@ -80,7 +82,12 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      height: 100vh;
+      box-sizing: border-box;
+      height: 100%;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: env(safe-area-inset-left, 0px);
     }
     .v-splash-animation,
     .v-splash-animation:after {
