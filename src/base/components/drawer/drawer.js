@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CloseButton } from '@src/base/components/close-button/close-button';
 
-export const Drawer = ({ isOpen, title, image, children, size, onClose, noHeader }) => {
+export const Drawer = ({ isOpen, title, image, children, size, className, onClose, noHeader }) => {
   return createPortal(
     <>
       <div
@@ -11,7 +11,7 @@ export const Drawer = ({ isOpen, title, image, children, size, onClose, noHeader
       />
       <div className={buildWrapperClassName(isOpen, size)}>
         <div
-          className="v-drawer"
+          className={buildDrawerClassName(className)}
           role="dialog"
           aria-hidden={!isOpen}
           aria-modal="true"
@@ -34,6 +34,12 @@ export const Drawer = ({ isOpen, title, image, children, size, onClose, noHeader
     document.body
   );
 };
+
+function buildDrawerClassName(className){
+  const classNames = ['v-drawer'];
+  if(className) classNames.push(className);
+  return classNames.join(' ');
+}
 
 function buildOverlayClassName(isOpen){
   const classNames = ['v-drawer-overlay'];

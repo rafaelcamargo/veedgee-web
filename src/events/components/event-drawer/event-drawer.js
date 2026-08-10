@@ -1,4 +1,5 @@
 import { useTranslation } from '@compilorama/polang';
+import imageService from '@src/base/services/image';
 import { Drawer } from '@src/base/components/drawer/drawer';
 import { EventDatetime } from '@src/events/components/event-datetime/event-datetime';
 import { EventDrawerImage } from '@src/events/components/event-drawer-image/event-drawer-image';
@@ -13,7 +14,8 @@ export const EventDrawer = ({ eventDetails, isOpen, onClose }) => {
     <Drawer
       size="lg"
       isOpen={isOpen}
-      image={buildImage({ image, category, title })}
+      image={eventDetails && buildImage({ image, category, title })}
+      className={buildClassName(image)}
       onClose={onClose}
       noHeader
     >
@@ -51,12 +53,27 @@ export const EventDrawer = ({ eventDetails, isOpen, onClose }) => {
 };
 
 function buildImage({ image, category, title }){
-  if(!image) return null;
   return (
     <EventDrawerImage
-      image={image}
+      image={buildImageSrc(image)}
       category={category}
       title={title}
     />
   );
+}
+
+function buildImageSrc(image){
+  return hasValidImage(image)
+    ? image
+    : `${imageService.getImagesPath()}/event-category-placeholder.webp`;
+}
+
+function buildClassName(image){
+  const classNames = ['v-event-drawer'];
+  if(!hasValidImage(image)) classNames.push('has-placeholder-image');
+  return classNames.join(' ');
+}
+
+function hasValidImage(image){
+  return image && imageService.isValidSrc(image);
 }

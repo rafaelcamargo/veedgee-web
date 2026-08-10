@@ -463,6 +463,32 @@ describe('Events View', () => {
     expect(eventWebsiteLink).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('should show a placeholder image if event has no image', async () => {
+    const { user } = await mount();
+    const { view_event_details } = getTranslations(eventCardTranslations);
+    const eventItem = screen.getByRole('listitem', { name: 'A Odisseia' });
+    await user.click(within(eventItem).getByRole('button', { name: view_event_details }));
+    const dialog = screen.getByRole('dialog');
+    expect(within(dialog).getByRole('img')).toHaveAttribute('src', '/assets/images/event-category-placeholder.webp');
+    expect(dialog.classList).toContain('v-event-drawer');
+    expect(dialog.classList).toContain('has-placeholder-image');
+  });
+
+  it('should show a placeholder image if event image source is invalid', async () => {
+    const events = eventsMock.map((event, index) => {
+      return index === 3
+        ? { ...event, image: 'https://genesisapi.diskingressos.com.br{{ngMeta.image}}' }
+        : event;
+    });
+    eventsResource.get = jest.fn(() => Promise.resolve({ data: events }));
+    const { user } = await mount();
+    const { view_event_details } = getTranslations(eventCardTranslations);
+    const eventItem = screen.getByRole('listitem', { name: 'A Odisseia' });
+    await user.click(within(eventItem).getByRole('button', { name: view_event_details }));
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.classList).toContain('has-placeholder-image');
+  });
+
   it('should close the event drawer', async () => {
     const { user } = await mount();
     const { view_event_details } = getTranslations(eventCardTranslations);

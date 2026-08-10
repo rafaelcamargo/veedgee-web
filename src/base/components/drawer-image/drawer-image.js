@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import imageService from '@src/base/services/image';
 
 export const DrawerImage = ({ src, alt, description }) => {
   const [loadedSrc, setLoadedSrc] = useState('');
@@ -6,7 +7,7 @@ export const DrawerImage = ({ src, alt, description }) => {
   return (
     <div className={buildClassName(loadedSrc === src)}>
       {
-        isValidSrc(src) && (
+        imageService.isValidSrc(src) && (
           <>
             <img
               src={src}
@@ -39,8 +40,4 @@ function buildClassName(isLoaded){
   const cssClasses = ['v-drawer-image'];
   if(isLoaded) cssClasses.push('is-loaded');
   return cssClasses.join(' ');
-}
-
-function isValidSrc(src){
-  return encodeURI(src) === src;
 }
