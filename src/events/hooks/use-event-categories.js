@@ -24,16 +24,22 @@ export const useEventCategories = () => {
 
   return {
     getCategoryName: category => t(category),
-    getCategories: () => categoryIds.map(id => ({
-      id,
-      name: t(id)
-    })),
+    getCategories: () => sortCategoriesByName(
+      categoryIds.map(id => ({
+        id,
+        name: t(id)
+      }))
+    ),
     getCategoryIcon,
   };
 };
 
 function getCategoryIcon(category){
   return buildCategoryIcons()[category];
+}
+
+function sortCategoriesByName(categories){
+  return categories.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function buildCategoryIcons(){
