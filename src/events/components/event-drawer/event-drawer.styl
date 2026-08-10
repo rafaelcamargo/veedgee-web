@@ -1,16 +1,15 @@
-.v-drawer:has(.v-drawer-image)
-  .v-drawer-body
-    margin-top 300px
-    background-color var(--vcolor-lightest)
+.v-event-drawer
+  &.has-placeholder-image
+    .v-drawer-image
+      height 150px
+    .v-drawer-body
+      margin-top 150px
 
-.v-drawer-body
-  .v-icon-clock
-    width 26px
-    height 26px
-  h3
-    color var(--vcolor-grey-darker)
-  p
-    color var(--vcolor-grey-dark)
+.v-event-drawer
+  .v-drawer-body
+    .v-icon-clock
+      width 26px
+      height 26px
 
 .v-event-drawer-row
   & + &
