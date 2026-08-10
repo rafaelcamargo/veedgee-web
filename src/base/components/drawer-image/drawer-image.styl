@@ -5,10 +5,13 @@
   width 100%
   height 300px
   background-color #000
+  animation drawer-image-pulse 1.2s ease-in-out infinite alternate
   overflow hidden
   &.is-loaded
     .v-drawer-image-picture,
-    .v-drawer-image-backdrop
+    .v-drawer-image-backdrop,
+    .v-drawer-image-gradient,
+    .v-drawer-image-description
       opacity 1
 
 .v-drawer-image-picture,
@@ -38,6 +41,8 @@
   width 100%
   height 100%
   background linear-gradient(to top, #000, transparent)
+  opacity 0
+  transition opacity 300ms ease-out
   pointer-events none
 
 .v-drawer-image-description
@@ -47,4 +52,12 @@
   display flex
   align-items center
   gap 10px
+  opacity 0
+  transition opacity 300ms ease-out
   z-index 1
+
+@keyframes drawer-image-pulse
+  from
+    background-color #000
+  to
+    background-color #333
