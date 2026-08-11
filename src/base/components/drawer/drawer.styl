@@ -37,7 +37,7 @@
     transform translate3d(0, 0, 0)
     pointer-events auto
     .v-drawer
-      box-shadow 0 -5px 48px 0 hsla(0, 0%, 0%, .5)
+      box-shadow 0 -5px 48px 0 hsla(0, 0%, 0%, .25)
   &.is-large
     --vdrawer-offset 80px
   &.is-small
@@ -62,7 +62,7 @@
     position absolute
     top 30px
     right 30px
-    z-index 2
+    z-index 3
   .v-drawer-close-button
     width 36px
     height 36px
@@ -72,10 +72,11 @@
 .v-drawer-header
   display flex
   justify-content space-between
-  padding 30px 58px 30px 30px
+  padding 34px 58px 10px 30px
   background-color var(--vcolor-lightest)
-  box-shadow 0 6px 12px 0 var(--vcolor-lightest)
-  z-index 1
+  color var(--vcolor-grey-dark)
+  box-shadow 0 12px 24px 6px var(--vcolor-lightest)
+  z-index 2
 
 .v-drawer-title
   line-height 28px
