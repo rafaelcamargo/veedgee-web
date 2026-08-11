@@ -16,7 +16,7 @@ export const Drawer = ({ isOpen, title, image, children, size, className, onClos
           aria-hidden={!isOpen}
           aria-modal="true"
         >
-          <CloseButton onClick={onClose} />
+          <CloseButton className="v-drawer-close-button" onClick={onClose} />
           {
             !noHeader && (
               <div className="v-drawer-header">

@@ -36,6 +36,8 @@
   &.is-open
     transform translate3d(0, 0, 0)
     pointer-events auto
+    .v-drawer
+      box-shadow 0 -5px 48px 0 hsla(0, 0%, 0%, .5)
   &.is-large
     --vdrawer-offset 80px
   &.is-small
@@ -49,8 +51,9 @@
   width 100%
   height 100%
   background-color var(--vcolor-lightest)
-  border-radius 40px
-  box-shadow 0 -5px 48px 0 hsla(0, 0%, 0%, .65)
+  border-radius 48px
+  box-shadow 0 0 0 0 hsla(0, 0%, 0%, 0)
+  transition box-shadow 300ms ease-out
   overflow hidden
   &:has(.v-drawer-image)
     .v-drawer-body
@@ -60,6 +63,11 @@
     top 30px
     right 30px
     z-index 2
+  .v-drawer-close-button
+    width 36px
+    height 36px
+    border 0
+    border-radius 50%
 
 .v-drawer-header
   display flex
@@ -102,7 +110,6 @@
       transform translate3d(0, 0, 0)
   .v-drawer
     border-radius 24px
-    box-shadow -16px 0 48px 0 hsla(0, 0%, 0%, .15)
   .v-drawer-body
     min-height 0
     padding 30px

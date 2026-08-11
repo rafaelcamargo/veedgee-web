@@ -7,6 +7,17 @@
         object-position top
     .v-drawer-body
       margin-top 150px
+  .v-drawer-close-button
+    background-color hsla(0, 0%, 20%, .8)
+    backdrop-filter blur(12px)
+    -webkit-backdrop-filter blur(12px)
+    &:focus,
+    &:hover,
+    &:active
+      background-color hsla(0, 0%, 20%, .8)
+      border 0
+    [data-stroke]
+      stroke var(--vcolor-grey-lighter)
 
 .v-event-drawer
   .v-drawer-body
