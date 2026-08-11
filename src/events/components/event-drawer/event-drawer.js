@@ -1,6 +1,7 @@
 import { useTranslation } from '@compilorama/polang';
 import imageService from '@src/base/services/image';
 import { Drawer } from '@src/base/components/drawer/drawer';
+import Ticket from '@src/base/icons/ticket';
 import { EventDatetime } from '@src/events/components/event-datetime/event-datetime';
 import { EventDrawerImage } from '@src/events/components/event-drawer-image/event-drawer-image';
 import translations from './event-drawer.t.js';
@@ -43,6 +44,11 @@ export const EventDrawer = ({ eventDetails, isOpen, onClose }) => {
                 className="v-button v-button-primary"
               >
                 {t('event_website')}
+                <Ticket
+                  size="30px"
+                  strokeColor="var(--vcolor-lightest)"
+                  strokeWidth="1.5px"
+                />
               </a>
             </div>
           </>
