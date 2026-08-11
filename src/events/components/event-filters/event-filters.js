@@ -41,7 +41,12 @@ export const EventFilters = ({ filters, onChange }) => {
       >
         <Funnel />
       </Button>
-      <Drawer isOpen={isDrawerOpen} title={t('filters')} onClose={closeDrawer}>
+      <Drawer
+        isOpen={isDrawerOpen}
+        title={t('filters')}
+        titleIcon={<Funnel />}
+        onClose={closeDrawer}
+      >
         <FilterFields
           filters={filters}
           onChange={onChange}

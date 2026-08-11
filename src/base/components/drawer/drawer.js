@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CloseButton } from '@src/base/components/close-button/close-button';
 
-export const Drawer = ({ isOpen, title, image, children, size, className, onClose, noHeader }) => {
+export const Drawer = ({ isOpen, title, titleIcon, image, children, size, className, onClose, noHeader }) => {
   return createPortal(
     <>
       <div
@@ -20,7 +20,10 @@ export const Drawer = ({ isOpen, title, image, children, size, className, onClos
           {
             !noHeader && (
               <div className="v-drawer-header">
-                <h3 className="v-drawer-title">{title}</h3>
+                <div className="v-drawer-title-content">
+                  {titleIcon}
+                  <h3 className="v-drawer-title">{title}</h3>
+                </div>
               </div>
             )
           }
