@@ -30,6 +30,22 @@ const translations = {
     'filters': 'Filtros',
     'reset': 'Limpar',
     'done': 'Concluir'
+  },
+  'es-AR': {
+    'title': 'Filtrar por título...',
+    'city': 'Ciudad',
+    'all_cities': 'Todas las ciudades',
+    'category': 'Categoría',
+    'all_categories': 'Todas las categorías',
+    'start_date': 'Fecha inicial',
+    'to': 'hasta',
+    'end_date': 'Fecha final',
+    'show_filters': 'Mostrar filtros',
+    'filter_by_city': 'Filtrar por ciudad',
+    'more_filters': 'Más filtros',
+    'filters': 'Filtros',
+    'reset': 'Limpiar',
+    'done': 'Listo'
   }
 };
 

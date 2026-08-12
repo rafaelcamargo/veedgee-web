@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'homepage': 'Página Inicial'
+  },
+  'es-AR': {
+    'homepage': 'Página de inicio'
   }
 };
 

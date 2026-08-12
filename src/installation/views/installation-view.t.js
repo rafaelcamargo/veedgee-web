@@ -34,6 +34,24 @@ const translations = {
     'tap_more': 'Toque no ícone Opções',
     'more_icon_details': ', à direita da barra de endereço',
     'install': 'Instalar'
+  },
+  'es-AR': {
+    'homepage': 'Página de inicio',
+    'installation': 'Instalación',
+    'intro': 'Agregar Veedgee a la pantalla de inicio facilita el acceso, incluso cuando no hay conexión.',
+    'iphone_instructions': 'Instrucciones para iPhone',
+    'iphone': 'iPhone',
+    'tap_share': 'Tocá Compartir',
+    'share_icon_details': ', generalmente en la esquina superior derecha (Chrome) o en la barra de opciones inferior (Safari)',
+    'tap': 'Tocá',
+    'add_to_homescreen': 'Agregar a la pantalla de inicio',
+    'final_tap': 'Tocá',
+    'add': 'Agregar',
+    'android_instructions': 'Instrucciones para Android',
+    'android': 'Android',
+    'tap_more': 'Tocá Más',
+    'more_icon_details': ', a la derecha de la barra de dirección',
+    'install': 'Instalar'
   }
 };
 

@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'language': 'Idioma'
+  },
+  'es-AR': {
+    'language': 'Idioma'
   }
 };
 

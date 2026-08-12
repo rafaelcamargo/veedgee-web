@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'category_label': 'Categoria: {{ name }}'
+  },
+  'es-AR': {
+    'category_label': 'Categoría: {{ name }}'
   }
 };
 

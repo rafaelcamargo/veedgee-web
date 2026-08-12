@@ -32,6 +32,23 @@ const translations = {
     'dance': 'Dança',
     'business': 'Negócios',
     'fair': 'Feira'
+  },
+  'es-AR': {
+    'sports': 'Deportes',
+    'family': 'Familia',
+    'exhibitions': 'Exposiciones',
+    'nightlife': 'Vida nocturna',
+    'movies': 'Cine',
+    'festivals': 'Festivales',
+    'food': 'Gastronomía',
+    'theater': 'Teatro',
+    'comedy': 'Comedia',
+    'education': 'Educación',
+    'musicals': 'Musicales',
+    'music': 'Música',
+    'dance': 'Danza',
+    'business': 'Negocios',
+    'fair': 'Feria'
   }
 };
 

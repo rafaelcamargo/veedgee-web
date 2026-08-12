@@ -3,6 +3,7 @@ import { I18nProvider as PolangI18nProvider } from '@compilorama/polang';
 const locales = [
   { code: 'en-US', name: 'English' },
   { code: 'pt-BR', name: 'Português' },
+  { code: 'es-AR', name: 'Español' },
 ];
 
 export const I18nProvider = ({ children }) => (

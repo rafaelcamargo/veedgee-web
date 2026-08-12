@@ -6,6 +6,10 @@ const translations = {
   'pt-BR': {
     'today': 'Hoje',
     'tomorrow': 'Amanhã'
+  },
+  'es-AR': {
+    'today': 'Hoy',
+    'tomorrow': 'Mañana'
   }
 };
 

@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'credits': 'Criado por {{ portfolioLink }} e servido por {{ compiloramaLink }}.'
+  },
+  'es-AR': {
+    'credits': 'Creado por {{ portfolioLink }} y presentado por {{ compiloramaLink }}.'
   }
 };
 

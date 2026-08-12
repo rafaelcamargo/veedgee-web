@@ -1,4 +1,4 @@
-import { TestingRouter, asyncMount, screen, getTranslations } from '@src/base/services/testing';
+import { TestingRouter, asyncMount, screen, getTranslations, mockSearchParams } from '@src/base/services/testing';
 import localeSelectTranslations from '@src/base/components/locale-select/locale-select.t.js';
 import homeViewTranslations from './home-view.t.js';
 import HomeView from './home-view';
@@ -11,6 +11,11 @@ describe('Home View', () => {
       </TestingRouter>
     );
   }
+
+  afterEach(() => {
+    mockSearchParams('');
+    localStorage.removeItem('plocale');
+  });
 
   it('should contain the hero section', async () => {
     await mount();
@@ -54,6 +59,16 @@ describe('Home View', () => {
     await user.selectOptions(screen.getByRole('combobox', { name: language }), 'pt-BR');
     const heroHeading = await screen.findByRole(
       'heading', { level: 2, name: homeViewTranslations['pt-BR'].find_events }
+    );
+    expect(heroHeading).toBeInTheDocument();
+  });
+
+  it('should optionally set es-AR as locale', async () => {
+    const { user } = await mount();
+    const { language } = getTranslations(localeSelectTranslations);
+    await user.selectOptions(screen.getByRole('combobox', { name: language }), 'es-AR');
+    const heroHeading = await screen.findByRole(
+      'heading', { level: 2, name: homeViewTranslations['es-AR'].find_events }
     );
     expect(heroHeading).toBeInTheDocument();
   });

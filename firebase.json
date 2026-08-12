@@ -12,6 +12,9 @@
     "rewrites": [{
       "regex": "manifest.json?locale=pt-BR",
       "destination": "/manifest-pt-BR.json"
+    }, {
+      "regex": "manifest.json?locale=es-AR",
+      "destination": "/manifest-es-AR.json"
     }]
   }
 }

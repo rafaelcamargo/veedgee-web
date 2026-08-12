@@ -16,6 +16,15 @@ const translations = {
     'formats_them': 'Formata os dados para que sejam facilmente encontrados.',
     'sends_notification': 'Te notifica diariamente sobre novos eventos.',
     'closed_beta': 'Closed beta'
+  },
+  'es-AR': {
+    'find_events': 'Descubrí shows, festivales, obras de teatro y lo mejor de lo que pasa en el sur de Brasil.',
+    'search': 'Buscar',
+    'how_it_works': 'Cómo funciona',
+    'grabs_events': 'Recopila eventos de varios sitios dispersos en la web.',
+    'formats_them': 'Los muestra de forma amigable y fácil de buscar.',
+    'sends_notification': 'Te envía notificaciones diarias sobre nuevos eventos.',
+    'closed_beta': 'Closed beta'
   }
 };
 

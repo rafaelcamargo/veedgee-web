@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'close': 'Fechar'
+  },
+  'es-AR': {
+    'close': 'Cerrar'
   }
 };
 

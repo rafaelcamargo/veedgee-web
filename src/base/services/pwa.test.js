@@ -178,4 +178,93 @@ describe('PWA Service', () => {
       ]
     });
   });
+
+  it('should build manifest according es-AR locale given', () => {
+    expect(pwaService.buildManifestByLocale('es-AR')).toEqual({
+      lang: 'es-AR',
+      id: '/?veedgee',
+      dir: 'ltr',
+      name: 'Veedgee',
+      short_name: 'Veedgee',
+      description: 'Descubrí lo mejor de lo que pasa en el sur de Brasil.',
+      display: 'standalone',
+      orientation: 'natural',
+      background_color: '#FBFBFB',
+      theme_color: '#FBFBFB',
+      scope: '/',
+      start_url: '/events?ref=pwa&locale=es-AR',
+      icons: [
+        {
+          src: '/assets/images/favicon_veedgee_48x48.png',
+          type: 'image/png',
+          sizes: '48x48'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_72x72.png',
+          type: 'image/png',
+          sizes: '72x72'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_96x96.png',
+          type: 'image/png',
+          sizes: '96x96'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_128x128.png',
+          type: 'image/png',
+          sizes: '128x128'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_144x144.png',
+          type: 'image/png',
+          sizes: '144x144'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_192x192.png',
+          type: 'image/png',
+          sizes: '192x192'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_256x256.png',
+          type: 'image/png',
+          sizes: '256x256'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_512x512.png',
+          type: 'image/png',
+          sizes: '512x512'
+        },
+        {
+          src: '/assets/images/favicon_veedgee_512x512_maskable.png',
+          type: 'image/png',
+          sizes: '512x512',
+          purpose: 'maskable'
+        }
+      ],
+      screenshots: [
+        {
+          src: '/assets/images/banner_veedgee_1270x760_02_en.png',
+          type: 'image/png',
+          sizes: '1270x760',
+          form_factor: 'wide'
+        },
+        {
+          'src': '/assets/images/banner_veedgee_760x1270_02_en.png',
+          'type': 'image/png',
+          'sizes': '760x1270'
+        },
+        {
+          src: '/assets/images/banner_veedgee_1270x760_03_en.png',
+          type: 'image/png',
+          sizes: '1270x760',
+          form_factor: 'wide'
+        },
+        {
+          'src': '/assets/images/banner_veedgee_760x1270_03_en.png',
+          'type': 'image/png',
+          'sizes': '760x1270'
+        }
+      ]
+    });
+  });
 });

@@ -1,6 +1,7 @@
 const baseManifest = require('../manifests/base');
 const englishManifest = require('../manifests/en-US');
 const portugueseManifest = require('../manifests/pt-BR');
+const spanishManifest = require('../manifests/es-AR');
 
 const _public = {};
 
@@ -49,7 +50,8 @@ function cloneJSON(json){
 function getLocalizedManifest(locale){
   return {
     'en-US': englishManifest,
-    'pt-BR': portugueseManifest
+    'pt-BR': portugueseManifest,
+    'es-AR': spanishManifest
   }[locale];
 }
 

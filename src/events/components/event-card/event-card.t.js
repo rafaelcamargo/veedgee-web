@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'view_event_details': 'Ver detalhes do evento'
+  },
+  'es-AR': {
+    'view_event_details': 'Ver detalles del evento'
   }
 };
 

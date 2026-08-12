@@ -55,7 +55,7 @@ function buildWebfontPreloadTags(webfontFilenames){
 }
 
 function generateManifestFiles(){
-  ['en-US', 'pt-BR'].forEach(locale => {
+  ['en-US', 'pt-BR', 'es-AR'].forEach(locale => {
     fs.writeFileSync(
       `${getTargetDirectoryPath()}/${buildManifestFilename(locale)}`,
       JSON.stringify(pwaService.buildManifestByLocale(locale))

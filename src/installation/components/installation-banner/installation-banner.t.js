@@ -10,6 +10,12 @@ const translations = {
     'install_android': 'Instale o Veedgee no seu Android',
     'faster_and_works_offline': 'É mais rápido e funciona offline',
     'view_instructions': 'Ver instruções'
+  },
+  'es-AR': {
+    'install_iphone': 'Instalá Veedgee en tu iPhone',
+    'install_android': 'Instalá Veedgee en tu Android',
+    'faster_and_works_offline': 'Carga más rápido y funciona sin conexión',
+    'view_instructions': 'Ver instrucciones'
   }
 };
 

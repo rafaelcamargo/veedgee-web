@@ -4,6 +4,9 @@ const translations = {
   },
   'pt-BR': {
     'event_website': 'Site do Evento'
+  },
+  'es-AR': {
+    'event_website': 'Sitio del evento'
   }
 };
 
