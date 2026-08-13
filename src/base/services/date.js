@@ -3,14 +3,18 @@ const _public = {};
 _public.getNow = () => new Date();
 
 _public.format = (dateString, { locale }) => {
-  const date = buildDateFromString(dateString);
-  const result =  new Intl.DateTimeFormat(locale, getDateDefaultOptions()).format(date);
-  return locale == 'pt-BR' ? formatBrazilianDate(result) : result;
+  const { formatLocalizedDateString } = buildLocaleBasedDateProps(locale);
+  const result =  new Intl
+    .DateTimeFormat(locale, getDateDefaultOptions())
+    .format(buildDateFromString(dateString));
+  return formatLocalizedDateString(result);
 };
 
 _public.formatTime = (timeString, { locale }) => {
-  const date = buildDateFromTimeString(timeString);
-  return new Intl.DateTimeFormat(locale, getTimeDefaultOptions()).format(date);
+  const { timeFormatOptions } = buildLocaleBasedDateProps(locale);
+  return new Intl
+    .DateTimeFormat(locale, timeFormatOptions)
+    .format(buildDateFromTimeString(timeString));
 };
 
 _public.isToday = dateString => {
@@ -52,7 +56,7 @@ function buildDateFromTimeString(timeString){
   return date;
 }
 
-function formatBrazilianDate(localeTimeString){
+function formatNonAmericanDateString(localeTimeString){
   return localeTimeString.replace('.,', ',').replace(/ de /g, ' ').replace('.', ',');
 }
 
@@ -64,10 +68,14 @@ function getDateDefaultOptions(){
   };
 }
 
-function getTimeDefaultOptions(){
-  return {
-    hour: 'numeric',
-    minute: 'numeric'
+function buildLocaleBasedDateProps(locale){
+  const baseHourOptions = { hour: 'numeric', minute: 'numeric' };
+  return locale == 'en-US' ? {
+    timeFormatOptions: baseHourOptions,
+    formatLocalizedDateString: localeTimeString => localeTimeString
+  } : {
+    timeFormatOptions: { ...baseHourOptions, hour12: false },
+    formatLocalizedDateString: formatNonAmericanDateString
   };
 }
 

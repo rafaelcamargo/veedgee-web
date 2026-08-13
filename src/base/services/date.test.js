@@ -29,4 +29,12 @@ describe('Date Service', () => {
     dateService.getNow = jest.fn(() => today);
     expect(dateService.isTomorrow('2024-05-15')).toEqual(true);
   });
+
+  it('should format a date according to es-AR locale', () => {
+    expect(dateService.format('2024-05-05', { locale: 'es-AR' })).toEqual('5 may 2024');
+  });
+
+  it('should format a time in 24h mode according to es-AR locale', () => {
+    expect(dateService.formatTime('14:30', { locale: 'es-AR' })).toEqual('14:30');
+  });
 });
