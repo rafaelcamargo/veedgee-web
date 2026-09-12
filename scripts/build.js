@@ -7,17 +7,29 @@ const routes = require('../src/routes');
 
 function init(){
   console.log('Compiling...');
-  webpack(webpackConfig).run(onCompilationSuccess);
+  webpack(webpackConfig).run(onCompilationComplete);
 }
 
-function onCompilationSuccess(err, stats){
-  if(!err) {
-    const assetFilenames = Object.keys(stats.compilation.assets);
-    generateServiceWorkerFile(formatAssetFilenames(assetFilenames));
-    handleWebfontsPreload(filterAssetsByExtesion(assetFilenames, ['.woff2', '.html']));
-    generateManifestFiles();
-    console.log('Compiled successfully!');
+function onCompilationComplete(err, stats){
+  if (err) {
+    console.error(err.stack || err);
+    process.exit(1);
   }
+
+  if (stats.hasErrors()) {
+    console.error(stats.toString({
+      colors: true,
+      errors: true,
+      warnings: false
+    }));
+    process.exit(1);
+  }
+
+  const assetFilenames = Object.keys(stats.compilation.assets);
+  generateServiceWorkerFile(formatAssetFilenames(assetFilenames));
+  handleWebfontsPreload(filterAssetsByExtesion(assetFilenames, ['.woff2', '.html']));
+  generateManifestFiles();
+  console.log('Compiled successfully!');
 }
 
 function formatAssetFilenames(assets){
