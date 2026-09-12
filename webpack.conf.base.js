@@ -52,7 +52,10 @@ module.exports = {
       patterns: [
         {
           from: path.join(__dirname, project.source.images.files),
-          to: `${path.join(__dirname, project.dist.images.directory)}/[name][ext]`
+          to: `${path.join(__dirname, project.dist.images.directory)}/[name][ext]`,
+          globOptions: {
+            ignore: [project.source.images.globToIgnore]
+          }
         }
       ]
     })

@@ -11,7 +11,8 @@
       "mixins": "src/mixins.styl"
     },
     "images": {
-      "files": "src/base/images/*.*"
+      "files": "src/base/images/*.*",
+      "globToIgnore": "**/icon_*"
     },
     "tests": {
       "files": [
